@@ -15,7 +15,7 @@
     <div class="bot__panel" id="botPanel" role="dialog" aria-label="Chat assistant" hidden>
       <div class="bot__head">
         <span class="bot__title">RJR Assistant</span>
-        <span class="bot__tag mono">scripted bot · no AI bill</span>
+        <span class="bot__tag mono">scripted demo</span>
         <button class="bot__close" id="botClose" aria-label="Close chat">✕</button>
       </div>
       <div class="bot__messages" id="botMessages"></div>
