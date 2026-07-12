@@ -2,7 +2,7 @@
   "name": "Rhon Jon Romero — Full-Stack Web Developer",
   "short_name": "RJR",
   "description": "Portfolio of Rhon Jon Romero — POS, attendance, and record-management systems built with PHP + MySQL.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",

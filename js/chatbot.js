@@ -50,7 +50,7 @@
     {
       match: /(download|pdf|resume|résumé|cv|curriculum|experience|education|graduate)/,
       reply: () =>
-        `Here you go: <a href="assets/Rhon-Jon-Romero-Resume.pdf" download>Download his résumé (PDF)</a> — or browse the <a href="resume.html">résumé page</a>. Short version: <strong>BSIT graduate</strong> (SEAIT, 2026), two production systems for paying clients, plus a shelf of shipped projects.`,
+        `Here you go: <a href="assets/Rhon-Jon-Romero-Resume.pdf" download>Download his résumé (PDF)</a> — or browse the <a href="resume">résumé page</a>. Short version: <strong>BSIT graduate</strong> (SEAIT, 2026), two production systems for paying clients, plus a shelf of shipped projects.`,
     },
     {
       match: /(service|offer|what.*(do|build)|gawa|website|system)/,
@@ -65,7 +65,7 @@
     {
       match: /(project|portfolio|work|shipped|example|damayan|power\s*giant|pos|attendance|cropsight)/,
       reply: () =>
-        `He's shipped <strong>17+ systems</strong> — two are live in production for paying clients: <a href="projects/divine-life-damayan.html">Divine Life Damayan</a> (1,200+ members) and <a href="projects/power-giant-rmt.html">Power Giant RMT</a>. The rest — QR attendance, POS, crop monitoring with a chatbot — are in <a href="#work">Things I've Built</a> and on <a href="https://github.com/Git-branches" target="_blank" rel="noopener">GitHub</a>.`,
+        `He's shipped <strong>17+ systems</strong> — two are live in production for paying clients: <a href="projects/divine-life-damayan">Divine Life Damayan</a> (1,200+ members) and <a href="projects/power-giant-rmt">Power Giant RMT</a>. The rest — QR attendance, POS, crop monitoring with a chatbot — are in <a href="#work">Things I've Built</a> and on <a href="https://github.com/Git-branches" target="_blank" rel="noopener">GitHub</a>.`,
     },
     {
       match: /(stack|tech|php|mysql|postgres|node|java\b|laravel|language|tool|framework|tailwind|react|oauth|rest)/,
