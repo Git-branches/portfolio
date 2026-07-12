@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Résumé — Rhon Jon Romero · Full-Stack Web Developer</title>
+  <meta name="description" content="Résumé of Rhon Jon Romero, full-stack web developer (PHP + MySQL) from General Santos City, Philippines." />
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <script>
+    // apply saved theme before paint
+    const saved = localStorage.getItem("theme");
+    if (saved) document.documentElement.setAttribute("data-theme", saved);
+    else if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-theme", "dark");
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__logo" href="index.html">RJR<span class="accent">.</span></a>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="soundToggle" aria-label="Toggle sound effects" title="Sound effects">
+        <span class="theme-toggle__icon" id="soundIcon">🔊</span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle__icon">◐</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="resume">
+    <div class="resume__head">
+      <h1 class="resume__name">Rhon Jon Romero</h1>
+      <p class="resume__meta">
+        General Santos City, Philippines &nbsp;|&nbsp; <a href="tel:+639560031151">+63 956 003 1151</a> &nbsp;|&nbsp;
+        <a href="mailto:ejromero294@gmail.com">ejromero294@gmail.com</a>
+      </p>
+      <p class="resume__meta">
+        Portfolio: <a href="https://github.com/Git-branches" target="_blank" rel="noopener">github.com/Git-branches</a>
+      </p>
+    </div>
+
+    <h2>Summary</h2>
+    <p>
+      An Information Technology graduate with experience in system development for student-based
+      clients and commission-based projects. Utilizes <strong>AI tools</strong> to improve coding
+      efficiency and productivity while ensuring system reliability. Responsible, detail-oriented,
+      and capable of working independently or as part of a team. Willing to learn new technologies
+      and continuously improve technical skills.
+    </p>
+
+    <h2>Skills</h2>
+    <ul class="resume__skills">
+      <li><strong>Languages:</strong> PHP, JavaScript, Java, HTML, CSS</li>
+      <li><strong>Frameworks &amp; Tools:</strong> Laravel, Tailwind CSS, Bootstrap, Node.js, React, REST APIs, Git/GitHub, VS Code, XAMPP, cPanel, Hostinger</li>
+      <li><strong>Databases &amp; Services:</strong> MySQL, PostgreSQL, SMS APIs (PhilSMS, Semaphore, UniSMS), AI-assisted development (Claude Code, ChatGPT), chatbot integration</li>
+    </ul>
+
+    <h2>Work Experience</h2>
+
+    <div class="resume__item">
+      <div class="resume__item-head">
+        <span class="resume__item-title">Divine Life Damayan Community Inc. — Full Stack Developer (Project-Based)</span>
+        <span class="resume__item-date">May 2026 – Jul 2026</span>
+      </div>
+      <ul>
+        <li>Developed and maintained a web-based membership and referral management system — <a href="https://divinelifedamayan.com" target="_blank" rel="noopener">divinelifedamayan.com</a>.</li>
+        <li>Built front-end interfaces and back-end features using PHP and MySQL, with CMS-managed landing pages and multi-language support (English, Tagalog, Cebuano).</li>
+        <li>Deployed and maintained the live production website serving 1,200+ registered members.</li>
+        <li>Utilized AI-assisted tools to improve development speed and productivity.</li>
+      </ul>
+    </div>
+
+    <div class="resume__item">
+      <div class="resume__item-head">
+        <span class="resume__item-title">PowerGiant RMT — Backend Developer (Project-Based)</span>
+        <span class="resume__item-date">Nov 2025 – Dec 2025</span>
+      </div>
+      <ul>
+        <li>Developed and maintained backend functionality using PHP and MySQL — <a href="https://powergiantrmt.com" target="_blank" rel="noopener">powergiantrmt.com</a>.</li>
+        <li>Deployed the system to a live environment.</li>
+        <li>Assisted in implementing client requirements and system improvements.</li>
+      </ul>
+    </div>
+
+    <div class="resume__item">
+      <div class="resume__item-head">
+        <span class="resume__item-title">J&amp;T Express — Parcel Sorter</span>
+        <span class="resume__item-date">Mar 2025 – Jun 2025</span>
+      </div>
+      <ul>
+        <li>Sorted and organized packages for delivery, maintaining accuracy in a fast-paced environment as part of a team.</li>
+      </ul>
+    </div>
+
+    <h2>Projects</h2>
+
+    <div class="resume__item">
+      <div class="resume__item-head">
+        <span class="resume__item-title">Cropsight <em class="resume__tech">— PHP · MySQL · JavaScript · Chatbot · SMS</em></span>
+      </div>
+      <ul>
+        <li>Rebuilt a crop-monitoring platform with an integrated chatbot assistant and refreshed UI/UX for farmers and agri-technicians.</li>
+        <li>Designed dashboards for crop stages, harvest trends, and task scheduling.</li>
+      </ul>
+    </div>
+
+    <div class="resume__item">
+      <div class="resume__item-head">
+        <span class="resume__item-title">QR Attendance <em class="resume__tech">— PHP · MySQL · JavaScript</em></span>
+      </div>
+      <ul>
+        <li>Built QR-scan attendance tracking that replaces paper logbooks, with records landing in a live dashboard.</li>
+        <li>Implemented student lookup and per-session attendance reports.</li>
+      </ul>
+    </div>
+
+    <div class="resume__item">
+      <div class="resume__item-head">
+        <span class="resume__item-title">POS with Barcode <em class="resume__tech">— PHP · MySQL · JavaScript · QRlib</em></span>
+      </div>
+      <ul>
+        <li>Developed a point-of-sale system with barcode scanning, inventory management, and sales reporting for small retail stores.</li>
+      </ul>
+    </div>
+
+    <h2>Education</h2>
+    <div class="resume__item">
+      <div class="resume__item-head">
+        <span class="resume__item-title">Bachelor of Science in Information Technology</span>
+        <span class="resume__item-date">2022 – 2026</span>
+      </div>
+      <ul>
+        <li>South East Asian Institute of Technology &nbsp;|&nbsp; Tupi, South Cotabato, Philippines</li>
+      </ul>
+    </div>
+
+    <div class="resume__actions">
+      <button class="btn btn--primary" onclick="window.print()">Download PDF / Print</button>
+      <a class="btn btn--ghost" href="index.html">← Back to portfolio</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span class="mono">© <span id="year"></span> Rhon Jon Romero</span>
+    <a class="mono" href="index.html">← Portfolio home</a>
+  </footer>
+
+  <script src="js/sfx.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+    });
+  </script>
+</body>
+</html>

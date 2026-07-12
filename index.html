@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhon Jon Romero — Full-Stack Web Developer</title>
+  <meta name="description" content="Rhon Jon Romero is a full-stack web developer from General Santos City, Philippines, building POS, attendance, and record-management systems with PHP & MySQL." />
+  <meta name="author" content="Rhon Jon Romero" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Rhon Jon Romero — Full-Stack Web Developer" />
+  <meta property="og:description" content="I build POS, attendance, and record-management systems that keep real businesses running. PHP + MySQL, with AI-assisted workflows." />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/Git-branches" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rhon Jon Romero — Full-Stack Web Developer" />
+  <meta name="twitter:description" content="I build POS, attendance, and record-management systems that keep real businesses running." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rhon Jon Romero",
+    "jobTitle": "Full-Stack Web Developer",
+    "email": "mailto:ejromero294@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "General Santos City", "addressCountry": "PH" },
+    "url": "https://github.com/Git-branches",
+    "sameAs": ["https://github.com/Git-branches", "https://www.linkedin.com/in/ej-romero-bba17238b", "https://ph.jobstreet.com/profiles/rhonjong-romero-m8LWX00L8B"],
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "South East Asian Institute of Technology", "address": "Tupi, South Cotabato, Philippines" },
+    "knowsAbout": ["PHP", "MySQL", "PostgreSQL", "JavaScript", "Node.js", "Laravel", "Java", "REST API", "OAuth", "Tailwind CSS", "Bootstrap", "POS systems", "SMS integration (PhilSMS, Semaphore, UniSMS)", "AI integration"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="top">
+    <a class="nav__logo" href="#top">RJR<span class="accent">.</span></a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#stack">Stack</a>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="resume.html">Résumé</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="soundToggle" aria-label="Toggle sound effects" title="Sound effects">
+        <span class="theme-toggle__icon" id="soundIcon">🔊</span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle__icon">◐</span>
+      </button>
+      <button class="nav__burger" id="navBurger" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__glow hero__glow--1"></div>
+        <div class="hero__glow hero__glow--2"></div>
+        <span class="hero__mark">&lt;/&gt;</span>
+        <span class="hero__glyph hero__glyph--1 mono">{ }</span>
+        <span class="hero__glyph hero__glyph--2 mono">&lt;?php</span>
+        <span class="hero__glyph hero__glyph--3 mono">SELECT *</span>
+        <span class="hero__glyph hero__glyph--4 mono">;</span>
+      </div>
+
+      <p class="kicker reveal">General Santos City, PH</p>
+      <h1 class="hero__title reveal">
+        I build <em class="rotator" id="rotator">systems</em> that keep<br />
+        real businesses running.
+      </h1>
+      <p class="hero__sub reveal">
+        Hi, I'm <strong>Rhon Jon Romero</strong> — an IT graduate building
+        web &amp; mobile experiences. From personal projects to production
+        features, I ship things that actually work.
+      </p>
+
+      <div class="hero__meta reveal">
+        <a class="btn btn--primary" href="#work">See my work ↓</a>
+        <a class="btn btn--ghost" href="mailto:ejromero294@gmail.com">Get in touch</a>
+        <span class="badge-live"><span class="badge-live__dot"></span> Open to projects</span>
+      </div>
+
+      <div class="hero__stats reveal">
+        <div class="stat">
+          <span class="stat__num" data-count="27" id="repoCount">0</span><span class="stat__plus">+</span>
+          <span class="stat__label">Public repositories</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="17">0</span><span class="stat__plus">+</span>
+          <span class="stat__label">Systems shipped</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILLS TICKER ================= -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track" id="tickerTrack">
+        <div class="ticker__group">
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/php" alt="" loading="lazy" onerror="this.remove()" />PHP</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/mysql" alt="" loading="lazy" onerror="this.remove()" />MySQL</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/postgresql" alt="" loading="lazy" onerror="this.remove()" />PostgreSQL</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/javascript" alt="" loading="lazy" onerror="this.remove()" />JavaScript</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/nodedotjs" alt="" loading="lazy" onerror="this.remove()" />Node.js</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/laravel" alt="" loading="lazy" onerror="this.remove()" />Laravel</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/openjdk" alt="" loading="lazy" onerror="this.remove()" />Java</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#0ea5e9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 7h-3v2h3a3 3 0 1 1 0 6h-3v2h3a5 5 0 0 0 0-10zm-7 8H7a3 3 0 1 1 0-6h3V7H7a5 5 0 0 0 0 10h3v-2zm-2-4h8v2H8v-2z"/></svg>REST API</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#2563eb" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 1 1 6 0v3H9V7zm3 6a2 2 0 0 1 1 3.73V19h-2v-2.27A2 2 0 0 1 12 13z"/></svg>OAuth</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/tailwindcss" alt="" loading="lazy" onerror="this.remove()" />Tailwind CSS</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/bootstrap" alt="" loading="lazy" onerror="this.remove()" />Bootstrap</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/html5" alt="" loading="lazy" onerror="this.remove()" />HTML5</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/css" alt="" loading="lazy" onerror="this.remove()" />CSS3</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#22c55e" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2zm3 5h10v2H7V8zm0 4h7v2H7v-2z"/></svg>SMS Integration</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/hostinger" alt="" loading="lazy" onerror="this.remove()" />Hostinger</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/git" alt="" loading="lazy" onerror="this.remove()" />Git</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/claude" alt="" loading="lazy" onerror="this.remove()" />Claude Code</span><span class="ticker__sep">·</span>
+          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#10a37f" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>ChatGPT</span><span class="ticker__sep">·</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= STACK ================= -->
+    <section class="section" id="stack">
+      <div class="section__head reveal">
+        <span class="section__index mono">01</span>
+        <h2 class="section__title">Tech Stack</h2>
+        <p class="section__note mono">tools I reach for daily</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">// Frontend</h3>
+          <ul><li>Tailwind CSS</li><li>Bootstrap</li><li>JavaScript</li><li>HTML5 / CSS3</li><li>Responsive UI/UX</li><li>React <span class="tag-learning mono">currently learning</span></li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">// Backend</h3>
+          <ul><li>PHP</li><li>Laravel</li><li>Node.js</li><li>Java</li><li>REST API</li><li>OAuth</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">// Databases &amp; Integrations</h3>
+          <ul><li>MySQL</li><li>PostgreSQL</li><li><button class="stack-pop" type="button" data-modal="modalSms">SMS APIs <span class="stack-pop__count mono">3</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li><li><button class="stack-pop" type="button" data-modal="modalAi">AI chatbots <span class="stack-pop__count mono">2</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">// Tools &amp; Deployment</h3>
+          <ul><li>Git &amp; GitHub</li><li>VS Code</li><li>XAMPP</li><li>cPanel</li><li>Hostinger</li></ul>
+        </div>
+      </div>
+
+      <dialog class="stack-modal" id="modalSms">
+        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
+        <h4 class="stack-modal__title mono">// SMS APIs</h4>
+        <ul class="stack-modal__list">
+          <li>PhilSMS <span class="stack-modal__note">Philippine SMS gateway</span></li>
+          <li>Semaphore <span class="stack-modal__note">OTP &amp; alerts for PH numbers</span></li>
+          <li>UniSMS <span class="stack-modal__note">unified SMS delivery API</span></li>
+        </ul>
+      </dialog>
+
+      <dialog class="stack-modal" id="modalAi">
+        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
+        <h4 class="stack-modal__title mono">// AI chatbots</h4>
+        <ul class="stack-modal__list">
+          <li>Claude <span class="stack-modal__note">chatbot &amp; dev workflows</span></li>
+          <li>ChatGPT <span class="stack-modal__note">assistants &amp; integrations</span></li>
+        </ul>
+      </dialog>
+    </section>
+
+    <!-- ================= WORK ================= -->
+    <section class="section" id="work">
+      <div class="section__head reveal">
+        <span class="section__index mono">02</span>
+        <h2 class="section__title">Things I've Built</h2>
+        <p class="section__note mono">systems in production &amp; on GitHub</p>
+      </div>
+
+      <ol class="ledger">
+        <li class="ledger__row ledger__row--thumb reveal">
+          <span class="ledger__num mono">001</span>
+          <img class="ledger__thumb" src="assets/damayan-thumb.jpg" alt="Divine Life Damayan homepage preview" loading="lazy" />
+          <div class="ledger__body">
+            <h3 class="ledger__title">Divine Life Damayan <span class="ledger__live mono">● live</span></h3>
+            <p class="ledger__desc">Membership & mutual-aid platform with CMS-managed landing pages, over-the-counter payment processing, and multi-language support.</p>
+            <div class="ledger__tags mono"><span>PHP</span><span>MySQL</span><span>CMS</span><span>i18n</span></div>
+            <a class="ledger__case mono" href="projects/divine-life-damayan.html">Read case study →</a>
+          </div>
+          <span class="ledger__year mono">2026</span>
+          <a class="ledger__link" href="https://divinelifedamayan.com" target="_blank" rel="noopener" aria-label="Visit live site">↗</a>
+        </li>
+
+        <li class="ledger__row ledger__row--thumb reveal">
+          <span class="ledger__num mono">002</span>
+          <img class="ledger__thumb" src="assets/powergiant-thumb.jpg" alt="Power Giant RMT homepage preview" loading="lazy" />
+          <div class="ledger__body">
+            <h3 class="ledger__title">Power Giant RMT <span class="ledger__live mono">● live</span></h3>
+            <p class="ledger__desc">Corporate site for a multi-service company — oils, waste management, cleaning, and logistics — with service catalog, testimonials, and quote requests.</p>
+            <div class="ledger__tags mono"><span>PHP</span><span>Corporate</span><span>Quotes</span></div>
+            <a class="ledger__case mono" href="projects/power-giant-rmt.html">Read case study →</a>
+          </div>
+          <span class="ledger__year mono">2025</span>
+          <a class="ledger__link" href="https://powergiantrmt.com" target="_blank" rel="noopener" aria-label="Visit live site">↗</a>
+        </li>
+
+        <li class="ledger__row ledger__row--thumb reveal">
+          <span class="ledger__num mono">003</span>
+          <img class="ledger__thumb" src="assets/qrattendance-thumb.jpg" alt="QR Attendance scanner dashboard preview" loading="lazy" />
+          <div class="ledger__body">
+            <h3 class="ledger__title">QR Attendance</h3>
+            <p class="ledger__desc">Attendance tracking that replaces paper logbooks — students scan a QR code and records land in a live dashboard.</p>
+            <div class="ledger__tags mono"><span>PHP</span><span>QR</span><span>MySQL</span></div>
+          </div>
+          <span class="ledger__year mono">2025</span>
+          <a class="ledger__link" href="https://github.com/Git-branches/qr-attendance-" target="_blank" rel="noopener" aria-label="View project">↗</a>
+        </li>
+
+        <li class="ledger__row ledger__row--thumb reveal">
+          <span class="ledger__num mono">004</span>
+          <img class="ledger__thumb" src="assets/cropsight-thumb.jpg" alt="Cropsight v2 farm dashboard preview" loading="lazy" />
+          <div class="ledger__body">
+            <h3 class="ledger__title">Cropsight v2</h3>
+            <p class="ledger__desc">Crop-monitoring platform, rebuilt with a chatbot assistant and a refreshed UI/UX for farmers and agri-technicians.</p>
+            <div class="ledger__tags mono"><span>PHP</span><span>Chatbot</span><span>UI/UX</span></div>
+          </div>
+          <span class="ledger__year mono">2025</span>
+          <a class="ledger__link" href="https://github.com/Git-branches/Cropsightv2" target="_blank" rel="noopener" aria-label="View project">↗</a>
+        </li>
+
+        <li class="ledger__row ledger__row--thumb reveal">
+          <span class="ledger__num mono">005</span>
+          <img class="ledger__thumb" src="assets/posbarcode-thumb.jpg" alt="POS checkout terminal preview" loading="lazy" />
+          <div class="ledger__body">
+            <h3 class="ledger__title">POS with Barcode</h3>
+            <p class="ledger__desc">Point-of-sale system with barcode scanning, inventory, and sales reporting for small retail stores.</p>
+            <div class="ledger__tags mono"><span>PHP</span><span>Barcode</span><span>Inventory</span></div>
+          </div>
+          <span class="ledger__year mono">2025</span>
+          <a class="ledger__link" href="https://github.com/Git-branches/POS-with-Barcode" target="_blank" rel="noopener" aria-label="View project">↗</a>
+        </li>
+
+        <li class="ledger__row ledger__row--thumb reveal">
+          <span class="ledger__num mono">006</span>
+          <img class="ledger__thumb" src="assets/dlicense-thumb.jpg" alt="Drivers license portal preview" loading="lazy" />
+          <div class="ledger__body">
+            <h3 class="ledger__title">Drivers ID & Licensing System</h3>
+            <p class="ledger__desc">License portal and records information system — application, renewal, and record lookup in one place.</p>
+            <div class="ledger__tags mono"><span>PHP</span><span>Records</span><span>Portal</span></div>
+          </div>
+          <span class="ledger__year mono">2024</span>
+          <a class="ledger__link" href="https://github.com/Git-branches/Driivers-ID-Licensing-and-Record-Information-System" target="_blank" rel="noopener" aria-label="View project">↗</a>
+        </li>
+
+        <li class="ledger__row ledger__row--thumb reveal">
+          <span class="ledger__num mono">007</span>
+          <img class="ledger__thumb" src="assets/classsched-thumb.jpg" alt="Scheduling dashboard preview" loading="lazy" />
+          <div class="ledger__body">
+            <h3 class="ledger__title">Classroom Sched v2</h3>
+            <p class="ledger__desc">Classroom scheduling system that untangles room conflicts and teacher loads for schools.</p>
+            <div class="ledger__tags mono"><span>PHP</span><span>Scheduling</span><span>MySQL</span></div>
+          </div>
+          <span class="ledger__year mono">2024</span>
+          <a class="ledger__link" href="https://github.com/Git-branches/Classroom-schedv2" target="_blank" rel="noopener" aria-label="View project">↗</a>
+        </li>
+      </ol>
+
+      <p class="section__more reveal">
+        <a class="btn btn--ghost" href="https://github.com/Git-branches?tab=repositories" target="_blank" rel="noopener">All <span id="repoTotal">27</span>+ repositories on GitHub ↗</a>
+      </p>
+    </section>
+
+    <!-- ================= SERVICES ================= -->
+    <section class="section" id="services">
+      <div class="section__head reveal">
+        <span class="section__index mono">03</span>
+        <h2 class="section__title">What I Do</h2>
+        <p class="section__note mono">from idea to deployed system</p>
+      </div>
+
+      <div class="fan fan--services reveal">
+        <article class="fan__card fan__card--left">
+          <span class="fan__badge mono">❮ pos · attendance · records ❯</span>
+          <div class="fan__head">
+            <span class="fan__icon" aria-hidden="true">🧾</span>
+            <h3 class="fan__title">Business Systems</h3>
+          </div>
+          <p class="fan__desc">
+            POS with barcode scanning, attendance tracking, scheduling, and record
+            management — custom-built around how your business actually operates.
+          </p>
+        </article>
+        <article class="fan__card fan__card--center">
+          <span class="fan__badge mono">❮ database → deploy ❯</span>
+          <div class="fan__head">
+            <span class="fan__icon" aria-hidden="true">🌐</span>
+            <h3 class="fan__title">Full-Stack Web Apps</h3>
+          </div>
+          <p class="fan__desc">
+            End-to-end delivery: database design, backend logic, responsive UI, and
+            deployment to the cPanel hosting you already pay for.
+          </p>
+        </article>
+        <article class="fan__card fan__card--right">
+          <span class="fan__badge mono">❮ chatbots &amp; workflows ❯</span>
+          <div class="fan__head">
+            <span class="fan__icon" aria-hidden="true">✦</span>
+            <h3 class="fan__title">AI Integration</h3>
+          </div>
+          <p class="fan__desc">
+            Chatbot assistants and AI-assisted workflows folded into existing systems —
+            like the assistant built into Cropsight v2.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section" id="about">
+      <div class="section__head reveal">
+        <span class="section__index mono">04</span>
+        <h2 class="section__title">About</h2>
+        <p class="section__note mono">the person behind the commits</p>
+      </div>
+
+      <div class="about">
+        <figure class="about__photo reveal">
+          <canvas id="halftonePhoto" width="480" height="480" role="img" aria-label="Rhon Jon Romero — halftone portrait"></canvas>
+          <figcaption class="mono">@Git-branches</figcaption>
+        </figure>
+        <div class="about__text reveal">
+          <p>
+            I'm a recent <strong>Bachelor of Science in Information Technology</strong> graduate from
+            South East Asian Institute of Technology (Tupi, South Cotabato, Philippines), now based in
+            <strong>General Santos City</strong>. My development journey spans web — from building and
+            shipping full applications from the ground up, to engineering production-level features
+            during a hands-on internship.
+          </p>
+          <p>
+            I care about clean code, meaningful user experiences, and building tools that actually
+            work for the people who use them.
+          <p>
+            My default stack is <strong>PHP + MySQL</strong> because it's what runs reliably on the
+            hosting my clients already have. Lately I've been folding <strong>AI assistants</strong>
+            into those systems and leveling up with React.
+          </p>
+          <p class="about__time mono">Local time in GenSan: <span id="localTime">--:--</span> PHT</p>
+
+          <div class="gh-activity" id="ghActivity" hidden>
+            <p class="gh-activity__label mono">// latest pushes on GitHub</p>
+            <ul class="gh-activity__list mono" id="ghActivityList"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="section section--contact" id="contact">
+      <div class="section__head reveal">
+        <span class="section__index mono">05</span>
+        <h2 class="section__title">Contact</h2>
+        <p class="section__note mono">let's build something</p>
+      </div>
+
+      <a class="contact-mail reveal" href="mailto:ejromero294@gmail.com">
+        ejromero294<span class="accent">@</span>gmail.com
+      </a>
+
+      <div class="contact-links reveal">
+        <a href="https://github.com/Git-branches" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/ej-romero-bba17238b" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://ph.jobstreet.com/profiles/rhonjong-romero-m8LWX00L8B" target="_blank" rel="noopener">JobStreet ↗</a>
+        <a href="https://profile.indeed.com/" target="_blank" rel="noopener">Indeed ↗</a>
+        <button id="copyEmail" type="button">Copy email</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="mono">© <span id="year"></span> Rhon Jon Romero · General Santos City, PH</span>
+    <span class="mono footer__note">Designed &amp; built by hand — no templates</span>
+    <a class="mono" href="#top">Back to top ↑</a>
+  </footer>
+
+  <div class="fab" id="fab">
+    <button class="fab__action" id="botLauncher" aria-label="Open chat assistant" title="Ask my assistant">✦</button>
+    <button class="fab__action" id="toTop" aria-label="Back to top" title="Back to top">↑</button>
+    <button class="fab__toggle" id="fabToggle" aria-label="Quick actions" aria-expanded="false">⚙</button>
+  </div>
+
+  <script src="js/sfx.js"></script>
+  <script src="js/halftone.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
