@@ -78,10 +78,8 @@
 
   if (reduced) return; // everything below is decoration
 
-  /* ---------- loading screen (once per session) ---------- */
-  let seen = false;
-  try { seen = sessionStorage.getItem("rjrLoader") === "1"; sessionStorage.setItem("rjrLoader", "1"); } catch { /* private mode */ }
-  if (!seen) {
+  /* ---------- loading screen (every full page load) ---------- */
+  {
     const loader = document.createElement("div");
     loader.className = "loader";
     loader.innerHTML =
@@ -89,7 +87,7 @@
     document.body.appendChild(loader);
     const t0 = performance.now();
     const finish = () => {
-      const wait = Math.max(0, 700 - (performance.now() - t0));
+      const wait = Math.max(0, 800 - (performance.now() - t0));
       setTimeout(() => {
         loader.classList.add("is-done");
         setTimeout(() => loader.remove(), 600);
@@ -175,7 +173,7 @@
       const r = btn.getBoundingClientRect();
       const dx = e.clientX - (r.left + r.width / 2);
       const dy = e.clientY - (r.top + r.height / 2);
-      btn.style.transform = `translate(${(dx * 0.16).toFixed(1)}px, ${(dy * 0.16 - 1).toFixed(1)}px)`;
+      btn.style.transform = `translate(${(dx * 0.22).toFixed(1)}px, ${(dy * 0.22 - 1).toFixed(1)}px)`;
     });
     btn.addEventListener("pointerleave", () => (btn.style.transform = ""));
   });
