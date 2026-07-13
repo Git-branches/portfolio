@@ -147,18 +147,6 @@ const spyObserver = new IntersectionObserver(
 );
 spySections.forEach((sec) => spyObserver.observe(sec));
 
-// ---------- floating quick-actions dial (chat + back-to-top) ----------
-const fab = document.getElementById("fab");
-const fabToggle = document.getElementById("fabToggle");
-fabToggle.addEventListener("click", () => {
-  const open = fab.classList.toggle("is-open");
-  fabToggle.setAttribute("aria-expanded", String(open));
-});
-document.getElementById("toTop").addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  fab.classList.remove("is-open");
-});
-
 // ---------- tech-stack provider modals ----------
 document.querySelectorAll("[data-modal]").forEach((btn) => {
   btn.addEventListener("click", () => document.getElementById(btn.dataset.modal)?.showModal());

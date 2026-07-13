@@ -168,7 +168,7 @@
   });
 
   /* ---------- magnetic buttons ---------- */
-  document.querySelectorAll(".btn, .fab__toggle, .fab__action, .to-top-btn, .theme-toggle").forEach((btn) => {
+  document.querySelectorAll(".btn, .to-top-btn, .theme-toggle").forEach((btn) => {
     btn.addEventListener("pointermove", (e) => {
       const r = btn.getBoundingClientRect();
       const dx = e.clientX - (r.left + r.width / 2);

@@ -2,7 +2,7 @@
 // Service worker — offline cache for the portfolio (PWA)
 // Bump CACHE version to force clients to refetch everything.
 // ============================================================
-const CACHE = "rjr-portfolio-v21";
+const CACHE = "rjr-portfolio-v22";
 
 const CORE = [
   "./",
@@ -14,7 +14,6 @@ const CORE = [
   "./assets/profile1.jpg",
   "./assets/profile-dark.png",
   "./js/main.js",
-  "./js/chatbot.js",
   "./js/lightbox.js",
   "./projects/divine-life-damayan",
   "./projects/power-giant-rmt",
