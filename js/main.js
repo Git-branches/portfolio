@@ -152,10 +152,11 @@ contactForm?.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
         access_key: WEB3FORMS_KEY,
-        subject: `New portfolio message from ${data.name}`,
+        subject: `${data.subject || "New message"} — from ${data.name}`,
         from_name: "rj-romero.vercel.app",
         name: data.name,
         email: data.email,
+        topic: data.subject,
         message: data.message,
       }),
     });
