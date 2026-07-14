@@ -129,10 +129,9 @@ copyBtn.addEventListener("click", async () => {
 });
 
 // ---------- contact form ----------
-// Uses FormSubmit.co — no signup, no API key. The first time a message is
-// sent, FormSubmit emails a one-click activation link to CONTACT_EMAIL;
-// after that every submission lands in the inbox automatically.
-const CONTACT_EMAIL = "ejromero294@gmail.com";
+// Web3Forms — the access key is meant to live in client-side code; it only
+// lets the form email CONTACT_EMAIL, it grants no access to the inbox.
+const WEB3FORMS_KEY = "ce9b16f2-c397-459a-9bf5-e620170750ea";
 const contactForm = document.getElementById("contactForm");
 contactForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -148,20 +147,20 @@ contactForm?.addEventListener("submit", async (e) => {
   btn.disabled = true;
   btn.textContent = "Sending…";
   try {
-    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+    const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: `New portfolio message from ${data.name}`,
+        from_name: "rj-romero.vercel.app",
         name: data.name,
         email: data.email,
         message: data.message,
-        _subject: `New portfolio message from ${data.name}`,
-        _template: "table",
-        _captcha: "false",
       }),
     });
     const json = await res.json();
-    if (json.success === true || json.success === "true") {
+    if (json.success) {
       contactForm.reset();
       window.showToast?.("Message sent — thanks! I'll reply soon ✓");
     } else {
