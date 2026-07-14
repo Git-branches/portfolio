@@ -12,11 +12,15 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rj-romero.vercel.app" />
   <meta property="og:title" content="Rhon Jon Romero — Full-Stack Web Developer" />
-  <meta property="og:description" content="I build POS, attendance, and record-management systems that keep real businesses running. PHP + MySQL, with AI-assisted workflows." />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/Git-branches" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:description" content="IT graduate & full-stack web developer from General Santos City. I build POS, attendance, and record-management systems with PHP, MySQL, and AI-assisted workflows." />
+  <meta property="og:image" content="https://rj-romero.vercel.app/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Rhon Jon Romero — IT graduate & full-stack web developer" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rhon Jon Romero — Full-Stack Web Developer" />
-  <meta name="twitter:description" content="I build POS, attendance, and record-management systems that keep real businesses running." />
+  <meta name="twitter:description" content="IT graduate & full-stack web developer from General Santos City — PHP, MySQL, and AI-assisted workflows." />
+  <meta name="twitter:image" content="https://rj-romero.vercel.app/assets/og-image.png" />
 
   <script type="application/ld+json">
   {
@@ -378,6 +382,26 @@
       <a class="contact-mail reveal" href="mailto:ejromero294@gmail.com">
         ejromero294<span class="accent">@</span>gmail.com
       </a>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="contact-form__row">
+          <label class="contact-form__field">
+            <span class="contact-form__label mono">// your name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Juan dela Cruz" />
+          </label>
+          <label class="contact-form__field">
+            <span class="contact-form__label mono">// your email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
+          </label>
+        </div>
+        <label class="contact-form__field">
+          <span class="contact-form__label mono">// message</span>
+          <textarea name="message" rows="4" required placeholder="Tell me about your project or role…"></textarea>
+        </label>
+        <!-- honeypot: real people never fill this -->
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+        <button class="btn btn--primary" type="submit" id="contactSubmit">Send message →</button>
+      </form>
 
       <div class="contact-links reveal">
         <a href="https://github.com/Git-branches" target="_blank" rel="noopener">GitHub ↗</a>

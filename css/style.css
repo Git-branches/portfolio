@@ -635,6 +635,36 @@ body {
 }
 .contact-mail:hover { color: var(--accent); }
 
+/* ---------- contact form ---------- */
+.contact-form {
+  margin-top: 2.75rem; max-width: 640px;
+  display: flex; flex-direction: column; gap: 1.1rem;
+}
+.contact-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+.contact-form__field { display: flex; flex-direction: column; gap: 0.45rem; }
+.contact-form__label { font-size: 0.7rem; color: var(--ink-soft); letter-spacing: 0.04em; }
+.contact-form input,
+.contact-form textarea {
+  font-family: var(--font-body);
+  /* 16px keeps iOS Safari from auto-zooming when a field is focused */
+  font-size: 16px;
+  color: var(--ink); background: var(--paper-2);
+  border: 1.5px solid var(--line); border-radius: 10px;
+  padding: 0.75rem 0.9rem; width: 100%; outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: var(--ink-soft); opacity: 0.7; }
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--ink); box-shadow: 3px 3px 0 var(--accent-soft);
+}
+.contact-form textarea { resize: vertical; min-height: 118px; line-height: 1.5; }
+.contact-form .btn { align-self: flex-start; }
+@media (max-width: 560px) {
+  .contact-form__row { grid-template-columns: 1fr; }
+}
+
 .contact-links { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.9rem 1.25rem; align-items: center; }
 .contact-links a, .contact-links button {
   font-family: var(--font-mono); font-size: 0.85rem;

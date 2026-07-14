@@ -128,6 +128,62 @@ copyBtn.addEventListener("click", async () => {
   setTimeout(() => (copyBtn.textContent = "Copy email"), 2000);
 });
 
+// ---------- contact form ----------
+// Works immediately: until a Web3Forms key is set it falls back to the
+// visitor's email client. Paste a free key from https://web3forms.com
+// (30-second signup, tied to ejromero294@gmail.com) to send inline instead.
+const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const contactForm = document.getElementById("contactForm");
+contactForm?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(contactForm));
+  if (data.botcheck) return; // honeypot tripped — silently drop
+  if (!data.name || !data.email || !data.message) {
+    window.showToast?.("Please fill in name, email, and message.");
+    return;
+  }
+
+  // no key yet → hand off to the email client so the form still works
+  if (WEB3FORMS_KEY.startsWith("YOUR_")) {
+    const body = `${data.message}\n\n— ${data.name} (${data.email})`;
+    window.location.href =
+      `mailto:ejromero294@gmail.com?subject=${encodeURIComponent("Portfolio inquiry from " + data.name)}&body=${encodeURIComponent(body)}`;
+    window.showToast?.("Opening your email app…");
+    return;
+  }
+
+  const btn = document.getElementById("contactSubmit");
+  const label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = "Sending…";
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: `New portfolio message from ${data.name}`,
+        from_name: "rj-romero.vercel.app",
+        name: data.name,
+        email: data.email,
+        message: data.message,
+      }),
+    });
+    const json = await res.json();
+    if (json.success) {
+      contactForm.reset();
+      window.showToast?.("Message sent — thanks! I'll reply soon ✓");
+    } else {
+      window.showToast?.("Couldn't send. Please email me directly.");
+    }
+  } catch {
+    window.showToast?.("Network error. Please email me directly.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = label;
+  }
+});
+
 // ---------- scrollspy: highlight nav link for the section in view ----------
 const spyLinks = [...navLinks.querySelectorAll("a")];
 const spySections = spyLinks
