@@ -668,6 +668,8 @@ body {
   background-repeat: no-repeat; background-position: right 1rem center;
   padding-right: 2.4rem;
 }
+/* muted look while the empty placeholder option is the one selected */
+.contact-form select:has(option[value=""]:checked) { color: var(--ink-soft); }
 .contact-form textarea { resize: vertical; min-height: 118px; line-height: 1.5; }
 .contact-form .btn { align-self: flex-start; }
 @media (max-width: 560px) {
