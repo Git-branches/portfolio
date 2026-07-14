@@ -129,10 +129,10 @@ copyBtn.addEventListener("click", async () => {
 });
 
 // ---------- contact form ----------
-// Works immediately: until a Web3Forms key is set it falls back to the
-// visitor's email client. Paste a free key from https://web3forms.com
-// (30-second signup, tied to ejromero294@gmail.com) to send inline instead.
-const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+// Uses FormSubmit.co — no signup, no API key. The first time a message is
+// sent, FormSubmit emails a one-click activation link to CONTACT_EMAIL;
+// after that every submission lands in the inbox automatically.
+const CONTACT_EMAIL = "ejromero294@gmail.com";
 const contactForm = document.getElementById("contactForm");
 contactForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -143,34 +143,25 @@ contactForm?.addEventListener("submit", async (e) => {
     return;
   }
 
-  // no key yet → hand off to the email client so the form still works
-  if (WEB3FORMS_KEY.startsWith("YOUR_")) {
-    const body = `${data.message}\n\n— ${data.name} (${data.email})`;
-    window.location.href =
-      `mailto:ejromero294@gmail.com?subject=${encodeURIComponent("Portfolio inquiry from " + data.name)}&body=${encodeURIComponent(body)}`;
-    window.showToast?.("Opening your email app…");
-    return;
-  }
-
   const btn = document.getElementById("contactSubmit");
   const label = btn.textContent;
   btn.disabled = true;
   btn.textContent = "Sending…";
   try {
-    const res = await fetch("https://api.web3forms.com/submit", {
+    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        subject: `New portfolio message from ${data.name}`,
-        from_name: "rj-romero.vercel.app",
         name: data.name,
         email: data.email,
         message: data.message,
+        _subject: `New portfolio message from ${data.name}`,
+        _template: "table",
+        _captcha: "false",
       }),
     });
     const json = await res.json();
-    if (json.success) {
+    if (json.success === true || json.success === "true") {
       contactForm.reset();
       window.showToast?.("Message sent — thanks! I'll reply soon ✓");
     } else {
