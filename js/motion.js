@@ -76,6 +76,66 @@
     window.addEventListener("scroll", () => btn.classList.toggle("is-on", window.scrollY > 480), { passive: true });
   }
 
+  /* ---------- konami code easter egg (works regardless of motion pref) ---------- */
+  const KONAMI = ["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","a"];
+  let kPos = 0;
+  document.addEventListener("keydown", (e) => {
+    const key = (e.key || "").toLowerCase();
+    kPos = key === KONAMI[kPos] ? kPos + 1 : (key === KONAMI[0] ? 1 : 0);
+    if (kPos === KONAMI.length) { kPos = 0; konami(); }
+  });
+  function konami() {
+    showToast("🎮 Konami unlocked — thanks for exploring!");
+    if (localStorage.getItem("sound") !== "off") victoryArpeggio();
+    if (!reduced) confettiBurst(); // respect reduced-motion: skip the animation
+  }
+  function victoryArpeggio() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [523, 659, 784, 1047].forEach((f, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        const t = ctx.currentTime + i * 0.09;
+        o.type = "sine"; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.05, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(t); o.stop(t + 0.24);
+      });
+    } catch { /* no audio */ }
+  }
+  function confettiBurst() {
+    const cv = document.createElement("canvas");
+    cv.className = "konami-canvas";
+    document.body.appendChild(cv);
+    const cx = cv.getContext("2d");
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
+    const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#111";
+    const colors = [accent, "#888", "#ccc", accent];
+    const parts = Array.from({ length: 150 }, () => ({
+      x: innerWidth / 2 * dpr, y: innerHeight * 0.42 * dpr,
+      vx: (Math.random() - 0.5) * 15 * dpr, vy: (Math.random() * -13 - 4) * dpr,
+      s: (Math.random() * 6 + 4) * dpr, rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.3,
+      c: colors[(Math.random() * colors.length) | 0],
+    }));
+    const grav = 0.35 * dpr;
+    const t0 = performance.now();
+    (function frame(now) {
+      const life = now - t0;
+      cx.clearRect(0, 0, cv.width, cv.height);
+      parts.forEach((p) => {
+        p.vy += grav; p.x += p.vx; p.y += p.vy; p.vx *= 0.99; p.rot += p.vr;
+        cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot);
+        cx.globalAlpha = Math.max(0, 1 - life / 2600);
+        cx.fillStyle = p.c; cx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * 0.5);
+        cx.restore();
+      });
+      if (life < 2600) requestAnimationFrame(frame);
+      else cv.remove();
+    })(t0);
+  }
+
   if (reduced) return; // everything below is decoration
 
   /* ---------- loading screen (every full page load) ---------- */

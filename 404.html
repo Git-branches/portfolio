@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page not found · Rhon Jon Romero</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="/assets/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/icon-192.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <script>
+    const saved = localStorage.getItem("theme");
+    if (saved) document.documentElement.setAttribute("data-theme", saved);
+    else if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-theme", "dark");
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__logo" href="/">RJR<span class="accent">.</span></a>
+    <div class="nav__actions">
+      <button class="theme-toggle" id="soundToggle" aria-label="Toggle sound effects" title="Sound effects">
+        <span class="theme-toggle__icon" id="soundIcon"><svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/><path d="M15 9.5a3.5 3.5 0 0 1 0 5"/><path d="M17.7 7a7 7 0 0 1 0 10"/><path d="M20.3 4.5a10.5 10.5 0 0 1 0 15"/></svg></span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle__icon">◐</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="notfound">
+    <p class="notfound__code">404</p>
+    <h1 class="notfound__title">This page ran off to keep a business running.</h1>
+    <p class="notfound__sub">The link is broken or the page never existed. Let's get you back on track.</p>
+
+    <pre class="notfound__sql mono" aria-hidden="true">SELECT * FROM pages
+WHERE url = '<span class="accent" id="badUrl">/this-page</span>';
+-- 0 rows returned</pre>
+
+    <div class="notfound__actions">
+      <a class="btn btn--primary" href="/">← Back to portfolio</a>
+      <a class="btn btn--ghost" href="/#work">See the work</a>
+    </div>
+    <p class="notfound__hint mono">tip: press <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> to jump anywhere</p>
+  </main>
+
+  <footer class="footer">
+    <span class="mono">© <span id="year"></span> Rhon Jon Romero · General Santos City, PH</span>
+    <a class="mono" href="/">← Portfolio home</a>
+  </footer>
+
+  <script src="/js/motion.js"></script>
+  <script src="/js/sfx.js"></script>
+  <script src="/js/palette.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const bad = document.getElementById("badUrl");
+    if (bad && location.pathname && location.pathname !== "/") bad.textContent = location.pathname;
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+    });
+  </script>
+</body>
+</html>

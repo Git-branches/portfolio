@@ -859,6 +859,87 @@ body.is-leaving .page-veil { opacity: 1; pointer-events: auto; }
 }
 .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 
+/* command palette (⌘K) */
+.cmdk[hidden] { display: none; }
+.cmdk {
+  position: fixed; inset: 0; z-index: 220;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 14vh;
+}
+.cmdk__backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(3px);
+}
+.cmdk__panel {
+  position: relative; width: min(560px, calc(100vw - 2rem));
+  background: var(--paper); border: 1.5px solid var(--ink);
+  border-radius: 14px; box-shadow: 8px 8px 0 var(--accent-soft);
+  overflow: hidden; animation: cmdkIn 0.16s ease;
+}
+@keyframes cmdkIn { from { opacity: 0; transform: translateY(-8px); } }
+.cmdk__input {
+  width: 100%; border: none; outline: none;
+  background: var(--paper); color: var(--ink);
+  font-family: var(--font-body); font-size: 1.05rem;
+  padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--line);
+}
+.cmdk__input::placeholder { color: var(--ink-soft); }
+.cmdk__list { list-style: none; max-height: 340px; overflow-y: auto; padding: 0.4rem; }
+.cmdk__item {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.6rem 0.85rem; border-radius: 9px; cursor: pointer;
+}
+.cmdk__item.is-active { background: var(--paper-2); }
+.cmdk__icon {
+  width: 1.5rem; text-align: center; color: var(--accent);
+  font-family: var(--font-mono); flex-shrink: 0;
+}
+.cmdk__label { font-weight: 500; }
+.cmdk__hint { margin-left: auto; color: var(--ink-soft); font-size: 0.72rem; }
+.cmdk__empty { padding: 1rem 0.85rem; color: var(--ink-soft); text-align: center; font-size: 0.8rem; }
+.cmdk__foot {
+  display: flex; gap: 1.25rem; justify-content: flex-end;
+  padding: 0.6rem 1rem; border-top: 1px solid var(--line);
+  color: var(--ink-soft); font-size: 0.68rem;
+}
+.cmdk__foot span { white-space: nowrap; }
+@media (max-width: 520px) { .cmdk__hint { display: none; } }
+
+/* konami confetti burst */
+.konami-canvas {
+  position: fixed; inset: 0; z-index: 240;
+  width: 100%; height: 100%; pointer-events: none;
+}
+
+/* 404 page */
+.notfound {
+  max-width: 720px; margin: 0 auto;
+  padding: clamp(3.5rem, 12vh, 8rem) clamp(1.25rem, 8vw, 4rem) 5rem;
+  text-align: center;
+}
+.notfound__code {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(5rem, 20vw, 11rem); line-height: 1; letter-spacing: -0.03em;
+  color: transparent; -webkit-text-stroke: 2px var(--ink);
+}
+.notfound__title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.5rem, 4vw, 2.4rem); margin-top: 0.5rem; text-wrap: balance;
+}
+.notfound__sub { color: var(--ink-soft); margin-top: 1rem; font-size: 1.05rem; }
+.notfound__sql {
+  display: inline-block; text-align: left; white-space: pre;
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1rem 1.25rem; margin: 2rem 0; font-size: 0.85rem; color: var(--ink-soft);
+  overflow-x: auto; max-width: 100%;
+}
+.notfound__actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.notfound__hint { margin-top: 2rem; color: var(--ink-soft); font-size: 0.75rem; }
+.notfound__hint kbd {
+  font-family: var(--font-mono); background: var(--paper-2);
+  border: 1px solid var(--line); border-radius: 5px; padding: 0.1em 0.4em; font-size: 0.9em;
+}
+
 /* portrait curtain reveal */
 .about__photo.is-visible canvas { animation: photoIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
 @keyframes photoIn { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0% 0); } }
