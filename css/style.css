@@ -96,8 +96,12 @@ body {
   border: 1px solid var(--line); background: var(--paper-2);
   color: var(--ink); width: 38px; height: 38px; border-radius: 50%;
   font-size: 1.1rem; cursor: pointer; transition: transform 0.3s ease;
+  display: inline-flex; align-items: center; justify-content: center;
 }
 .theme-toggle:hover { transform: rotate(180deg); }
+/* the speaker shouldn't flip upside-down on hover — scale it instead */
+#soundToggle:hover { transform: scale(1.12); }
+.vol-icon { width: 1.05rem; height: 1.05rem; display: block; }
 
 .nav__burger {
   display: none; border: 1px solid var(--line); background: var(--paper-2);

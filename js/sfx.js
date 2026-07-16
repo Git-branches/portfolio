@@ -10,9 +10,18 @@
   let soundOn = localStorage.getItem("sound") !== "off";
   let audioCtx = null;
 
+  // speaker glyphs: volume-high (3 waves) vs muted (X)
+  const SPEAKER = '<path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/>';
+  const SVG_OPEN =
+    '<svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+  const VOL_ON =
+    `${SVG_OPEN}${SPEAKER}<path d="M15 9.5a3.5 3.5 0 0 1 0 5"/><path d="M17.7 7a7 7 0 0 1 0 10"/><path d="M20.3 4.5a10.5 10.5 0 0 1 0 15"/></svg>`;
+  const VOL_OFF =
+    `${SVG_OPEN}${SPEAKER}<path d="M16 9.5l5 5m0-5l-5 5"/></svg>`;
+
   function syncSoundIcon() {
     if (!soundToggle) return;
-    soundIcon.textContent = soundOn ? "🔊" : "🔇";
+    soundIcon.innerHTML = soundOn ? VOL_ON : VOL_OFF;
     soundToggle.setAttribute("aria-pressed", String(soundOn));
   }
   syncSoundIcon();
