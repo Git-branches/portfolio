@@ -155,7 +155,7 @@ body {
 }
 .hero__glyph--1 { top: 20%; right: 10%; --tilt: -8deg; }
 .hero__glyph--2 { top: 62%; right: 26%; --tilt: 5deg; animation-duration: 9s; animation-delay: -3s; }
-.hero__glyph--3 { top: 38%; right: 34%; --tilt: -4deg; animation-duration: 8s; animation-delay: -5s; }
+.hero__glyph--3 { top: 45%; right: 24%; --tilt: -4deg; animation-duration: 8s; animation-delay: -5s; }
 .hero__glyph--4 { bottom: 14%; right: 7%; --tilt: 10deg; font-size: 1.6rem; animation-delay: -2s; }
 
 @keyframes drift {
@@ -178,12 +178,13 @@ body {
   font-size: clamp(2.4rem, 6.5vw, 4.8rem);
   font-weight: 600; line-height: 1.08;
   letter-spacing: -0.02em;
+  text-wrap: balance; /* even line lengths whatever word is showing */
 }
 .hero__title em {
   font-style: italic; color: var(--accent);
 }
 .rotator {
-  display: inline-block;
+  display: inline-block; white-space: nowrap; /* keep "web apps" on one line */
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 .rotator.is-out { opacity: 0; transform: translateY(0.5em); }

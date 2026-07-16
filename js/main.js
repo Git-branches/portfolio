@@ -91,7 +91,7 @@ tickerTrack.style.setProperty(
 
 // ---------- hero headline word slideshow ----------
 const rotator = document.getElementById("rotator");
-const rotatorWords = ["systems", "POS tools", "dashboards", "web apps", "platforms"];
+const rotatorWords = ["systems", "web apps", "dashboards", "POS apps", "portals"];
 let rotatorIndex = 0;
 setInterval(() => {
   rotator.classList.add("is-out");
