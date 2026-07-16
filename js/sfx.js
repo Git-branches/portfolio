@@ -34,24 +34,31 @@
       const t = audioCtx.currentTime + delay;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
+      const lp = audioCtx.createBiquadFilter();
+      lp.type = "lowpass";
+      lp.frequency.value = 1600; // shave off harsh highs so it's warm, not shrill
       osc.type = type;
       osc.frequency.value = freq;
-      gain.gain.setValueAtTime(vol, t);
+      // soft attack + smooth decay — removes the click/pop that made it piercing
+      gain.gain.setValueAtTime(0.0001, t);
+      gain.gain.exponentialRampToValueAtTime(vol, t + 0.012);
       gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      osc.connect(gain);
+      osc.connect(lp);
+      lp.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start(t);
-      osc.stop(t + dur);
+      osc.stop(t + dur + 0.02);
     } catch {
       /* audio unavailable — stay silent */
     }
   }
 
+  // warm, low, sine-based cues — easy on the ears
   const sfx = {
-    hover: () => playTone(1500, 0.045, "sine", 0.02),
-    click: () => playTone(650, 0.09, "triangle", 0.05),
-    theme: () => { playTone(480, 0.12, "sine", 0.05); playTone(920, 0.16, "sine", 0.05, 0.09); },
-    on:    () => { playTone(600, 0.08, "sine", 0.05); playTone(1200, 0.12, "sine", 0.05, 0.07); },
+    hover: () => playTone(560, 0.05, "sine", 0.02),
+    click: () => playTone(340, 0.11, "sine", 0.05),
+    theme: () => { playTone(392, 0.14, "sine", 0.045); playTone(587, 0.18, "sine", 0.045, 0.1); },
+    on:    () => { playTone(440, 0.1, "sine", 0.05); playTone(659, 0.14, "sine", 0.05, 0.08); },
   };
 
   if (soundToggle) {
