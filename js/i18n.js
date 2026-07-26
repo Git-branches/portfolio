@@ -15,8 +15,8 @@
     // hero
     hero_t1: ["I build", "Gumagawa ako ng"],
     hero_t2: [
-      "that keep<br />real businesses running.",
-      "na nagpapatakbo<br />sa totoong mga negosyo.",
+      "that power<br />real businesses.",
+      "na nagpapatakbo<br />ng totoong mga negosyo.",
     ],
     hero_sub: [
       "Hi, I'm <strong>Rhon Jon Romero</strong> — an IT graduate and <strong>aspiring Full Stack Developer</strong> building web &amp; mobile experiences. From personal projects to production features, I ship things that actually work.",
