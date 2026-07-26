@@ -11,11 +11,28 @@ if (savedTheme) {
   document.documentElement.setAttribute("data-theme", "dark");
 }
 
+const applyTheme = (next) => {
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("theme", next);
+};
+
 themeToggle.addEventListener("click", () => {
   const current = document.documentElement.getAttribute("data-theme");
   const next = current === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", next);
-  localStorage.setItem("theme", next);
+
+  // animate the new theme sweeping down from the top (View Transitions API);
+  // browsers without support (or reduced-motion users) switch instantly
+  if (
+    document.startViewTransition &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    const root = document.documentElement;
+    root.classList.add("theme-wipe"); // freeze per-element color transitions
+    const vt = document.startViewTransition(() => applyTheme(next));
+    vt.finished.finally(() => root.classList.remove("theme-wipe"));
+  } else {
+    applyTheme(next);
+  }
 });
 
 // ---------- mobile nav ----------
