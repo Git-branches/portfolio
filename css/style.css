@@ -190,6 +190,11 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
   display: inline-block; white-space: nowrap; /* keep "web apps" on one line */
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
+/* mobile: the reserved rotator slot leaves odd mid-line gaps — give the
+   word its own line instead; still stable, since every word fits one line */
+@media (max-width: 640px) {
+  .rotator { display: block; min-width: 0 !important; text-align: left !important; }
+}
 .rotator.is-out { opacity: 0; transform: translateY(0.5em); }
 
 .hero__sub {
@@ -301,20 +306,38 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
 }
 /* the hovered card takes focus; its siblings go slightly subdued */
 .svc-grid:hover .svc-card:not(:hover) { opacity: 0.55; }
-.svc-card__badge {
-  display: inline-block; font-size: 0.6rem; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--ink-soft);
-  border: 1px solid var(--line); border-radius: 999px;
-  padding: 0.3em 0.95em; margin-bottom: 1.25rem; white-space: nowrap;
+.svc-card { display: flex; flex-direction: column; }
+.svc-card__top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1.5rem;
 }
-.svc-card__head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.7rem; }
+.svc-card__num { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--ink-soft); }
+.svc-card__arrow {
+  font-size: 1.15rem; color: var(--ink-soft);
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.svc-card:hover .svc-card__arrow { transform: translate(4px, -4px); color: var(--accent); }
+.svc-card__head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.7rem; }
 .svc-card__icon {
   display: grid; place-items: center; flex-shrink: 0;
-  width: 2.5rem; height: 2.5rem; font-size: 1.3rem;
+  width: 2.75rem; height: 2.75rem; font-size: 1.4rem;
   border-radius: 12px; background: var(--accent-soft); border: 1px solid var(--line);
+  transition: transform 0.3s ease-in-out;
 }
+.svc-card:hover .svc-card__icon { transform: scale(1.08) rotate(-4deg); }
 .svc-card__title { font-family: var(--font-display); font-size: 1.15rem; line-height: 1.25; }
-.svc-card__desc { font-size: 0.88rem; line-height: 1.65; color: var(--ink-soft); }
+.svc-card__desc { font-size: 0.88rem; line-height: 1.65; color: var(--ink-soft); flex: 1; }
+.svc-card__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.4rem; }
+.svc-card__tags span {
+  font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ink-soft); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 999px; padding: 0.3em 0.85em;
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.svc-card:hover .svc-card__tags span {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  color: var(--ink);
+}
 
 @media (max-width: 900px) {
   .svc-grid { grid-template-columns: 1fr; max-width: 480px; gap: 1.25rem; }
@@ -415,6 +438,8 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
   letter-spacing: 0.1em; text-transform: uppercase;
   border: 1px solid color-mix(in srgb, #16a34a 40%, transparent);
   border-radius: 999px; padding: 0.15em 0.6em; margin-left: 0.5em;
+  /* wrap as one unit — never split the ● from "live" across lines */
+  display: inline-block; white-space: nowrap;
 }
 
 .ledger__case {

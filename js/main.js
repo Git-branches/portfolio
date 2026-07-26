@@ -125,6 +125,12 @@ let rotatorIndex = 0;
 
 // reserve the longest word's width so the headline never re-wraps mid-rotation
 const sizeRotator = () => {
+  // on phones the word sits on its own line (see CSS) — no reserved slot
+  if (window.innerWidth <= 640) {
+    rotator.style.minWidth = "";
+    rotator.style.textAlign = "";
+    return;
+  }
   const cs = getComputedStyle(rotator);
   const probe = document.createElement("span");
   probe.style.position = "absolute";
