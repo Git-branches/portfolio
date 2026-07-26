@@ -285,26 +285,31 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
    behind at an angle; hovering any card straightens + lifts it to the front
    while the rest of the deck steps back. transforms only — no reflow */
 .svc-deck {
-  display: flex; justify-content: center; align-items: flex-start;
-  max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem 4.5rem;
+  position: relative; max-width: 1000px; margin: 0 auto;
+  padding: 0; margin-top: 3rem; margin-bottom: 4.5rem;
+  /* height is set by JS (tallest card + tuck offset) */
 }
 .svc-card {
   display: flex; flex-direction: column;
-  width: min(340px, 86vw); flex-shrink: 0;
+  position: absolute; left: 50%; top: 0;
+  width: min(340px, 86vw);
+  --tx: -50%; --rot: 0deg; --ty: 0rem;
+  transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
   border: 1px solid var(--line); border-radius: 22px;
   background: var(--paper-2); padding: 1.9rem 1.75rem;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
-              border-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  cursor: pointer;
+  transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out,
+              border-color 0.35s ease-in-out, opacity 0.35s ease-in-out;
 }
-.svc-card--left  { transform: rotate(-9deg) translateY(2rem); margin-right: -4.5rem; z-index: 1; opacity: 0.85; }
-.svc-card--right { transform: rotate(9deg) translateY(2rem);  margin-left: -4.5rem;  z-index: 1; opacity: 0.85; }
+.svc-card--left  { --tx: calc(-50% - min(270px, 26vw)); --rot: -9deg; --ty: 2rem; z-index: 1; opacity: 0.85; }
+.svc-card--right { --tx: calc(-50% + min(270px, 26vw)); --rot: 9deg;  --ty: 2rem; z-index: 1; opacity: 0.85; }
 .svc-card--center {
-  position: relative; z-index: 2;
+  z-index: 2; cursor: default;
   box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
 }
 .svc-card:hover {
-  transform: rotate(0) translateY(-10px) scale(1.03);
-  z-index: 3; opacity: 1;
+  transform: translate(var(--tx), calc(var(--ty) - 10px)) rotate(var(--rot)) scale(1.03);
+  opacity: 1;
   border-color: var(--accent);
   box-shadow: 0 28px 56px -18px rgba(0, 0, 0, 0.4);
 }
@@ -342,8 +347,14 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
 }
 
 @media (max-width: 880px) {
-  .svc-deck { flex-direction: column; align-items: center; gap: 1.25rem; padding: 1.5rem 0 3rem; }
-  .svc-card--left, .svc-card--right, .svc-card--center { transform: none; margin: 0; opacity: 1; }
+  .svc-deck {
+    display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+    margin-top: 1.5rem; margin-bottom: 3rem; height: auto !important;
+  }
+  .svc-card, .svc-card--left, .svc-card--right, .svc-card--center {
+    position: static; transform: none; opacity: 1; cursor: default;
+  }
+  .svc-card:hover { transform: none; }
   .svc-deck:hover .svc-card:not(:hover) { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {

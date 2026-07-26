@@ -140,6 +140,8 @@
     if (langLabel) langLabel.textContent = lang === "tl" ? "EN" : "TL";
     // headline font size differs per language — re-reserve the rotator width
     window.sizeRotator?.();
+    // card description lengths change per language — re-measure the deck
+    window.sizeDeck?.();
   }
 
   let lang = localStorage.getItem("lang") === "tl" ? "tl" : "en";

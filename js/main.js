@@ -169,6 +169,53 @@ setInterval(() => {
   }, 350);
 }, 3200);
 
+// ---------- services deck: click a tucked card to bring it to the front ----------
+const svcDeck = document.querySelector(".svc-deck");
+if (svcDeck) {
+  const SLOTS = ["svc-card--left", "svc-card--center", "svc-card--right"];
+  const cards = svcDeck.querySelectorAll(".svc-card");
+
+  // the deck is absolutely positioned, so it needs an explicit height:
+  // tallest card + the 2rem tuck offset of the side cards
+  const sizeDeck = () => {
+    if (window.innerWidth <= 880) {
+      svcDeck.style.height = "";
+      return;
+    }
+    let max = 0;
+    cards.forEach((c) => { max = Math.max(max, c.offsetHeight); });
+    svcDeck.style.height = `${Math.ceil(max + 42)}px`;
+  };
+  window.sizeDeck = sizeDeck; // i18n.js re-runs this (description lengths change)
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeDeck);
+  else sizeDeck();
+  let deckResizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(deckResizeTimer);
+    deckResizeTimer = setTimeout(sizeDeck, 150);
+  });
+
+  const swapToFront = (card) => {
+    const center = svcDeck.querySelector(".svc-card--center");
+    if (card === center || window.innerWidth <= 880) return;
+    const slot = SLOTS.find((s) => card.classList.contains(s));
+    card.classList.remove(slot);
+    card.classList.add("svc-card--center");
+    center.classList.remove("svc-card--center");
+    center.classList.add(slot);
+  };
+  cards.forEach((card) => {
+    card.setAttribute("tabindex", "0");
+    card.addEventListener("click", () => swapToFront(card));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        swapToFront(card);
+      }
+    });
+  });
+}
+
 // ---------- live GenSan clock (PHT, UTC+8) ----------
 const localTime = document.getElementById("localTime");
 function updateClock() {
