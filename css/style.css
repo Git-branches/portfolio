@@ -285,39 +285,47 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
    behind at an angle; hovering any card straightens + lifts it to the front
    while the rest of the deck steps back. transforms only — no reflow */
 .svc-deck {
-  position: relative; max-width: 1000px; margin: 0 auto;
-  padding: 0; margin-top: 3rem; margin-bottom: 4.5rem;
+  position: relative; max-width: 1000px; margin: 3rem auto 0;
+  touch-action: pan-y; /* horizontal drags belong to the carousel */
+  user-select: none;
   /* height is set by JS (tallest card + tuck offset) */
 }
 .svc-card {
   display: flex; flex-direction: column;
   position: absolute; left: 50%; top: 0;
   width: min(340px, 86vw);
-  --tx: -50%; --rot: 0deg; --ty: 0rem;
-  transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+  --tx: -50%; --rot: 0deg; --ty: 0rem; --scale: 1;
+  transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--scale));
   border: 1px solid var(--line); border-radius: 22px;
   background: var(--paper-2); padding: 1.9rem 1.75rem;
   cursor: pointer;
-  transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out,
-              border-color 0.35s ease-in-out, opacity 0.35s ease-in-out;
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
+              border-color 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }
-.svc-card--left  { --tx: calc(-50% - min(270px, 26vw)); --rot: -9deg; --ty: 2rem; z-index: 1; opacity: 0.85; }
-.svc-card--right { --tx: calc(-50% + min(270px, 26vw)); --rot: 9deg;  --ty: 2rem; z-index: 1; opacity: 0.85; }
+.svc-card--left  { --tx: calc(-50% - min(265px, 30vw)); --rot: -8deg; --ty: 1.6rem; --scale: 0.92; z-index: 1; opacity: 0.6; }
+.svc-card--right { --tx: calc(-50% + min(265px, 30vw)); --rot: 8deg;  --ty: 1.6rem; --scale: 0.92; z-index: 1; opacity: 0.6; }
 .svc-card--center {
-  z-index: 2; cursor: default;
-  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
+  z-index: 3; cursor: grab;
+  box-shadow: 0 22px 48px -18px rgba(0, 0, 0, 0.4);
 }
 .svc-card:hover {
-  transform: translate(var(--tx), calc(var(--ty) - 10px)) rotate(var(--rot)) scale(1.03);
+  transform: translate(var(--tx), calc(var(--ty) - 8px)) rotate(var(--rot)) scale(calc(var(--scale) + 0.02));
   opacity: 1;
-  border-color: var(--accent);
-  box-shadow: 0 28px 56px -18px rgba(0, 0, 0, 0.4);
 }
-[data-theme="dark"] .svc-card:hover {
-  box-shadow: 0 28px 56px -14px rgba(0, 0, 0, 0.7);
+.svc-card--center:hover { border-color: var(--accent); }
+[data-theme="dark"] .svc-card--center {
+  box-shadow: 0 22px 48px -14px rgba(0, 0, 0, 0.7);
 }
-/* hovered card takes the spotlight; the rest of the deck steps back */
-.svc-deck:hover .svc-card:not(:hover) { opacity: 0.5; }
+
+.svc-nav { display: flex; justify-content: center; gap: 0.9rem; padding: 2rem 0 3rem; }
+.svc-nav__btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--paper-2);
+  color: var(--ink); font-size: 1.05rem; cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+.svc-nav__btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+.svc-nav__btn:active { transform: translateY(0) scale(0.94); }
 .svc-card__badge {
   align-self: flex-start; font-size: 0.6rem; letter-spacing: 0.16em;
   text-transform: uppercase; color: var(--ink-soft);
@@ -346,20 +354,9 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
   color: var(--ink);
 }
 
-@media (max-width: 880px) {
-  .svc-deck {
-    display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
-    margin-top: 1.5rem; margin-bottom: 3rem; height: auto !important;
-  }
-  .svc-card, .svc-card--left, .svc-card--right, .svc-card--center {
-    position: static; transform: none; opacity: 1; cursor: default;
-  }
-  .svc-card:hover { transform: none; }
-  .svc-deck:hover .svc-card:not(:hover) { opacity: 1; }
-}
 @media (prefers-reduced-motion: reduce) {
   .svc-card { transition: none; }
-  .svc-card:hover { transform: none; }
+  .svc-card:hover { transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--scale)); }
 }
 .ticker:hover .ticker__track { animation-play-state: paused; }
 @keyframes ticker {

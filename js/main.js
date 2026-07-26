@@ -169,22 +169,34 @@ setInterval(() => {
   }, 350);
 }, 3200);
 
-// ---------- services deck: click a tucked card to bring it to the front ----------
+// ---------- services card-stack carousel ----------
+// center card is active; prev/next buttons, click a side card, drag with the
+// mouse, or swipe on touch to rotate the stack. transforms only — no reflow.
 const svcDeck = document.querySelector(".svc-deck");
 if (svcDeck) {
-  const SLOTS = ["svc-card--left", "svc-card--center", "svc-card--right"];
-  const cards = svcDeck.querySelectorAll(".svc-card");
+  const cards = Array.from(svcDeck.querySelectorAll(".svc-card"));
+  // slot for a card = how far it sits from the active one (0 front, 1 right, 2 left)
+  const SLOT = ["svc-card--center", "svc-card--right", "svc-card--left"];
+  let active = 1; // Full-Stack Web Apps starts in front
+
+  const render = () => {
+    cards.forEach((card, i) => {
+      card.classList.remove(...SLOT);
+      card.classList.add(SLOT[(i - active + cards.length) % cards.length]);
+    });
+  };
+  const step = (dir) => {
+    active = (active + dir + cards.length) % cards.length;
+    render();
+  };
+  render();
 
   // the deck is absolutely positioned, so it needs an explicit height:
-  // tallest card + the 2rem tuck offset of the side cards
+  // tallest card + the side cards' tuck offset
   const sizeDeck = () => {
-    if (window.innerWidth <= 880) {
-      svcDeck.style.height = "";
-      return;
-    }
     let max = 0;
     cards.forEach((c) => { max = Math.max(max, c.offsetHeight); });
-    svcDeck.style.height = `${Math.ceil(max + 42)}px`;
+    svcDeck.style.height = `${Math.ceil(max + 34)}px`;
   };
   window.sizeDeck = sizeDeck; // i18n.js re-runs this (description lengths change)
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeDeck);
@@ -195,24 +207,41 @@ if (svcDeck) {
     deckResizeTimer = setTimeout(sizeDeck, 150);
   });
 
-  const swapToFront = (card) => {
-    const center = svcDeck.querySelector(".svc-card--center");
-    if (card === center || window.innerWidth <= 880) return;
-    const slot = SLOTS.find((s) => card.classList.contains(s));
-    card.classList.remove(slot);
-    card.classList.add("svc-card--center");
-    center.classList.remove("svc-card--center");
-    center.classList.add(slot);
-  };
-  cards.forEach((card) => {
+  document.getElementById("svcPrev")?.addEventListener("click", () => step(-1));
+  document.getElementById("svcNext")?.addEventListener("click", () => step(1));
+
+  // click / keyboard: bring a side card to the front
+  let suppressClick = false; // don't treat the end of a drag as a click
+  cards.forEach((card, i) => {
     card.setAttribute("tabindex", "0");
-    card.addEventListener("click", () => swapToFront(card));
+    card.addEventListener("click", () => {
+      if (suppressClick) return;
+      if (i !== active) { active = i; render(); }
+    });
     card.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        swapToFront(card);
+        if (i !== active) { active = i; render(); }
+      } else if (e.key === "ArrowLeft") {
+        step(-1);
+      } else if (e.key === "ArrowRight") {
+        step(1);
       }
     });
+  });
+
+  // drag / swipe (pointer events cover both mouse and touch)
+  let dragStartX = null;
+  svcDeck.addEventListener("pointerdown", (e) => { dragStartX = e.clientX; });
+  window.addEventListener("pointerup", (e) => {
+    if (dragStartX === null) return;
+    const dx = e.clientX - dragStartX;
+    dragStartX = null;
+    if (Math.abs(dx) > 50) {
+      suppressClick = true;
+      setTimeout(() => { suppressClick = false; }, 100);
+      step(dx < 0 ? 1 : -1); // swipe left → next card
+    }
   });
 }
 
