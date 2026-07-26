@@ -2,7 +2,7 @@
 // Service worker — offline cache for the portfolio (PWA)
 // Bump CACHE version to force clients to refetch everything.
 // ============================================================
-const CACHE = "rjr-portfolio-v41";
+const CACHE = "rjr-portfolio-v42";
 
 const CORE = [
   "./",
@@ -43,13 +43,40 @@ self.addEventListener("fetch", (e) => {
   // never cache the GitHub APIs — stats & contribution graph should stay live
   if (req.url.includes("api.github.com") || req.url.includes("github-contributions-api")) return;
 
+  const url = new URL(req.url);
+  const sameOrigin = url.origin === self.location.origin;
+
+  // NETWORK-FIRST for app code (pages, CSS, JS): a deploy shows up on the
+  // very next load — no more stale-CSS + fresh-JS mixes breaking layouts.
+  // The cached copy is only a fallback for offline.
+  const isAppCode =
+    sameOrigin &&
+    (req.mode === "navigate" ||
+      url.pathname.endsWith(".css") ||
+      url.pathname.endsWith(".js") ||
+      url.pathname.endsWith(".webmanifest"));
+  if (isAppCode) {
+    e.respondWith(
+      fetch(req)
+        .then((res) => {
+          if (res.ok) {
+            const copy = res.clone();
+            caches.open(CACHE).then((c) => c.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // CACHE-FIRST for everything else (images, fonts) — they rarely change
   e.respondWith(
     caches.match(req).then(
       (hit) =>
         hit ||
         fetch(req).then((res) => {
-          // runtime-cache successful same-origin responses (screenshots, fonts CSS, icons)
-          if (res.ok && new URL(req.url).origin === self.location.origin) {
+          if (res.ok && sameOrigin) {
             const copy = res.clone();
             caches.open(CACHE).then((c) => c.put(req, copy));
           }
