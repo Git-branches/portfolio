@@ -93,6 +93,38 @@ tickerTrack.style.setProperty(
 const rotator = document.getElementById("rotator");
 const rotatorWords = ["systems", "web apps", "platforms", "dashboards", "portals"];
 let rotatorIndex = 0;
+
+// reserve the longest word's width so the headline never re-wraps mid-rotation
+const sizeRotator = () => {
+  const cs = getComputedStyle(rotator);
+  const probe = document.createElement("span");
+  probe.style.position = "absolute";
+  probe.style.visibility = "hidden";
+  probe.style.whiteSpace = "nowrap";
+  probe.style.fontFamily = cs.fontFamily;
+  probe.style.fontSize = cs.fontSize;
+  probe.style.fontWeight = cs.fontWeight;
+  probe.style.fontStyle = cs.fontStyle;
+  probe.style.letterSpacing = cs.letterSpacing;
+  document.body.appendChild(probe);
+  let max = 0;
+  rotatorWords.forEach((w) => {
+    probe.textContent = w;
+    max = Math.max(max, probe.offsetWidth);
+  });
+  probe.remove();
+  rotator.style.minWidth = `${Math.ceil(max)}px`;
+  rotator.style.textAlign = "center";
+};
+window.sizeRotator = sizeRotator; // i18n.js re-runs this after a language switch
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeRotator);
+else sizeRotator();
+let rotatorResizeTimer;
+window.addEventListener("resize", () => {
+  clearTimeout(rotatorResizeTimer);
+  rotatorResizeTimer = setTimeout(sizeRotator, 150);
+});
+
 setInterval(() => {
   rotator.classList.add("is-out");
   setTimeout(() => {

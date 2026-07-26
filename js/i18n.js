@@ -16,13 +16,13 @@
     hero_t1: ["I build", "Gumagawa ako ng"],
     hero_t2: [
       "that power<br />real businesses.",
-      "na nagpapatakbo<br />ng totoong mga negosyo.",
+      "para sa<br />totoong mga negosyo.",
     ],
     hero_sub: [
       "Hi, I'm <strong>Rhon Jon Romero</strong> — an IT graduate and <strong>aspiring Full Stack Developer</strong> building web &amp; mobile experiences. From personal projects to production features, I ship things that actually work.",
-      "Hi, ako si <strong>Rhon Jon Romero</strong> — IT graduate at <strong>aspiring Full Stack Developer</strong> na gumagawa ng web at mobile experiences. Mula sa personal projects hanggang production features, gumagawa ako ng mga bagay na talagang gumagana.",
+      "Hi, ako si <strong>Rhon Jon Romero</strong> — IT graduate at <strong>aspiring Full Stack Developer</strong>. Mula sa personal projects hanggang production features, gumagawa ako ng mga bagay na talagang gumagana.",
     ],
-    hero_cta1: ["See my work ↓", "Tingnan ang gawa ko ↓"],
+    hero_cta1: ["See my work ↓", "Mga gawa ko ↓"],
     hero_cta2: ["Get in touch", "Makipag-ugnayan"],
     hero_badge: ["Open to projects and work", "Bukas sa projects at trabaho"],
     stat_repos: ["Public repositories", "Mga public repository"],
@@ -138,6 +138,8 @@
     });
     // label shows the language you'd switch TO
     if (langLabel) langLabel.textContent = lang === "tl" ? "EN" : "TL";
+    // headline font size differs per language — re-reserve the rotator width
+    window.sizeRotator?.();
   }
 
   let lang = localStorage.getItem("lang") === "tl" ? "tl" : "en";
