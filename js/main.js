@@ -230,18 +230,39 @@ if (svcDeck) {
     });
   });
 
-  // drag / swipe (pointer events cover both mouse and touch)
+  // interactive drag / swipe: the stack scrubs along with the pointer in
+  // real time, then springs to its new arrangement on release
+  const DRAG_LIMIT = 150; // px the stack will follow before resisting
+  const SWIPE_AT = 60;    // px needed to commit a swap on release
   let dragStartX = null;
-  svcDeck.addEventListener("pointerdown", (e) => { dragStartX = e.clientX; });
-  window.addEventListener("pointerup", (e) => {
+  let dragDx = 0;
+
+  const clampDx = (dx) => Math.max(-DRAG_LIMIT, Math.min(DRAG_LIMIT, dx));
+
+  svcDeck.addEventListener("pointerdown", (e) => {
+    dragStartX = e.clientX;
+    dragDx = 0;
+  });
+  window.addEventListener("pointermove", (e) => {
     if (dragStartX === null) return;
-    const dx = e.clientX - dragStartX;
+    dragDx = clampDx(e.clientX - dragStartX);
+    // only enter drag mode once it's clearly a drag, so taps stay clicks
+    if (Math.abs(dragDx) > 5) {
+      svcDeck.classList.add("is-dragging");
+      svcDeck.style.setProperty("--drag", dragDx);
+    }
+  });
+  window.addEventListener("pointerup", () => {
+    if (dragStartX === null) return;
     dragStartX = null;
-    if (Math.abs(dx) > 50) {
+    svcDeck.classList.remove("is-dragging");
+    svcDeck.style.setProperty("--drag", 0); // spring back (or into the swap)
+    if (Math.abs(dragDx) > SWIPE_AT) {
       suppressClick = true;
       setTimeout(() => { suppressClick = false; }, 100);
-      step(dx < 0 ? 1 : -1); // swipe left → next card
+      step(dragDx < 0 ? 1 : -1); // drag left → next card
     }
+    dragDx = 0;
   });
 }
 

@@ -294,21 +294,29 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
   display: flex; flex-direction: column;
   position: absolute; left: 50%; top: 0;
   width: min(340px, 86vw);
-  --tx: -50%; --rot: 0deg; --ty: 0rem; --scale: 1;
-  transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(var(--scale));
+  /* --drag is a unitless px count set on the deck while scrubbing; each slot
+     follows it at its own rate (--dragf) and tilts with it (--dragr) */
+  --tx: -50%; --rot: 0deg; --ty: 0rem; --scale: 1; --dragf: 0; --dragr: 0;
+  transform: translate(calc(var(--tx) + var(--drag, 0) * var(--dragf) * 1px), var(--ty))
+             rotate(calc(var(--rot) + var(--drag, 0) * var(--dragr) * 1deg))
+             scale(var(--scale));
   border: 1px solid var(--line); border-radius: 22px;
   background: var(--paper-2); padding: 1.9rem 1.75rem;
   cursor: pointer;
   transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
               border-color 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }
-.svc-card--left  { --tx: calc(-50% - min(265px, 30vw)); --rot: -8deg; --ty: 1.6rem; --scale: 0.92; z-index: 1; opacity: 0.6; }
-.svc-card--right { --tx: calc(-50% + min(265px, 30vw)); --rot: 8deg;  --ty: 1.6rem; --scale: 0.92; z-index: 1; opacity: 0.6; }
+.svc-card--left  { --tx: calc(-50% - min(265px, 30vw)); --rot: -8deg; --ty: 1.6rem; --scale: 0.92; --dragf: 0.55; --dragr: 0.012; z-index: 1; opacity: 0.6; }
+.svc-card--right { --tx: calc(-50% + min(265px, 30vw)); --rot: 8deg;  --ty: 1.6rem; --scale: 0.92; --dragf: 0.55; --dragr: 0.012; z-index: 1; opacity: 0.6; }
 .svc-card--center {
   z-index: 3; cursor: grab;
+  --dragf: 1; --dragr: 0.025;
   box-shadow: 0 22px 48px -18px rgba(0, 0, 0, 0.4);
 }
-.svc-card:hover {
+/* while scrubbing: cards track the pointer instantly, no easing lag */
+.svc-deck.is-dragging .svc-card { transition: none; }
+.svc-deck.is-dragging .svc-card--center { cursor: grabbing; }
+.svc-deck:not(.is-dragging) .svc-card:hover {
   transform: translate(var(--tx), calc(var(--ty) - 8px)) rotate(var(--rot)) scale(calc(var(--scale) + 0.02));
   opacity: 1;
 }
