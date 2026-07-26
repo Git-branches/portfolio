@@ -250,3 +250,47 @@ fetch(`https://api.github.com/users/${GH_USER}/repos?sort=pushed&per_page=3`)
     document.getElementById("ghActivity").hidden = false;
   })
   .catch(() => {});
+
+// ---------- GitHub contribution graph (last 12 months) ----------
+fetch(`https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=last`)
+  .then((r) => (r.ok ? r.json() : null))
+  .then((data) => {
+    if (!data || !Array.isArray(data.contributions) || data.contributions.length === 0) {
+      throw new Error("no data");
+    }
+    const days = data.contributions;
+
+    // pad the first week so day-of-week rows line up (rows are Sun–Sat)
+    const offset = new Date(days[0].date + "T00:00:00").getDay();
+    const cells = [];
+    for (let i = 0; i < offset; i++) cells.push('<i style="visibility:hidden"></i>');
+    days.forEach((d) => {
+      const label = `${d.count} contribution${d.count === 1 ? "" : "s"} on ${d.date}`;
+      cells.push(`<i data-level="${d.level}" title="${label}"></i>`);
+    });
+    document.getElementById("ghGraphGrid").innerHTML = cells.join("");
+
+    // month labels above the week that starts each month (skip a cramped first label)
+    const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    let labels = [];
+    let lastMonth = -1;
+    days.forEach((d, i) => {
+      const month = new Date(d.date + "T00:00:00").getMonth();
+      if (month !== lastMonth) {
+        labels.push({ week: Math.floor((i + offset) / 7), name: monthNames[month] });
+        lastMonth = month;
+      }
+    });
+    if (labels.length > 1 && labels[1].week - labels[0].week < 3) labels = labels.slice(1);
+    document.getElementById("ghGraphMonths").innerHTML = labels
+      .map((m) => `<span style="grid-column-start:${m.week + 1}">${m.name}</span>`)
+      .join("");
+
+    const total = data.total && data.total.lastYear;
+    document.getElementById("ghGraphTotal").textContent =
+      total != null ? `${total} contributions in the last year` : "last 12 months";
+  })
+  .catch(() => {
+    document.getElementById("ghGraphTotal").innerHTML =
+      'graph unavailable — <a href="https://github.com/Git-branches" target="_blank" rel="noopener">view on GitHub ↗</a>';
+  });

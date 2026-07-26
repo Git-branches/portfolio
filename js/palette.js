@@ -8,6 +8,7 @@
     { label: "Home", hint: "top of page", icon: "⌂", run: () => go("/#top") },
     { label: "Tech Stack", hint: "tools I use", icon: "§", run: () => go("/#stack") },
     { label: "Things I've Built", hint: "projects", icon: "§", run: () => go("/#work") },
+    { label: "GitHub Contributions", hint: "commit graph", icon: "§", run: () => go("/#github") },
     { label: "What I Do", hint: "services", icon: "§", run: () => go("/#services") },
     { label: "About", hint: "the person", icon: "§", run: () => go("/#about") },
     { label: "Contact", hint: "send a message", icon: "§", run: () => go("/#contact") },

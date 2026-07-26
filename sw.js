@@ -2,7 +2,7 @@
 // Service worker — offline cache for the portfolio (PWA)
 // Bump CACHE version to force clients to refetch everything.
 // ============================================================
-const CACHE = "rjr-portfolio-v32";
+const CACHE = "rjr-portfolio-v33";
 
 const CORE = [
   "./",
@@ -39,8 +39,8 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
-  // never cache the GitHub API — stats should stay live
-  if (req.url.includes("api.github.com")) return;
+  // never cache the GitHub APIs — stats & contribution graph should stay live
+  if (req.url.includes("api.github.com") || req.url.includes("github-contributions-api")) return;
 
   e.respondWith(
     caches.match(req).then(
