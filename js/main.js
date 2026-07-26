@@ -29,6 +29,18 @@ themeToggle.addEventListener("click", () => {
     const root = document.documentElement;
     root.classList.add("theme-wipe"); // freeze per-element color transitions
     const vt = document.startViewTransition(() => applyTheme(next));
+    vt.ready
+      .then(() => {
+        root.animate(
+          { clipPath: ["inset(0 0 100% 0)", "inset(0 0 0 0)"] },
+          {
+            duration: 450,
+            easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+            pseudoElement: "::view-transition-new(root)",
+          }
+        );
+      })
+      .catch(() => {}); // ready rejects if the transition is skipped — fine
     vt.finished.finally(() => root.classList.remove("theme-wipe"));
   } else {
     applyTheme(next);

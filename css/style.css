@@ -556,17 +556,12 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
 .gh-activity__date { color: var(--ink-soft); white-space: nowrap; }
 
 /* ---------- animated theme switch (View Transitions API) ---------- */
-/* the new theme slides down from the top over the old one; the browser
-   animates snapshots, so nothing in the layout can shift or reflow */
-::view-transition-old(root) {
-  animation: none;
-}
+/* kill the browser's default cross-fade; main.js animates the new-theme
+   snapshot sliding down from the top with the Web Animations API instead */
+::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: themeWipe 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-@keyframes themeWipe {
-  from { clip-path: inset(0 0 100% 0); }
-  to   { clip-path: inset(0 0 0 0); }
+  animation: none;
+  mix-blend-mode: normal;
 }
 /* while the wipe runs, colors must swap instantly inside the new snapshot —
    otherwise the body's own 0.35s color fade would smear the effect */
