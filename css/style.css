@@ -280,43 +280,45 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
 [data-theme="dark"] .ticker__icon { filter: brightness(1.35); }
 .ticker__icon--accent { color: var(--accent); }
 
-/* ---------- services cards ---------- */
-/* stacked-card grid: hover lifts + scales the card, neighbors step back;
-   transforms only, so the grid itself never reflows */
-.svc-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1.75rem; max-width: 1100px; margin: 0 auto;
-  padding: 2rem 0 3.5rem;
+/* ---------- services deck (stacked cards, Bryl Lim style) ---------- */
+/* three cards fanned like a hand of cards: center up front, sides tucked
+   behind at an angle; hovering any card straightens + lifts it to the front
+   while the rest of the deck steps back. transforms only — no reflow */
+.svc-deck {
+  display: flex; justify-content: center; align-items: flex-start;
+  max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem 4.5rem;
 }
 .svc-card {
-  position: relative;
-  border: 1px solid var(--line); border-radius: 20px;
-  background: var(--paper-2); padding: 2rem 1.75rem;
+  display: flex; flex-direction: column;
+  width: min(340px, 86vw); flex-shrink: 0;
+  border: 1px solid var(--line); border-radius: 22px;
+  background: var(--paper-2); padding: 1.9rem 1.75rem;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
               border-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
+.svc-card--left  { transform: rotate(-9deg) translateY(2rem); margin-right: -4.5rem; z-index: 1; opacity: 0.85; }
+.svc-card--right { transform: rotate(9deg) translateY(2rem);  margin-left: -4.5rem;  z-index: 1; opacity: 0.85; }
+.svc-card--center {
+  position: relative; z-index: 2;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
+}
 .svc-card:hover {
-  transform: translateY(-10px) scale(1.03);
+  transform: rotate(0) translateY(-10px) scale(1.03);
+  z-index: 3; opacity: 1;
   border-color: var(--accent);
-  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.28);
-  z-index: 2;
+  box-shadow: 0 28px 56px -18px rgba(0, 0, 0, 0.4);
 }
 [data-theme="dark"] .svc-card:hover {
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 28px 56px -14px rgba(0, 0, 0, 0.7);
 }
-/* the hovered card takes focus; its siblings go slightly subdued */
-.svc-grid:hover .svc-card:not(:hover) { opacity: 0.55; }
-.svc-card { display: flex; flex-direction: column; }
-.svc-card__top {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 1.5rem;
+/* hovered card takes the spotlight; the rest of the deck steps back */
+.svc-deck:hover .svc-card:not(:hover) { opacity: 0.5; }
+.svc-card__badge {
+  align-self: flex-start; font-size: 0.6rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-soft);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.35em 1em; margin-bottom: 1.4rem; white-space: nowrap;
 }
-.svc-card__num { font-size: 0.75rem; letter-spacing: 0.12em; color: var(--ink-soft); }
-.svc-card__arrow {
-  font-size: 1.15rem; color: var(--ink-soft);
-  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-.svc-card:hover .svc-card__arrow { transform: translate(4px, -4px); color: var(--accent); }
 .svc-card__head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.7rem; }
 .svc-card__icon {
   display: grid; place-items: center; flex-shrink: 0;
@@ -339,11 +341,13 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
   color: var(--ink);
 }
 
-@media (max-width: 900px) {
-  .svc-grid { grid-template-columns: 1fr; max-width: 480px; gap: 1.25rem; }
+@media (max-width: 880px) {
+  .svc-deck { flex-direction: column; align-items: center; gap: 1.25rem; padding: 1.5rem 0 3rem; }
+  .svc-card--left, .svc-card--right, .svc-card--center { transform: none; margin: 0; opacity: 1; }
+  .svc-deck:hover .svc-card:not(:hover) { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .svc-card, .svc-grid:hover .svc-card:not(:hover) { transition: none; }
+  .svc-card { transition: none; }
   .svc-card:hover { transform: none; }
 }
 .ticker:hover .ticker__track { animation-play-state: paused; }
