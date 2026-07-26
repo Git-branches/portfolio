@@ -552,6 +552,12 @@ body {
 .gh-activity__list a:hover { color: var(--accent); }
 .gh-activity__date { color: var(--ink-soft); white-space: nowrap; }
 
+/* ---------- language toggle ---------- */
+.theme-toggle--lang {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
 /* ---------- GitHub contribution graph ---------- */
 .gh-graph {
   border: 1px solid var(--line); background: var(--paper-2);

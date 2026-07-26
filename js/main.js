@@ -132,11 +132,13 @@ copyBtn.addEventListener("click", async () => {
 // Web3Forms — the access key is meant to live in client-side code; it only
 // lets the form email CONTACT_EMAIL, it grants no access to the inbox.
 const WEB3FORMS_KEY = "ce9b16f2-c397-459a-9bf5-e620170750ea";
+const PAGE_LOADED_AT = Date.now();
 const contactForm = document.getElementById("contactForm");
 contactForm?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const data = Object.fromEntries(new FormData(contactForm));
   if (data.botcheck) return; // honeypot tripped — silently drop
+  if (Date.now() - PAGE_LOADED_AT < 4000) return; // bots submit instantly; humans can't
   if (!data.name || !data.email || !data.message) {
     window.showToast?.("Please fill in name, email, and message.");
     return;
