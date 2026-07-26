@@ -68,10 +68,37 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
+/* animated glow border around the RJR. logo: a conic-gradient sweep spins
+   behind the chip (::before); ::after covers the middle so only a thin ring
+   shows; a blurred twin (.nav__logo-glow) provides the outer glow */
+.nav__logo-box { position: relative; display: inline-block; border-radius: 10px; }
 .nav__logo {
   font-family: var(--font-display);
   font-weight: 700; font-size: 1.5rem;
   color: var(--ink); text-decoration: none;
+  position: relative; display: inline-block; z-index: 0;
+  padding: 0.15em 0.5em; border-radius: 10px; overflow: hidden;
+}
+.nav__logo::before, .nav__logo-glow::before {
+  content: ""; position: absolute; z-index: -2; top: 50%; left: 50%;
+  width: 220px; height: 220px;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background-image: conic-gradient(rgba(0, 0, 0, 0), #1976ed, rgba(0, 0, 0, 0) 25%);
+  animation: logoSpin 4s linear infinite;
+}
+.nav__logo::after {
+  content: ""; position: absolute; z-index: -1; inset: 2px;
+  background: var(--paper); border-radius: 8px;
+}
+.nav__logo-glow {
+  position: absolute; inset: 0; border-radius: 10px;
+  overflow: hidden; filter: blur(14px); pointer-events: none;
+}
+@keyframes logoSpin {
+  100% { transform: translate(-50%, -50%) rotate(1turn); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav__logo::before, .nav__logo-glow::before { animation: none; }
 }
 
 .nav__links { display: flex; gap: 2rem; }
