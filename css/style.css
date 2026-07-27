@@ -208,8 +208,6 @@ body {
   /* no text-wrap: balance — rebalancing made lines jump whenever the
      rotator word or the language changed; the <br> fixes the break instead */
 }
-/* Tagalog copy runs longer — scale the headline so it stays two lines */
-html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
 .hero__title em {
   font-style: italic; color: var(--accent);
 }
@@ -642,12 +640,6 @@ html[lang="tl"] .hero__title { font-size: clamp(2rem, 5.4vw, 4rem); }
 /* while the wipe runs, colors must swap instantly inside the new snapshot —
    otherwise the body's own 0.35s color fade would smear the effect */
 .theme-wipe, .theme-wipe * { transition: none !important; }
-
-/* ---------- language toggle ---------- */
-.theme-toggle--lang {
-  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
-  letter-spacing: 0.05em;
-}
 
 /* ---------- GitHub contribution graph ---------- */
 .gh-graph {
