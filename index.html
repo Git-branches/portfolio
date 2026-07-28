@@ -22,21 +22,6 @@
   <meta name="twitter:description" content="IT graduate & full-stack web developer from General Santos City — PHP, MySQL, and AI-assisted workflows." />
   <meta name="twitter:image" content="https://rj-romero.vercel.app/assets/og-image.png" />
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Rhon Jon Romero",
-    "jobTitle": "Full-Stack Web Developer",
-    "email": "mailto:ejromero294@gmail.com",
-    "address": { "@type": "PostalAddress", "addressLocality": "General Santos City", "addressCountry": "PH" },
-    "url": "https://rj-romero.vercel.app",
-    "sameAs": ["https://github.com/Git-branches", "https://www.linkedin.com/in/ej-romero-bba17238b", "https://ph.jobstreet.com/profiles/rhonjong-romero-m8LWX00L8B", "https://www.facebook.com/ejromero995"],
-    "alumniOf": { "@type": "CollegeOrUniversity", "name": "South East Asian Institute of Technology", "address": "Tupi, South Cotabato, Philippines" },
-    "knowsAbout": ["PHP", "MySQL", "PostgreSQL", "JavaScript", "Node.js", "Laravel", "Java", "REST API", "OAuth", "Tailwind CSS", "Bootstrap", "POS systems", "SMS integration (PhilSMS, Semaphore, UniSMS)", "AI integration"]
-  }
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -45,8 +30,55 @@
   <link rel="icon" href="assets/icon-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <link rel="manifest" href="manifest.webmanifest" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Rhon Jon Romero",
+        "url": "https://rj-romero.vercel.app/",
+        "jobTitle": "Full Stack Web Developer",
+        "email": "mailto:ejromero294@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "General Santos City", "addressCountry": "PH" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "South East Asian Institute of Technology", "address": "Tupi, South Cotabato, Philippines" },
+        "knowsAbout": ["PHP", "MySQL", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "REST APIs", "POS systems", "SMS integration", "AI integration"],
+        "sameAs": [
+          "https://github.com/Git-branches",
+          "https://www.linkedin.com/in/ej-romero-bba17238b",
+          "https://ph.jobstreet.com/profiles/rhonjong-romero-m8LWX00L8B",
+          "https://www.facebook.com/ejromero995"
+        ]
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "headline": "The Contribution of POS and Financial Reporting Systems to Retail Performance and Customer Satisfaction",
+        "author": [
+          { "@type": "Person", "name": "Reginald Prudente" },
+          { "@type": "Person", "name": "Chemberlyn Crodua" },
+          { "@type": "Person", "name": "Justin Parbo" },
+          { "@type": "Person", "name": "Adrian Kyle Ramirez" },
+          { "@type": "Person", "name": "Rhon Jon Romero" }
+        ],
+        "datePublished": "2026-02",
+        "pagination": "773-787",
+        "isPartOf": {
+          "@type": "PublicationIssue",
+          "issueNumber": "2",
+          "isPartOf": {
+            "@type": "PublicationVolume",
+            "volumeNumber": "4",
+            "isPartOf": { "@type": "Periodical", "name": "International Journal of Versatile Research and Analysis" }
+          }
+        },
+        "sameAs": "https://doi.org/10.56975/ijvra.v4i2.700782"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" id="progressBar"></div>
 
   <!-- ================= NAV ================= -->
@@ -74,7 +106,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <!-- ================= HERO ================= -->
     <section class="hero">
       <div class="hero__bg" aria-hidden="true">
@@ -324,7 +356,7 @@
         <p class="section__note mono" data-i18n="note_services">from idea to deployed system</p>
       </div>
 
-      <div class="svc-deck reveal">
+      <div class="svc-deck reveal" role="region" aria-roledescription="carousel" aria-label="Services">
         <article class="svc-card svc-card--left">
           <span class="svc-card__badge mono">❮ pos · attendance · records ❯</span>
           <div class="svc-card__head">

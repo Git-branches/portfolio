@@ -35,6 +35,16 @@ html, body { overflow-x: clip; }
 
 ::selection { background: var(--accent); color: var(--paper); }
 
+/* keyboard users can jump straight to the content */
+.skip-link {
+  position: fixed; top: -60px; left: 12px; z-index: 200;
+  background: var(--ink); color: var(--paper);
+  padding: 0.6em 1.1em; border-radius: 8px;
+  text-decoration: none; font-size: 0.85rem; font-weight: 600;
+  transition: top 0.2s ease;
+}
+.skip-link:focus { top: 12px; }
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -421,6 +431,7 @@ body {
 .ledger { list-style: none; }
 
 .ledger__row {
+  position: relative; /* anchors the cursor spotlight */
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   gap: 1.5rem; align-items: center;
@@ -435,6 +446,19 @@ body {
 }
 
 .ledger__num { color: var(--ink-soft); font-size: 0.8rem; }
+
+/* cursor spotlight: a soft radial glow trails the pointer across the row */
+@media (hover: hover) and (pointer: fine) {
+  .ledger__row::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    opacity: 0; transition: opacity 0.35s ease;
+    background: radial-gradient(
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%
+    );
+  }
+  .ledger__row:hover::after { opacity: 1; }
+}
 
 .ledger__row--thumb { grid-template-columns: auto auto 1fr auto auto; }
 .ledger__thumb {
@@ -629,11 +653,20 @@ body {
 .gh-activity__list a:hover { color: var(--accent); }
 .gh-activity__date { color: var(--ink-soft); white-space: nowrap; }
 
-/* ---------- animated theme switch (View Transitions API) ---------- */
-/* kill the browser's default cross-fade; main.js animates the new-theme
-   snapshot sliding down from the top with the Web Animations API instead */
-::view-transition-old(root),
-::view-transition-new(root) {
+/* ---------- page + theme transitions (View Transitions API) ---------- */
+/* cross-document navigations (home ↔ resume ↔ case studies): quick fade-up */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vtFadeOut 0.2s ease both; }
+::view-transition-new(root) { animation: vtFadeUp 0.32s ease both; }
+@keyframes vtFadeOut { to { opacity: 0; } }
+@keyframes vtFadeUp { from { opacity: 0; transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+/* theme toggle: main.js drives the swipe-down wipe via the Web Animations
+   API instead, so the CSS animations above must not run during it */
+.theme-wipe::view-transition-old(root),
+.theme-wipe::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }

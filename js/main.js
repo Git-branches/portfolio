@@ -460,3 +460,72 @@ fetch(`https://github-contributions-api.jogruber.de/v4/${GH_USER}?y=last`)
     document.getElementById("ghGraphTotal").innerHTML =
       'graph unavailable — <a href="https://github.com/Git-branches" target="_blank" rel="noopener">view on GitHub ↗</a>';
   });
+
+// ---------- premium pointer effects (fine pointers + motion allowed only) ----------
+const FINE_POINTER = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (FINE_POINTER && !REDUCED_MOTION) {
+  // cursor spotlight across each project row (CSS reads --mx/--my)
+  document.querySelectorAll(".ledger__row").forEach((row) => {
+    row.addEventListener("mousemove", (e) => {
+      const r = row.getBoundingClientRect();
+      row.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      row.style.setProperty("--my", `${e.clientY - r.top}px`);
+    });
+  });
+
+  // 3D tilt on screenshot thumbnails — tilts toward the cursor
+  document.querySelectorAll(".ledger__row--thumb").forEach((row) => {
+    const thumb = row.querySelector(".ledger__thumb");
+    if (!thumb) return;
+    row.addEventListener("mousemove", (e) => {
+      const r = row.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      thumb.style.transform =
+        `perspective(600px) rotateX(${(-py * 10).toFixed(2)}deg) rotateY(${(px * 12).toFixed(2)}deg) scale(1.05)`;
+    });
+    row.addEventListener("mouseleave", () => { thumb.style.transform = ""; });
+  });
+
+  // magnetic buttons — pull gently toward the cursor, spring back on leave
+  document.querySelectorAll(".btn, .svc-nav__btn").forEach((btn) => {
+    btn.addEventListener("mousemove", (e) => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) * 0.22;
+      const dy = (e.clientY - (r.top + r.height / 2)) * 0.22;
+      btn.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)`;
+    });
+    btn.addEventListener("mouseleave", () => { btn.style.transform = ""; });
+  });
+}
+
+// ---------- hero kicker: decode/unscramble on load ----------
+(() => {
+  const kicker = document.querySelector(".hero .kicker");
+  if (!kicker || REDUCED_MOTION) return;
+  const finalText = kicker.textContent;
+  const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&";
+  const totalFrames = Math.ceil(finalText.length * 2.2);
+  let frame = 0;
+  const tick = () => {
+    frame++;
+    const reveal = Math.floor((frame / totalFrames) * finalText.length);
+    kicker.textContent = [...finalText]
+      .map((ch, i) => {
+        if (ch === " " || ch === "," || i < reveal) return ch;
+        return CHARS[(Math.random() * CHARS.length) | 0];
+      })
+      .join("");
+    if (reveal < finalText.length) setTimeout(tick, 28);
+    else kicker.textContent = finalText;
+  };
+  setTimeout(tick, 350);
+})();
+
+// ---------- a11y: keep the burger's expanded state in sync ----------
+burger.setAttribute("aria-expanded", "false");
+burger.addEventListener("click", () =>
+  burger.setAttribute("aria-expanded", String(navLinks.classList.contains("is-open")))
+);
