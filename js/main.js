@@ -396,7 +396,24 @@ fetch(`https://api.github.com/users/${GH_USER}`)
 
 // ---------- PWA: register service worker (needs http/https, not file://) ----------
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  navigator.serviceWorker.register("sw.js").catch(() => {});
+  navigator.serviceWorker
+    .register("sw.js")
+    .then((reg) => {
+      reg.update(); // look for a newer worker on every visit
+      // the worker calls skipWaiting + clients.claim, so a deploy takes
+      // control mid-session; reload once so the page matches the assets it
+      // is now being served, instead of sitting on a stale mix.
+      // On a first-ever visit there is no controller yet — claiming one then
+      // is not an update, so don't burn a reload on it.
+      const wasControlled = !!navigator.serviceWorker.controller;
+      let reloaded = false;
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        if (!wasControlled || reloaded) return;
+        reloaded = true;
+        location.reload();
+      });
+    })
+    .catch(() => {});
 }
 
 // ---------- premium pointer effects (fine pointers + motion allowed only) ----------
