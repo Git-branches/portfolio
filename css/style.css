@@ -199,6 +199,7 @@ body {
   image-rendering: pixelated; /* keep the pixel grid crisp when scaled */
   cursor: pointer;
   transition: opacity 0.22s ease;
+  transform: scaleX(-1); /* the sheets face right; mirror so he walks left */
   /* grounds the figure on the page without drawing a box around it */
   filter: drop-shadow(0 16px 14px rgba(0, 0, 0, 0.15));
 }

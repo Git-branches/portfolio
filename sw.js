@@ -1,8 +1,8 @@
-// ============================================================
-// Service worker â€” offline cache for the portfolio (PWA)
+﻿// ============================================================
+// Service worker Ã¢â‚¬â€ offline cache for the portfolio (PWA)
 // Bump CACHE version to force clients to refetch everything.
 // ============================================================
-const CACHE = "rjr-portfolio-v53";
+const CACHE = "rjr-portfolio-v54";
 
 const CORE = [
   "./",
@@ -39,14 +39,14 @@ self.addEventListener("activate", (e) => {
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
-  // never cache the GitHub APIs â€” stats & contribution graph should stay live
+  // never cache the GitHub APIs Ã¢â‚¬â€ stats & contribution graph should stay live
   if (req.url.includes("api.github.com") || req.url.includes("github-contributions-api")) return;
 
   const url = new URL(req.url);
   const sameOrigin = url.origin === self.location.origin;
 
   // NETWORK-FIRST for app code (pages, CSS, JS): a deploy shows up on the
-  // very next load â€” no more stale-CSS + fresh-JS mixes breaking layouts.
+  // very next load Ã¢â‚¬â€ no more stale-CSS + fresh-JS mixes breaking layouts.
   // The cached copy is only a fallback for offline.
   const isAppCode =
     sameOrigin &&
@@ -69,7 +69,7 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
-  // CACHE-FIRST for everything else (images, fonts) â€” they rarely change
+  // CACHE-FIRST for everything else (images, fonts) Ã¢â‚¬â€ they rarely change
   e.respondWith(
     caches.match(req).then(
       (hit) =>
