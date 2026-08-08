@@ -88,11 +88,11 @@
       <a class="nav__logo" href="#top">RJR<span class="accent">.</span></a>
     </div>
     <nav class="nav__links" id="navLinks">
+      <a href="#work">Work</a>
+      <a href="#github">GitHub</a>
       <a href="#stack">Stack</a>
-      <a href="#work" data-i18n="nav_work">Work</a>
-      <a href="#services" data-i18n="nav_services">Services</a>
-      <a href="#about" data-i18n="nav_about">About</a>
-      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
       <a href="resume">Résumé</a>
     </nav>
     <div class="nav__actions">
@@ -111,39 +111,49 @@
     <section class="hero">
       <div class="hero__bg" aria-hidden="true">
         <div class="hero__glow hero__glow--1"></div>
-        <div class="hero__glow hero__glow--2"></div>
-        <span class="hero__mark">&lt;/&gt;</span>
-        <span class="hero__glyph hero__glyph--1 mono">{ }</span>
-        <span class="hero__glyph hero__glyph--2 mono">&lt;?php</span>
-        <span class="hero__glyph hero__glyph--3 mono">SELECT *</span>
-        <span class="hero__glyph hero__glyph--4 mono">;</span>
       </div>
 
-      <p class="kicker reveal">General Santos City, PH</p>
-      <h1 class="hero__title reveal">
-        <span data-i18n="hero_t1">I build</span> <em class="rotator" id="rotator">systems</em> <span data-i18n-html="hero_t2">that power real businesses.</span>
-      </h1>
-      <p class="hero__sub reveal" data-i18n-html="hero_sub">
-  Hi, I'm <strong>Rhon Jon Romero</strong> — an IT graduate and <strong>aspiring Full Stack Developer</strong> building
-  web &amp; mobile experiences. From personal projects to production
-  features, I ship things that actually work.
-</p>
+      <div class="hero__grid">
+        <div class="hero__intro">
+          <p class="kicker reveal">General Santos City, PH</p>
+          <h1 class="hero__title reveal">
+            I build <em class="rotator" id="rotator">systems</em> that power real businesses.
+          </h1>
+          <p class="hero__sub reveal">
+            I'm <strong>Rhon Jon Romero</strong> — a BS Information Technology graduate from South East
+            Asian Institute of Technology, now based in General Santos City. I build and deploy
+            production systems for real clients: membership platforms, point-of-sale, and corporate
+            sites that people use every day.
+          </p>
+          <p class="hero__note reveal">
+            Two of them are live and serving businesses right now. My capstone POS system was
+            usability-tested and <a href="https://doi.org/10.56975/ijvra.v4i2.700782" target="_blank" rel="noopener">published as research</a>.
+          </p>
 
-      <div class="hero__meta reveal">
-        <a class="btn btn--primary" href="#work" data-i18n="hero_cta1">See my work ↓</a>
-        <a class="btn btn--ghost" href="mailto:ejromero294@gmail.com" data-i18n="hero_cta2">Get in touch</a>
-        <span class="badge-live"><span class="badge-live__dot"></span> <span data-i18n="hero_badge">Open to projects and work</span></span>
-      </div>
+          <div class="hero__meta reveal">
+            <a class="btn btn--primary" href="#work">See my work ↓</a>
+            <a class="btn btn--ghost" href="mailto:ejromero294@gmail.com">Get in touch</a>
+          </div>
 
-      <div class="hero__stats reveal">
-        <div class="stat">
-          <span class="stat__num" data-count="27" id="repoCount">0</span><span class="stat__plus">+</span>
-          <span class="stat__label" data-i18n="stat_repos">Public repositories</span>
+          <div class="hero__stats reveal">
+            <div class="stat">
+              <span class="stat__num" data-count="27" id="repoCount">0</span><span class="stat__plus">+</span>
+              <span class="stat__label">Public repositories</span>
+            </div>
+            <div class="stat">
+              <span class="stat__num" data-count="17">0</span><span class="stat__plus">+</span>
+              <span class="stat__label">Systems shipped</span>
+            </div>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat__num" data-count="17">0</span><span class="stat__plus">+</span>
-          <span class="stat__label" data-i18n="stat_shipped">Systems shipped</span>
-        </div>
+
+        <figure class="hero__photo reveal">
+          <canvas id="halftonePhoto" width="480" height="480" role="img" aria-label="Rhon Jon Romero — halftone portrait"></canvas>
+          <figcaption class="mono">
+            <span class="badge-live"><span class="badge-live__dot"></span> Open to work</span>
+            <span class="hero__photo-time">General Santos City · <span id="localTime">--:--</span> PHT</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -178,57 +188,10 @@
       </div>
     </div>
 
-    <!-- ================= STACK ================= -->
-    <section class="section" id="stack">
-      <div class="section__head reveal">
-        <span class="section__index mono">01</span>
-        <h2 class="section__title">Tech Stack</h2>
-        <p class="section__note mono" data-i18n="note_stack">tools I reach for daily</p>
-      </div>
-
-      <div class="stack-grid">
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">// Frontend</h3>
-          <ul><li>Tailwind CSS</li><li>Bootstrap</li><li>JavaScript</li><li>HTML5 / CSS3</li><li>Responsive UI/UX</li><li>React</li></ul>
-        </div>
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">// Backend</h3>
-          <ul><li>PHP</li><li>Laravel</li><li>Node.js</li><li>Java</li><li>REST API</li><li>OAuth</li></ul>
-        </div>
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">// Databases &amp; Integrations</h3>
-          <ul><li>MySQL</li><li>PostgreSQL</li><li><button class="stack-pop" type="button" data-modal="modalSms">SMS APIs <span class="stack-pop__count mono">3</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li><li><button class="stack-pop" type="button" data-modal="modalAi">AI chatbots <span class="stack-pop__count mono">2</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li></ul>
-        </div>
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">// Tools &amp; Deployment</h3>
-          <ul><li>Git &amp; GitHub</li><li>VS Code</li><li>XAMPP</li><li>cPanel</li><li>Hostinger</li></ul>
-        </div>
-      </div>
-
-      <dialog class="stack-modal" id="modalSms">
-        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
-        <h4 class="stack-modal__title mono">// SMS APIs</h4>
-        <ul class="stack-modal__list">
-          <li>PhilSMS <span class="stack-modal__note">Philippine SMS gateway</span></li>
-          <li>Semaphore <span class="stack-modal__note">OTP &amp; alerts for PH numbers</span></li>
-          <li>UniSMS <span class="stack-modal__note">unified SMS delivery API</span></li>
-        </ul>
-      </dialog>
-
-      <dialog class="stack-modal" id="modalAi">
-        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
-        <h4 class="stack-modal__title mono">// AI chatbots</h4>
-        <ul class="stack-modal__list">
-          <li>Claude <span class="stack-modal__note">chatbot &amp; dev workflows</span></li>
-          <li>ChatGPT <span class="stack-modal__note">assistants &amp; integrations</span></li>
-        </ul>
-      </dialog>
-    </section>
-
     <!-- ================= WORK ================= -->
     <section class="section" id="work">
       <div class="section__head reveal">
-        <span class="section__index mono">02</span>
+        <span class="section__index mono">01</span>
         <h2 class="section__title" data-i18n="title_work">Things I've Built</h2>
         <p class="section__note mono" data-i18n="note_work">systems in production &amp; on GitHub</p>
       </div>
@@ -330,7 +293,7 @@
     <!-- ================= GITHUB CONTRIBUTIONS ================= -->
     <section class="section" id="github">
       <div class="section__head reveal">
-        <span class="section__index mono">03</span>
+        <span class="section__index mono">02</span>
         <h2 class="section__title">GitHub Contributions</h2>
         <p class="section__note mono" data-i18n="note_github">a year of commits at a glance</p>
       </div>
@@ -346,6 +309,58 @@
           <a class="gh-graph__profile" href="https://github.com/Git-branches" target="_blank" rel="noopener">@Git-branches ↗</a>
         </div>
       </div>
+
+      <div class="gh-activity reveal" id="ghActivity" hidden>
+        <p class="gh-activity__label mono">Latest pushes</p>
+        <ul class="gh-activity__list mono" id="ghActivityList"></ul>
+      </div>
+    </section>
+
+    <!-- ================= STACK ================= -->
+    <section class="section" id="stack">
+      <div class="section__head reveal">
+        <span class="section__index mono">03</span>
+        <h2 class="section__title">Tech Stack</h2>
+        <p class="section__note mono" data-i18n="note_stack">tools I reach for daily</p>
+      </div>
+
+      <div class="stack-grid">
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">Frontend</h3>
+          <ul><li>Tailwind CSS</li><li>Bootstrap</li><li>JavaScript</li><li>HTML5 / CSS3</li><li>Responsive UI/UX</li><li>React</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">Backend</h3>
+          <ul><li>PHP</li><li>Laravel</li><li>Node.js</li><li>Java</li><li>REST API</li><li>OAuth</li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">Databases &amp; Integrations</h3>
+          <ul><li>MySQL</li><li>PostgreSQL</li><li><button class="stack-pop" type="button" data-modal="modalSms">SMS APIs <span class="stack-pop__count mono">3</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li><li><button class="stack-pop" type="button" data-modal="modalAi">AI chatbots <span class="stack-pop__count mono">2</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li></ul>
+        </div>
+        <div class="stack-card reveal">
+          <h3 class="stack-card__label mono">Tools &amp; Deployment</h3>
+          <ul><li>Git &amp; GitHub</li><li>VS Code</li><li>XAMPP</li><li>cPanel</li><li>Hostinger</li></ul>
+        </div>
+      </div>
+
+      <dialog class="stack-modal" id="modalSms">
+        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
+        <h4 class="stack-modal__title mono">SMS APIs</h4>
+        <ul class="stack-modal__list">
+          <li>PhilSMS <span class="stack-modal__note">Philippine SMS gateway</span></li>
+          <li>Semaphore <span class="stack-modal__note">OTP &amp; alerts for PH numbers</span></li>
+          <li>UniSMS <span class="stack-modal__note">unified SMS delivery API</span></li>
+        </ul>
+      </dialog>
+
+      <dialog class="stack-modal" id="modalAi">
+        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
+        <h4 class="stack-modal__title mono">AI chatbots</h4>
+        <ul class="stack-modal__list">
+          <li>Claude <span class="stack-modal__note">chatbot &amp; dev workflows</span></li>
+          <li>ChatGPT <span class="stack-modal__note">assistants &amp; integrations</span></li>
+        </ul>
+      </dialog>
     </section>
 
     <!-- ================= SERVICES ================= -->
@@ -402,49 +417,10 @@
     </section>
 
     <!-- ================= ABOUT ================= -->
-    <section class="section" id="about">
-      <div class="section__head reveal">
-        <span class="section__index mono">05</span>
-        <h2 class="section__title" data-i18n="title_about">About</h2>
-        <p class="section__note mono" data-i18n="note_about">the person behind the commits</p>
-      </div>
-
-      <div class="about">
-        <figure class="about__photo reveal">
-          <canvas id="halftonePhoto" width="480" height="480" role="img" aria-label="Rhon Jon Romero — halftone portrait"></canvas>
-          <figcaption class="mono">@Git-branches</figcaption>
-        </figure>
-        <div class="about__text reveal">
-          <p data-i18n-html="about_p1">
-            I'm a recent <strong>Bachelor of Science in Information Technology</strong> graduate from
-            South East Asian Institute of Technology (Tupi, South Cotabato, Philippines), now based in
-            <strong>General Santos City</strong>. My development journey spans web — from building and
-            shipping full applications from the ground up, to engineering production-level features
-            during a hands-on internship.
-          </p>
-          <p data-i18n="about_p2">
-            I care about clean code, meaningful user experiences, and building tools that actually
-            work for the people who use them.
-          </p>
-          <p data-i18n-html="about_p3">
-            My default stack is <strong>PHP + MySQL</strong> because it's what runs reliably on the
-            hosting my clients already have. Lately I've been folding <strong>AI assistants</strong>
-            into those systems and leveling up with React.
-          </p>
-          <p class="about__time mono"><span data-i18n="about_time">Local time in General Santos City:</span> <span id="localTime">--:--</span> PHT</p>
-
-          <div class="gh-activity" id="ghActivity" hidden>
-            <p class="gh-activity__label mono" data-i18n="gh_latest">// latest pushes on GitHub</p>
-            <ul class="gh-activity__list mono" id="ghActivityList"></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ================= CONTACT ================= -->
     <section class="section section--contact" id="contact">
       <div class="section__head reveal">
-        <span class="section__index mono">06</span>
+        <span class="section__index mono">05</span>
         <h2 class="section__title" data-i18n="title_contact">Contact</h2>
         <p class="section__note mono" data-i18n="note_contact">let's build something</p>
       </div>
@@ -456,16 +432,16 @@
       <form class="contact-form reveal" id="contactForm" novalidate>
         <div class="contact-form__row">
           <label class="contact-form__field">
-            <span class="contact-form__label mono" data-i18n="form_name">// your name</span>
+            <span class="contact-form__label mono" data-i18n="form_name">Your name</span>
             <input type="text" name="name" required autocomplete="name" placeholder="Juan dela Cruz" />
           </label>
           <label class="contact-form__field">
-            <span class="contact-form__label mono" data-i18n="form_email">// your email</span>
+            <span class="contact-form__label mono" data-i18n="form_email">Your email</span>
             <input type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
           </label>
         </div>
         <label class="contact-form__field">
-          <span class="contact-form__label mono" data-i18n="form_topic">// what's this about?</span>
+          <span class="contact-form__label mono" data-i18n="form_topic">Topic</span>
           <select name="subject">
             <option value="" data-i18n="opt_none">— select a topic (optional) —</option>
             <option value="Job opportunity">Job opportunity</option>
@@ -476,7 +452,7 @@
           </select>
         </label>
         <label class="contact-form__field">
-          <span class="contact-form__label mono" data-i18n="form_msg">// message</span>
+          <span class="contact-form__label mono" data-i18n="form_msg">Message</span>
           <textarea name="message" rows="4" required placeholder="Tell me about your project or role…" data-i18n-ph="form_msg_ph"></textarea>
         </label>
         <!-- honeypot: real people never fill this -->

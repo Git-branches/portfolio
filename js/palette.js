@@ -6,11 +6,10 @@
 (() => {
   const commands = [
     { label: "Home", hint: "top of page", icon: "⌂", run: () => go("/#top") },
-    { label: "Tech Stack", hint: "tools I use", icon: "§", run: () => go("/#stack") },
     { label: "Things I've Built", hint: "projects", icon: "§", run: () => go("/#work") },
     { label: "GitHub Contributions", hint: "commit graph", icon: "§", run: () => go("/#github") },
+    { label: "Tech Stack", hint: "tools I use", icon: "§", run: () => go("/#stack") },
     { label: "What I Do", hint: "services", icon: "§", run: () => go("/#services") },
-    { label: "About", hint: "the person", icon: "§", run: () => go("/#about") },
     { label: "Contact", hint: "send a message", icon: "§", run: () => go("/#contact") },
     { label: "Open Résumé", hint: "full CV page", icon: "↗", run: () => go("/resume") },
     { label: "Download Résumé (PDF)", hint: "save a copy", icon: "↓", run: () => go("/assets/Rhon-Jon-Romero-Resume.pdf") },
