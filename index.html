@@ -147,9 +147,12 @@
           </div>
         </div>
 
-        <figure class="hero__photo reveal">
-          <canvas id="halftonePhoto" width="480" height="480" role="img" aria-label="Rhon Jon Romero — halftone portrait"></canvas>
-          <figcaption class="mono">
+        <figure class="hero__visual reveal">
+          <div class="hero__scene hero__scene--light" aria-hidden="true"></div>
+          <div class="hero__scene hero__scene--dark" aria-hidden="true"></div>
+          <div class="hero__sprite" id="heroSprite" role="img"
+            aria-label="Pixel-art figure of Rhon Jon Romero — in graduation attire in light mode, at a coding desk in dark mode"></div>
+          <figcaption class="hero__visual-meta mono">
             <span class="badge-live"><span class="badge-live__dot"></span> Open to work</span>
             <span class="hero__photo-time">General Santos City · <span id="localTime">--:--</span> PHT</span>
           </figcaption>
@@ -479,7 +482,7 @@
 
   <script src="js/motion.js"></script>
   <script src="js/sfx.js"></script>
-  <script src="js/halftone.js"></script>
+  <script src="js/hero-sprite.js"></script>
   <script src="js/main.js"></script>
   <script src="js/palette.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
