@@ -177,94 +177,37 @@ body {
   gap: clamp(0.5rem, 2vw, 2rem); align-items: end;
 }
 
-/* ---------- pixel-art hero scene ---------- */
-/* Deliberately not a card: no border, no radius, no panel background. The
-   scene runs the full height of the hero, swallows the section's right
-   padding so it reaches the container edge, and its left/bottom edges are
-   masked so it dissolves into the page instead of ending on a seam. */
+/* ---------- pixel-art hero character ---------- */
+/* No scene, no panel, no card — the figure stands directly on the page
+   background, so the right side reads as part of the hero rather than an
+   image dropped into it. */
 .hero__visual {
   position: relative; margin: 0;
   align-self: stretch;
-  min-height: min(62vh, 600px);
-  /* swallow the hero's right padding AND the centring gutter of the 1100px
-     container, so the scene runs clean off the right edge of the screen */
-  margin-right: calc(-1 * clamp(1.25rem, 8vw, 6rem) - max(0px, 50vw - 550px));
+  min-height: min(62vh, 560px);
+  display: grid; place-items: end center;
 }
 
-/* both backdrops stay mounted and crossfade, so a theme switch never
-   re-decodes an image mid-transition. Each artwork was cropped to drop the
-   figure painted into it, so no framing can ever reveal a second person —
-   the animated sprite is the only character on screen. */
-/* the fade lives on the backdrop only — the character and caption sit above
-   it and stay fully opaque, so nothing readable gets washed out */
-.hero__scene {
-  position: absolute; inset: 0;
-  background-repeat: no-repeat;
-  background-size: cover; /* fills the panel without distorting the art */
-  opacity: 0; transition: opacity 0.6s ease;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 18%),
-                      linear-gradient(to bottom, #000 82%, transparent);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 18%),
-              linear-gradient(to bottom, #000 82%, transparent);
-  mask-composite: intersect;
-}
-.hero__scene--light {
-  background-image: url("../assets/graduate.png");
-  background-position: center;
-  opacity: 1;
-}
-.hero__scene--dark {
-  /* anchored right so the desk meets the screen edge and runs off it */
-  background-image: url("../assets/developer.png");
-  background-position: right center;
-}
-[data-theme="dark"] .hero__scene--light { opacity: 0; }
-[data-theme="dark"] .hero__scene--dark { opacity: 1; }
-
-/* barely-there breathing light over the monitor in the dark scene */
-.hero__scene--dark::after {
-  content: ""; position: absolute;
-  left: 60%; top: 30%; width: 40%; height: 26%;
-  background: radial-gradient(ellipse at center, rgba(90, 190, 220, 0.16), transparent 70%);
-  animation: screenGlow 5s ease-in-out infinite;
-}
-@keyframes screenGlow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
-/* the character: one frame of the sheet, scrolled by background-position.
-   The element never moves or resizes — only which frame shows changes —
-   so the figure always returns to exactly the same spot. */
+/* one frame of the sheet, scrolled by background-position. The element
+   never moves or resizes — only which frame shows changes — so the figure
+   always returns to exactly the same spot. */
 .hero__sprite {
-  position: absolute; bottom: 8%; left: 46%;
-  transform: translateX(-50%);
-  height: 84%; aspect-ratio: 344 / 384;
+  width: auto; height: min(100%, 520px);
+  aspect-ratio: 344 / 384;
   background-repeat: no-repeat;
   background-size: 400% 200%; /* 4 columns x 2 rows */
   image-rendering: pixelated; /* keep the pixel grid crisp when scaled */
   cursor: pointer;
   transition: opacity 0.22s ease;
+  /* grounds the figure on the page without drawing a box around it */
+  filter: drop-shadow(0 16px 14px rgba(0, 0, 0, 0.15));
+}
+[data-theme="dark"] .hero__sprite {
+  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.6));
 }
 /* the sheets carry no breathing or blinking frames, so the idle pose is
    held perfectly still rather than faked with a wobble */
 .hero__sprite.is-swapping { opacity: 0; }
-
-.hero__visual-meta {
-  position: absolute; left: 20%; bottom: 2.5%;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;
-  font-size: 0.7rem; color: var(--ink-soft);
-  text-shadow: 0 1px 3px var(--paper);
-}
-[data-theme="dark"] .hero__visual-meta { text-shadow: 0 1px 4px #000; }
-.hero__photo-time { letter-spacing: 0.04em; }
-
-.hero__note {
-  margin-top: 1rem; max-width: 560px;
-  font-size: 0.95rem; color: var(--ink-soft);
-}
-.hero__note a { color: var(--ink); text-underline-offset: 3px; }
 
 /* tablet: keep the two columns, give the copy a little more room */
 @media (max-width: 1100px) {
@@ -272,28 +215,11 @@ body {
   .hero__visual { min-height: min(52vh, 460px); }
   .hero__sprite { height: 78%; }
 }
-/* mobile: copy first, scene stacked underneath — never overlapping the
-   headline or the buttons, and re-framed rather than shrunk */
+/* mobile: copy first, character centred underneath */
 @media (max-width: 900px) {
-  .hero__grid { grid-template-columns: 1fr; gap: 2rem; }
-  .hero__visual {
-    min-height: 380px;
-    margin-right: calc(-1 * clamp(1.25rem, 8vw, 6rem));
-    margin-left: calc(-1 * clamp(1.25rem, 8vw, 6rem));
-  }
-  /* full-bleed on mobile, so only the bottom needs softening */
-  .hero__scene {
-    -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent);
-    -webkit-mask-composite: source-over;
-    mask-image: linear-gradient(to bottom, #000 88%, transparent);
-    mask-composite: add;
-  }
-  /* lifted so the caption below it has clear ground of its own */
-  .hero__sprite { height: 76%; bottom: 20%; left: 50%; }
-  .hero__visual-meta {
-    left: 50%; transform: translateX(-50%); bottom: 3%;
-    align-items: center; text-align: center;
-  }
+  .hero__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero__visual { min-height: 340px; place-items: center; }
+  .hero__sprite { height: min(100%, 320px); }
 }
 
 @keyframes drift {
@@ -304,6 +230,13 @@ body {
   font-family: var(--font-mono);
   font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.18em;
   color: var(--accent); margin-bottom: 1.5rem;
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.75em;
+}
+/* live clock sits on the same line as the place, separated by a rule */
+.kicker__time {
+  color: var(--ink-soft); letter-spacing: 0.1em;
+  padding-left: 0.75em; border-left: 1px solid var(--line);
+  font-variant-numeric: tabular-nums; /* stops the line twitching each tick */
 }
 
 .hero__title {
@@ -595,8 +528,10 @@ body {
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 .ledger__row:hover .ledger__link {
+  /* --paper, not #fff: in dark mode the accent IS white, and a white arrow
+     on it left nothing but a blank disc */
   background: var(--accent); border-color: var(--accent);
-  color: #fff; transform: rotate(45deg);
+  color: var(--paper); transform: rotate(45deg);
 }
 
 .ledger__live {
@@ -710,20 +645,6 @@ body {
   vertical-align: middle; white-space: nowrap;
 }
 
-.gh-activity { margin-top: 2rem; }
-.gh-activity__label {
-  color: var(--accent); font-size: 0.75rem;
-  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem;
-}
-.gh-activity__list { list-style: none; }
-.gh-activity__list li {
-  padding: 0.45rem 0; border-bottom: 1px dotted var(--line);
-  font-size: 0.8rem; display: flex; justify-content: space-between; gap: 1rem;
-}
-.gh-activity__list li:last-child { border-bottom: none; }
-.gh-activity__list a { color: var(--ink); text-decoration: none; }
-.gh-activity__list a:hover { color: var(--accent); }
-.gh-activity__date { color: var(--ink-soft); white-space: nowrap; }
 
 /* ---------- page + theme transitions (View Transitions API) ---------- */
 /* cross-document navigations (home ↔ resume ↔ case studies): quick fade-up */
@@ -746,39 +667,6 @@ body {
    otherwise the body's own 0.35s color fade would smear the effect */
 .theme-wipe, .theme-wipe * { transition: none !important; }
 
-/* ---------- GitHub contribution graph ---------- */
-.gh-graph {
-  border: 1px solid var(--line); background: var(--paper-2);
-  padding: 1.5rem;
-}
-.gh-graph__scroll { overflow-x: auto; padding-bottom: 0.25rem; }
-.gh-graph__months {
-  display: grid; grid-auto-flow: column; grid-auto-columns: 14px;
-  grid-template-rows: 1.1rem; width: max-content;
-  font-size: 0.65rem; color: var(--ink-soft);
-}
-.gh-graph__months span { grid-row: 1; white-space: nowrap; }
-.gh-graph__grid {
-  display: grid; grid-auto-flow: column;
-  grid-template-rows: repeat(7, 11px); grid-auto-columns: 11px;
-  gap: 3px; width: max-content;
-}
-.gh-graph__grid i, .gh-graph__legend i {
-  display: block; width: 11px; height: 11px; border-radius: 2px;
-  background: var(--accent-soft);
-}
-.gh-graph i[data-level="1"] { background: color-mix(in srgb, var(--accent) 25%, var(--paper-2)); }
-.gh-graph i[data-level="2"] { background: color-mix(in srgb, var(--accent) 45%, var(--paper-2)); }
-.gh-graph i[data-level="3"] { background: color-mix(in srgb, var(--accent) 70%, var(--paper-2)); }
-.gh-graph i[data-level="4"] { background: var(--accent); }
-.gh-graph__foot {
-  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-  margin-top: 1rem; font-size: 0.75rem; color: var(--ink-soft);
-}
-.gh-graph__total { color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
-.gh-graph__legend { display: inline-flex; align-items: center; gap: 3px; }
-.gh-graph__profile { margin-left: auto; color: var(--ink-soft); text-decoration: none; }
-.gh-graph__profile:hover { color: var(--accent); }
 
 /* ---------- case study pages ---------- */
 .case {
@@ -1183,8 +1071,6 @@ body.is-leaving .page-veil { opacity: 1; pointer-events: auto; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
   .loader, .page-veil, .cursor-glow { display: none !important; }
-  .hero__scene { transition: none; }
-  .hero__scene--dark::after { animation: none; }
   /* ticker intentionally keeps animating — it's the page's signature element */
   .hero__glow { animation: none; }
   html { scroll-behavior: auto; }

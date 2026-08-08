@@ -89,7 +89,6 @@
     </div>
     <nav class="nav__links" id="navLinks">
       <a href="#work">Work</a>
-      <a href="#github">GitHub</a>
       <a href="#stack">Stack</a>
       <a href="#services">Services</a>
       <a href="#contact">Contact</a>
@@ -115,24 +114,24 @@
 
       <div class="hero__grid">
         <div class="hero__intro">
-          <p class="kicker reveal">General Santos City, PH</p>
+          <p class="kicker reveal">
+            <span class="kicker__place">General Santos City, PH</span>
+            <span class="kicker__time" id="localTime">--:--</span>
+          </p>
           <h1 class="hero__title reveal">
             I build <em class="rotator" id="rotator">systems</em> that power real businesses.
           </h1>
           <p class="hero__sub reveal">
             I'm <strong>Rhon Jon Romero</strong> — a BS Information Technology graduate from South East
-            Asian Institute of Technology, now based in General Santos City. I build and deploy
-            production systems for real clients: membership platforms, point-of-sale, and corporate
-            sites that people use every day.
-          </p>
-          <p class="hero__note reveal">
-            Two of them are live and serving businesses right now. My capstone POS system was
-            usability-tested and <a href="https://doi.org/10.56975/ijvra.v4i2.700782" target="_blank" rel="noopener">published as research</a>.
+            Asian Institute of Technology and an <strong>aspiring junior full stack developer</strong>.
+            I build and deploy production systems for real clients: membership platforms,
+            point-of-sale, and corporate sites that people use every day.
           </p>
 
           <div class="hero__meta reveal">
             <a class="btn btn--primary" href="#work">See my work ↓</a>
             <a class="btn btn--ghost" href="mailto:ejromero294@gmail.com">Get in touch</a>
+            <span class="badge-live"><span class="badge-live__dot"></span> Open to work</span>
           </div>
 
           <div class="hero__stats reveal">
@@ -148,14 +147,8 @@
         </div>
 
         <figure class="hero__visual reveal">
-          <div class="hero__scene hero__scene--light" aria-hidden="true"></div>
-          <div class="hero__scene hero__scene--dark" aria-hidden="true"></div>
           <div class="hero__sprite" id="heroSprite" role="img"
-            aria-label="Pixel-art figure of Rhon Jon Romero — in graduation attire in light mode, at a coding desk in dark mode"></div>
-          <figcaption class="hero__visual-meta mono">
-            <span class="badge-live"><span class="badge-live__dot"></span> Open to work</span>
-            <span class="hero__photo-time">General Santos City · <span id="localTime">--:--</span> PHT</span>
-          </figcaption>
+            aria-label="Pixel-art figure of Rhon Jon Romero — in graduation attire in light mode, in developer clothes in dark mode"></div>
         </figure>
       </div>
     </section>
@@ -293,36 +286,10 @@
       </p>
     </section>
 
-    <!-- ================= GITHUB CONTRIBUTIONS ================= -->
-    <section class="section" id="github">
-      <div class="section__head reveal">
-        <span class="section__index mono">02</span>
-        <h2 class="section__title">GitHub Contributions</h2>
-        <p class="section__note mono" data-i18n="note_github">a year of commits at a glance</p>
-      </div>
-
-      <div class="gh-graph reveal" id="ghGraph">
-        <div class="gh-graph__scroll">
-          <div class="gh-graph__months mono" id="ghGraphMonths" aria-hidden="true"></div>
-          <div class="gh-graph__grid" id="ghGraphGrid" role="img" aria-label="GitHub contribution graph for the last year"></div>
-        </div>
-        <div class="gh-graph__foot mono">
-          <span class="gh-graph__total" id="ghGraphTotal">loading contributions…</span>
-          <span class="gh-graph__legend" aria-hidden="true">less <i data-level="0"></i><i data-level="1"></i><i data-level="2"></i><i data-level="3"></i><i data-level="4"></i> more</span>
-          <a class="gh-graph__profile" href="https://github.com/Git-branches" target="_blank" rel="noopener">@Git-branches ↗</a>
-        </div>
-      </div>
-
-      <div class="gh-activity reveal" id="ghActivity" hidden>
-        <p class="gh-activity__label mono">Latest pushes</p>
-        <ul class="gh-activity__list mono" id="ghActivityList"></ul>
-      </div>
-    </section>
-
     <!-- ================= STACK ================= -->
     <section class="section" id="stack">
       <div class="section__head reveal">
-        <span class="section__index mono">03</span>
+        <span class="section__index mono">02</span>
         <h2 class="section__title">Tech Stack</h2>
         <p class="section__note mono" data-i18n="note_stack">tools I reach for daily</p>
       </div>
@@ -369,7 +336,7 @@
     <!-- ================= SERVICES ================= -->
     <section class="section" id="services">
       <div class="section__head reveal">
-        <span class="section__index mono">04</span>
+        <span class="section__index mono">03</span>
         <h2 class="section__title" data-i18n="title_services">What I Do</h2>
         <p class="section__note mono" data-i18n="note_services">from idea to deployed system</p>
       </div>
@@ -423,7 +390,7 @@
     <!-- ================= CONTACT ================= -->
     <section class="section section--contact" id="contact">
       <div class="section__head reveal">
-        <span class="section__index mono">05</span>
+        <span class="section__index mono">04</span>
         <h2 class="section__title" data-i18n="title_contact">Contact</h2>
         <p class="section__note mono" data-i18n="note_contact">let's build something</p>
       </div>
