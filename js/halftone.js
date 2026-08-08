@@ -1,7 +1,7 @@
 // ============================================================
 // Halftone portrait — 2x2 square, theme-swapped:
-//   light mode → assets/profile.png       (formal photo, ink dots)
-//   dark mode  → assets/profile-dark.png  (GitHub avatar, light dots)
+//   light mode → assets/profile-toga.jpg  (graduation photo, ink dots)
+//   dark mode  → assets/profile1.jpg      (coding setup, light dots)
 // Dot grid runs at 15°; repaints when the theme toggle flips.
 // ============================================================
 
@@ -14,8 +14,13 @@
 
   const sources = {
     // crop: source-pixel square to focus on (keeps the subject in frame)
-    light: { src: "assets/profile1.jpg", crop: { x: 51, y: 6, s: 445 } },
-    dark: { src: "assets/profile-dark.png" },
+    // fallback: used when the primary file isn't on disk yet
+    light: {
+      src: "assets/profile-toga.jpg",
+      crop: { x: 540, y: 250, s: 1500 },
+      fallback: { src: "assets/profile1.jpg", crop: { x: 51, y: 6, s: 445 } },
+    },
+    dark: { src: "assets/profile1.jpg", crop: { x: 51, y: 6, s: 445 } },
   };
   const cache = {}; // theme → { data, lo, hi } or { img } when pixels are unreadable
 
@@ -25,46 +30,51 @@
   function load(theme) {
     return new Promise((resolve) => {
       if (cache[theme]) return resolve();
-      const cfg = sources[theme];
-      const img = new Image();
-      img.onload = () => {
-        const off = document.createElement("canvas");
-        off.width = W;
-        off.height = H;
-        const octx = off.getContext("2d");
-        // focus crop when configured, else centered square biased to the top
-        let { x: sx, y: sy, s } = cfg.crop || {};
-        if (!s) {
-          s = Math.min(img.width, img.height);
-          sx = (img.width - s) / 2;
-          sy = Math.min((img.height - s) / 2, img.height * 0.03);
-        }
-        octx.drawImage(img, sx, sy, s, s, 0, 0, W, H);
-        try {
-          const data = octx.getImageData(0, 0, W, H).data;
-          // auto-levels: stretch the 5th–95th luminance percentiles to full
-          // range so dark, busy photos don't collapse into solid ink
-          const lums = [];
-          for (let i = 0; i < data.length; i += 16) {
-            if (data[i + 3] < 120) continue;
-            lums.push(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]);
-          }
-          lums.sort((a, b) => a - b);
-          const lo = (lums[Math.floor(lums.length * 0.05)] || 0) / 255;
-          const hi = (lums[Math.floor(lums.length * 0.95)] || 255) / 255;
-          cache[theme] = { data, lo, hi: Math.max(hi, lo + 0.05) };
-        } catch {
-          // canvas tainted (file:// preview) — fall back to the plain photo
-          cache[theme] = { img, sx, sy, s };
-        }
-        resolve();
-      };
-      img.onerror = () => {
-        cache[theme] = {};
-        resolve();
-      };
-      img.src = cfg.src;
+      loadCfg(sources[theme], theme, resolve);
     });
+  }
+
+  function loadCfg(cfg, theme, resolve) {
+    const img = new Image();
+    img.onload = () => {
+      const off = document.createElement("canvas");
+      off.width = W;
+      off.height = H;
+      const octx = off.getContext("2d");
+      // focus crop when configured, else centered square biased to the top
+      let { x: sx, y: sy, s } = cfg.crop || {};
+      if (!s) {
+        s = Math.min(img.width, img.height);
+        sx = (img.width - s) / 2;
+        sy = Math.min((img.height - s) / 2, img.height * 0.03);
+      }
+      octx.drawImage(img, sx, sy, s, s, 0, 0, W, H);
+      try {
+        const data = octx.getImageData(0, 0, W, H).data;
+        // auto-levels: stretch the 5th–95th luminance percentiles to full
+        // range so dark, busy photos don't collapse into solid ink
+        const lums = [];
+        for (let i = 0; i < data.length; i += 16) {
+          if (data[i + 3] < 120) continue;
+          lums.push(0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]);
+        }
+        lums.sort((a, b) => a - b);
+        const lo = (lums[Math.floor(lums.length * 0.05)] || 0) / 255;
+        const hi = (lums[Math.floor(lums.length * 0.95)] || 255) / 255;
+        cache[theme] = { data, lo, hi: Math.max(hi, lo + 0.05) };
+      } catch {
+        // canvas tainted (file:// preview) — fall back to the plain photo
+        cache[theme] = { img, sx, sy, s };
+      }
+      resolve();
+    };
+    img.onerror = () => {
+      // primary file missing — try the fallback photo before giving up
+      if (cfg.fallback) return loadCfg(cfg.fallback, theme, resolve);
+      cache[theme] = {};
+      resolve();
+    };
+    img.src = cfg.src;
   }
 
   function luminanceAt(data, x, y) {
