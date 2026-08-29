@@ -823,6 +823,11 @@ body {
   font-family: var(--font-display); font-weight: 700;
   font-size: clamp(1.9rem, 5vw, 2.5rem); line-height: 1.1; letter-spacing: -0.01em;
 }
+.resume__title {
+  font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--accent); margin-top: 0.5rem;
+}
 .resume__meta {
   font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.5rem;
 }
@@ -852,8 +857,15 @@ body {
 .resume__skills {
   list-style: none; color: var(--ink-soft); font-size: 0.95rem;
 }
-.resume__skills li { padding: 0.2rem 0; }
+/* label column + value column, so the categories line up like the PDF */
+.resume__skills li {
+  padding: 0.2rem 0;
+  display: grid; grid-template-columns: 10.5rem 1fr; gap: 0.25rem 1rem;
+}
 .resume__skills li strong { color: var(--ink); }
+@media (max-width: 520px) {
+  .resume__skills li { grid-template-columns: 1fr; }
+}
 
 .resume__tech {
   font-style: italic; font-weight: 400;
@@ -869,22 +881,23 @@ body {
     --paper: #fff; --paper-2: #fff; --ink: #000; --ink-soft: #333;
     --line: #999; --accent: #b93a09; --accent-soft: #fff;
   }
-  body { background: #fff !important; background-image: none !important; line-height: 1.24; }
+  body { background: #fff !important; background-image: none !important; line-height: 1.15; }
   .nav, .footer, .to-top, .to-top-btn, .toast, .loader, .page-veil, .cursor-glow, .resume__actions, .progress-bar { display: none !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
-  .resume { max-width: none; padding: 0.7cm 1.3cm; font-size: 0.9rem; }
+  .resume { max-width: none; padding: 0.55cm 1.15cm; font-size: 0.86rem; }
   .resume a { text-decoration: none; color: inherit; }
-  .resume h2 { margin: 0.7rem 0 0.35rem; font-size: 0.8rem; padding-bottom: 0.25rem; }
-  .resume p { margin-bottom: 0.4rem; }
-  .resume__item { margin-bottom: 0.45rem; break-inside: avoid; }
-  .resume__item ul { margin-top: 0.15rem; font-size: 0.85rem; }
-  .resume__item ul li { margin-bottom: 0.08rem; }
-  .resume__item-title { font-size: 0.95rem; }
-  .resume__skills { font-size: 0.85rem; }
-  .resume__skills li { padding: 0.12rem 0; }
-  .resume__name { font-size: 1.75rem; }
-  .resume__meta { font-size: 0.78rem; margin-top: 0.25rem; }
-  .resume__head { padding-bottom: 0.55rem; margin-bottom: 0.65rem; }
+  .resume h2 { margin: 0.55rem 0 0.3rem; font-size: 0.78rem; padding-bottom: 0.2rem; }
+  .resume p { margin-bottom: 0.35rem; }
+  .resume__item { margin-bottom: 0.4rem; break-inside: avoid; }
+  .resume__item ul { margin-top: 0.12rem; font-size: 0.82rem; }
+  .resume__item ul li { margin-bottom: 0.06rem; }
+  .resume__item-title { font-size: 0.92rem; }
+  .resume__skills { font-size: 0.82rem; }
+  .resume__skills li { padding: 0.06rem 0; grid-template-columns: 8.5rem 1fr; }
+  .resume__name { font-size: 1.55rem; }
+  .resume__title { font-size: 0.7rem; margin-top: 0.15rem; color: #000; }
+  .resume__meta { font-size: 0.76rem; margin-top: 0.15rem; }
+  .resume__head { padding-bottom: 0.4rem; margin-bottom: 0.5rem; }
   /* margin: 0 suppresses the browser's own print header/footer
      (date, page title, file:// URL); page margins come from .resume padding */
   @page { margin: 0; }
