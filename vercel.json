@@ -3,7 +3,6 @@
   "trailingSlash": false,
   "headers": [
     {
-      "comment": "the worker script must never be served from cache, or a stale one keeps controlling the page and a deploy appears not to land",
       "source": "/sw.js",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
