@@ -120,7 +120,7 @@ tickerTrack.style.setProperty(
 
 // ---------- hero headline word slideshow ----------
 const rotator = document.getElementById("rotator");
-const rotatorWords = ["systems", "web apps", "platforms", "dashboards", "portals"];
+const rotatorWords = ["Manual Workflows", "Paper Logbooks", "Spreadsheet Chaos", "Offline Processes", "Legacy Systems"];
 let rotatorIndex = 0;
 
 // reserve the longest word's width so the headline never re-wraps mid-rotation
