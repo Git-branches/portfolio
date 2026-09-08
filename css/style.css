@@ -881,13 +881,13 @@ body {
   body { background: #fff !important; background-image: none !important; line-height: 1.12; }
   .nav, .footer, .to-top, .to-top-btn, .toast, .loader, .page-veil, .cursor-glow, .resume__actions, .progress-bar { display: none !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
-  /* print scale sits in the normal resume range: ~11pt body, ~10.8pt bullets.
-     Anything smaller reads cramped on paper even when it fits the page. */
   /* padding IS the page margin (@page margin is 0). Keep top/bottom at or above
      ~0.75cm — most printers cannot print inside roughly 0.2in of the paper edge.
      Every size below is in em, so the font-size here scales the whole sheet:
-     it is the one knob to turn when the resume has to be refitted to a page. */
-  .resume { max-width: none; padding: 0.75cm 1.15cm; font-size: 0.92rem; }
+     it is the one knob to turn when the resume has to be refitted to a page.
+     Measured on A4: 0.98rem spills onto a second page, so 0.96 is the largest
+     that fits, kept a notch under the boundary for browser-to-browser drift. */
+  .resume { max-width: none; padding: 0.75cm 1.15cm; font-size: 0.96rem; }
   .resume a { text-decoration: none; color: inherit; }
   .resume h2 { margin: 0.4em 0 0.22em; font-size: 0.96em; padding-bottom: 0.15em; }
   .resume p { margin-bottom: 0.26em; }
@@ -903,9 +903,10 @@ body {
   .resume__name { font-size: 1.74em; }
   .resume__meta { font-size: 0.87em; margin-top: 0.12em; }
   .resume__head { padding-bottom: 0.3em; margin-bottom: 0.38em; }
-  /* margin: 0 suppresses the browser's own print header/footer
-     (date, page title, file:// URL); page margins come from .resume padding */
-  @page { margin: 0; }
+  /* A4 is what the printer here is loaded with. margin: 0 suppresses the
+     browser's own print header/footer (date, page title, file:// URL);
+     the page margins come from .resume padding instead */
+  @page { size: A4; margin: 0; }
 }
 
 /* ---------- footer ---------- */
