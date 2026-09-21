@@ -28,7 +28,7 @@
     img.src = "";
   };
 
-  document.querySelectorAll(".case__shot img").forEach((shot) => {
+  document.querySelectorAll(".cs-shot img").forEach((shot) => {
     shot.addEventListener("click", () => open(shot.src, shot.alt));
   });
 

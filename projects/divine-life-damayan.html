@@ -5,121 +5,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Divine Life Damayan — Case Study · Rhon Jon Romero</title>
   <meta name="description" content="Case study: membership & mutual-aid platform for Divine Life Damayan Community Life Inc., built with PHP + MySQL by Rhon Jon Romero." />
+  <meta name="theme-color" content="#0f0f0f" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/home.css" />
   <link rel="icon" href="../assets/icon-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="../assets/icon-192.png" />
   <link rel="manifest" href="../manifest.webmanifest" />
   <script>
-    // apply saved theme before paint
-    const saved = localStorage.getItem("theme");
-    if (saved) document.documentElement.setAttribute("data-theme", saved);
-    else if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-theme", "dark");
+    document.documentElement.classList.add("js"); // scroll-reveal start states only apply when JS runs
   </script>
 </head>
-<body>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="nav">
-    <a class="nav__logo" href="../">RJR<span class="accent">.</span></a>
-    <div class="nav__actions">
-      <button class="theme-toggle" id="soundToggle" aria-label="Toggle sound effects" title="Sound effects">
-        <span class="theme-toggle__icon" id="soundIcon"><svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/><path d="M15 9.5a3.5 3.5 0 0 1 0 5"/><path d="M17.7 7a7 7 0 0 1 0 10"/><path d="M20.3 4.5a10.5 10.5 0 0 1 0 15"/></svg></span>
-      </button>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle__icon">◐</span>
+    <div class="nav__pill">
+      <nav class="nav__side nav__side--left" aria-label="Primary">
+        <a class="roll" href="../#about"><span data-t="About">About</span></a>
+        <a class="roll" href="../#work"><span data-t="Work">Work</span></a>
+        <a class="roll" href="../#lab"><span data-t="Gallery">Gallery</span></a>
+      </nav>
+      <a class="nav__logo" href="../" aria-label="Portfolio home">RJR<span>.</span></a>
+      <nav class="nav__side nav__side--right" aria-label="Secondary">
+        <a class="roll" href="../#services"><span data-t="Services">Services</span></a>
+        <a class="roll" href="../#contact"><span data-t="Contact">Contact</span></a>
+        <a class="nav__cta" href="../resume">
+          <span class="nav__cta-a">Résumé <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          <span class="nav__cta-b" aria-hidden="true">Résumé <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+        </a>
+      </nav>
+      <button class="nav__burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main class="case">
-    <a class="case__back" href="../#work">← Back to all work</a>
+  <div class="menu" id="mobileMenu" hidden>
+    <a href="../#about">About</a>
+    <a href="../#work">Work</a>
+    <a href="../#lab">Gallery</a>
+    <a href="../#services">Services</a>
+    <a href="../#contact">Contact</a>
+    <a href="../resume">Résumé ↗</a>
+  </div>
 
-    <p class="case__kicker">Case Study · 001</p>
-    <h1 class="case__title">Divine Life Damayan</h1>
+  <main id="main" class="cs">
+    <header class="cs-hero">
+      <a class="cs-back rv rv-fade" href="../#work">← All work</a>
+      <p class="eyebrow rv rv-eyebrow">Case Study · 001</p>
+      <h1 class="cs-title rv" data-words>Divine Life Damayan</h1>
+      <p class="cs-lede rv rv-rise" style="--d: 0.35s">A membership and mutual-aid platform that moved a paper-run organization online — now serving 1,200+ registered members.</p>
+      <dl class="cs-meta">
+        <div class="rv rv-rise"><dt>Year</dt><dd>May – Aug 2026</dd></div>
+        <div class="rv rv-rise"><dt>Role</dt><dd>Full-stack developer<br />(project-based)</dd></div>
+        <div class="rv rv-rise"><dt>Stack</dt><dd>PHP · MySQL · JS</dd></div>
+        <div class="rv rv-rise"><dt>Live</dt><dd><a href="https://divinelifedamayan.com" target="_blank" rel="noopener">divinelifedamayan.com ↗</a></dd></div>
+      </dl>
+    </header>
 
-    <div class="case__meta">
-      <span><strong>Year</strong> May – Jul 2026</span>
-      <span><strong>Role</strong> Full-stack developer (project-based)</span>
-      <span><strong>Stack</strong> PHP · MySQL · JS</span>
-      <span><strong>Live</strong> <a href="https://divinelifedamayan.com" target="_blank" rel="noopener">divinelifedamayan.com ↗</a></span>
-    </div>
-
-    <figure class="case__shot">
-      <img src="../assets/damayan-cover.jpg" alt="Divine Life Damayan homepage" loading="lazy" />
+    <figure class="cs-shot rv rv-shot">
+      <div class="cs-shot__frame"><img src="../assets/damayan-cover.jpg" alt="Divine Life Damayan homepage" loading="lazy" /></div>
       <figcaption>Homepage — divinelifedamayan.com</figcaption>
     </figure>
 
-    <h2>The problem</h2>
-    <p>
-      <strong>Divine Life Damayan Community Life Inc.</strong> is a mutual-aid organization serving
-      lower-income families in Polomolok and Maasim, Sarangani Province. Members pool contributions
-      to support each other through bereavement, hospitalization, and disasters — but everything ran
-      on paper: registrations, contribution records, and claims were slow to process and hard to audit.
-    </p>
+    <section class="cs-sec">
+      <h2 class="cs-sec__label rv rv-line"><span class="cs-sec__num">01</span>The problem</h2>
+      <div class="cs-sec__body">
+          <p class="rv rv-rise"><strong>Divine Life Damayan Community Life Inc.</strong> is a mutual-aid organization serving lower-income families in Polomolok and Maasim, Sarangani Province. Members pool contributions to support each other through bereavement, hospitalization, and disasters — but everything ran on paper: registrations, contribution records, and claims were slow to process and hard to audit.</p>
+      </div>
+    </section>
 
-    <h2>What I built</h2>
-    <p>
-      A full membership platform that moves the whole operation online while staying simple enough
-      for members who mostly browse on budget phones:
-    </p>
-    <ul>
-      <li><strong>Member registration &amp; login</strong> — lifetime membership with up to 4 designated beneficiaries per member.</li>
-      <li><strong>Over-the-counter payment processing</strong> — staff record contributions and the system keeps a transparent, auditable transaction trail.</li>
-      <li><strong>Claims tracking</strong> — bereavement, illness, and disaster-relief claims processed and traceable end-to-end.</li>
-      <li><strong>CMS-managed landing pages</strong> — staff update programs, announcements, and requirements without touching code.</li>
-      <li><strong>Multi-language support</strong> — English, Tagalog, and Cebuano, matching how members actually speak.</li>
-      <li><strong>Advocate program</strong> — a separate registration flow for community advocates who recruit members.</li>
-    </ul>
+    <section class="cs-sec">
+      <h2 class="cs-sec__label rv rv-line"><span class="cs-sec__num">02</span>What I built</h2>
+      <div class="cs-sec__body">
+          <p class="rv rv-rise">A full membership platform that moves the whole operation online while staying simple enough for members who mostly browse on budget phones:</p>
+          <ul class="cs-features">
+            <li class="rv rv-rise">
+              <span class="cs-features__n">01</span>
+              <h3>Member registration &amp; login</h3>
+              <p>Lifetime membership with up to 4 designated beneficiaries per member.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">02</span>
+              <h3>Over-the-counter payments</h3>
+              <p>Staff record contributions and the system keeps a transparent, auditable transaction trail.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">03</span>
+              <h3>Claims tracking</h3>
+              <p>Bereavement, illness, and disaster-relief claims processed and traceable end-to-end.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">04</span>
+              <h3>CMS-managed landing pages</h3>
+              <p>Staff update programs, announcements, and requirements without touching code.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">05</span>
+              <h3>Multi-language support</h3>
+              <p>English, Tagalog, and Cebuano, matching how members actually speak.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">06</span>
+              <h3>Advocate program</h3>
+              <p>A separate registration flow for community advocates who recruit members.</p>
+            </li>
+          </ul>
+      </div>
+    </section>
 
-    <figure class="case__shot">
-      <img src="../assets/damayan-programs.jpg" alt="The three damayan programs: death, illness, and calamity support" loading="lazy" />
+    <figure class="cs-shot rv rv-shot">
+      <div class="cs-shot__frame"><img src="../assets/damayan-programs.jpg" alt="The three damayan programs: death, illness, and calamity support" loading="lazy" /></div>
       <figcaption>The three damayan programs — bereavement, illness, and calamity support</figcaption>
     </figure>
 
-    <figure class="case__shot">
-      <img src="../assets/damayan-profile.jpg" alt="Company profile section with photo gallery" loading="lazy" />
+    <figure class="cs-shot rv rv-shot">
+      <div class="cs-shot__frame"><img src="../assets/damayan-profile.jpg" alt="Company profile section with photo gallery" loading="lazy" /></div>
       <figcaption>CMS-managed company profile with a community photo gallery</figcaption>
     </figure>
 
-    <figure class="case__shot">
-      <img src="../assets/damayan-login.jpg" alt="Member sign-in page" loading="lazy" />
+    <figure class="cs-shot rv rv-shot">
+      <div class="cs-shot__frame"><img src="../assets/damayan-login.jpg" alt="Member sign-in page" loading="lazy" /></div>
       <figcaption>Member sign-in — the gateway to contributions, claims, and records</figcaption>
     </figure>
 
-    <h2>The result</h2>
-    <p>
-      The organization now runs <strong>1,200+ registered members</strong>, <strong>350+ families assisted</strong>,
-      and <strong>200+ claims processed</strong> through the platform — with records that used to live in
-      logbooks now searchable in seconds. Built with PHP + MySQL and deployed on standard cPanel hosting,
-      so the organization can afford to keep it running.
-    </p>
+    <section class="cs-sec">
+      <h2 class="cs-sec__label rv rv-line"><span class="cs-sec__num">03</span>The result</h2>
+      <div class="cs-sec__body">
+          <p class="rv rv-rise">Records that used to live in logbooks are now searchable in seconds. Built with PHP + MySQL and deployed on standard cPanel hosting, so the organization can afford to keep it running.</p>
+          <div class="cs-stats">
+            <div class="rv rv-rise"><strong>1,200+</strong><span>Registered members</span></div>
+            <div class="rv rv-rise"><strong>350+</strong><span>Families assisted</span></div>
+            <div class="rv rv-rise"><strong>200+</strong><span>Claims processed</span></div>
+          </div>
+      </div>
+    </section>
 
-    <div class="case__cta">
-      <a class="btn btn--primary" href="https://divinelifedamayan.com" target="_blank" rel="noopener">Visit live site ↗</a>
-      <a class="btn btn--ghost" href="power-giant-rmt">Next case study →</a>
-    </div>
+    <nav class="cs-next" aria-label="More case studies">
+      <a class="cs-next__link rv rv-rise" href="power-giant-rmt">
+        <span class="eyebrow">Next case study</span>
+        <span class="cs-next__title">Power Giant RMT <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pill pill--solid rv rv-rise" href="https://divinelifedamayan.com" target="_blank" rel="noopener">Visit live site ↗</a>
+    </nav>
   </main>
 
-  <footer class="footer">
-    <span class="mono">© <span id="year"></span> Rhon Jon Romero · General Santos City, PH</span>
-    <a class="mono" href="../">← Portfolio home</a>
+  <footer class="footer footer--dark">
+    <div class="footer__rule"></div>
+    <div class="footer__row">
+      <p class="footer__copy">© <span id="year"></span> Rhon Jon Romero · GenSan, PH</p>
+      <p class="footer__note">Designed and built by Rhon Jon Romero.</p>
+      <a class="footer__top" href="#top">Back to top <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+    </div>
   </footer>
 
-  <script src="../js/motion.js"></script>
-  <script src="../js/sfx.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/site.js"></script>
   <script src="../js/lightbox.js"></script>
   <script src="../js/palette.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("themeToggle").addEventListener("click", () => {
-      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-    });
-  </script>
 </body>
 </html>

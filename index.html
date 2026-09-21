@@ -6,13 +6,13 @@
   <title>Rhon Jon Romero — Full-Stack Web Developer</title>
   <meta name="description" content="Rhon Jon Romero is a full-stack web developer from General Santos City, Philippines, building POS, attendance, and record-management systems with PHP & MySQL." />
   <meta name="author" content="Rhon Jon Romero" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#0f0f0f" />
 
   <!-- Open Graph / social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://rj-romero.vercel.app" />
   <meta property="og:title" content="Rhon Jon Romero — Full-Stack Web Developer" />
-  <meta property="og:description" content="IT graduate & full-stack web developer from General Santos City. I build POS, attendance, and record-management systems with PHP, MySQL, and AI-assisted workflows." />
+  <meta property="og:description" content="IT graduate & Aspiring full-stack web developer from General Santos City. I build POS, attendance, and record-management systems with PHP, MySQL, and AI-assisted workflows." />
   <meta property="og:image" content="https://rj-romero.vercel.app/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -24,12 +24,22 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
   <link rel="icon" href="assets/icon-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <link rel="manifest" href="manifest.webmanifest" />
+  <script>
+    document.documentElement.classList.add("js"); // scroll-reveal start states only apply when JS runs
+    // hold the name back until the card ring starts spinning (home.js releases it)
+    // the orbit loader shows once per session (and never with reduced motion)
+    try {
+      if (sessionStorage.getItem("loaderSeen") || matchMedia("(prefers-reduced-motion: reduce)").matches)
+        document.documentElement.classList.add("no-loader");
+    } catch { document.documentElement.classList.add("no-loader"); }
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("hero-wait");
+  </script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -77,380 +87,512 @@
   }
   </script>
 </head>
-<body>
+<body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- ================= LOADER (orbit rings) ================= -->
+  <div class="ldr" id="loader" aria-hidden="true">
+    <div class="ldr-main">
+      <div class="ldr-wrap">
+        <div class="c1">
+          <div class="c2">
+            <div class="c3">
+              <div class="rect1">
+                <div class="miniC"></div>
+                <div class="c4">
+                  <div class="rect2"><div class="rect3"></div></div>
+                </div>
+                <div class="c5"></div>
+                <div class="c6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ================= NAV ================= -->
-  <header class="nav" id="top">
-    <div class="nav__logo-box">
-      <span class="nav__logo-glow" aria-hidden="true"></span>
-      <a class="nav__logo" href="#top">RJR<span class="accent">.</span></a>
-    </div>
-    <nav class="nav__links" id="navLinks">
-      <a href="#work">Work</a>
-      <a href="#stack">Stack</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-      <a href="resume">Résumé</a>
-    </nav>
-    <div class="nav__actions">
-      <button class="theme-toggle" id="soundToggle" aria-label="Toggle sound effects" title="Sound effects">
-        <span class="theme-toggle__icon" id="soundIcon"><svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/><path d="M15 9.5a3.5 3.5 0 0 1 0 5"/><path d="M17.7 7a7 7 0 0 1 0 10"/><path d="M20.3 4.5a10.5 10.5 0 0 1 0 15"/></svg></span>
+  <header class="nav">
+    <div class="nav__pill">
+      <nav class="nav__side nav__side--left" aria-label="Primary">
+        <a class="roll" href="#about"><span data-t="About">About</span></a>
+        <a class="roll" href="#work"><span data-t="Work">Work</span></a>
+        <a class="roll" href="#lab"><span data-t="Gallery">Gallery</span></a>
+      </nav>
+      <a class="nav__logo" href="#top" aria-label="Back to top">RJR<span>.</span></a>
+      <nav class="nav__side nav__side--right" aria-label="Secondary">
+        <a class="roll" href="#services"><span data-t="Services">Services</span></a>
+        <a class="roll" href="#contact"><span data-t="Contact">Contact</span></a>
+        <a class="nav__cta" href="resume">
+          <span class="nav__cta-a">Résumé <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          <span class="nav__cta-b" aria-hidden="true">Résumé <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+        </a>
+      </nav>
+      <button class="nav__burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span>
       </button>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle__icon">◐</span>
-      </button>
-      <button class="nav__burger" id="navBurger" aria-label="Open menu">☰</button>
     </div>
   </header>
+
+  <div class="menu" id="mobileMenu" hidden>
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#lab">Gallery</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="resume">Résumé ↗</a>
+  </div>
 
   <main id="main">
     <!-- ================= HERO ================= -->
     <section class="hero">
-      <div class="hero__bg" aria-hidden="true">
-        <div class="hero__glow hero__glow--1"></div>
+      <div class="hero__center">
+        <p class="hero__hello" aria-hidden="true">Hello, I'm</p>
+        <h1 class="hero__name">
+          <span>Rhon Jon</span>
+          <span>Romero</span>
+        </h1>
       </div>
 
-      <div class="hero__grid">
-        <div class="hero__intro">
-          <p class="kicker reveal">
-            <span class="kicker__place">General Santos City, PH</span>
-            <span class="kicker__time" id="localTime">--:--</span>
-          </p>
-          <h1 class="hero__title reveal">
-            Converting <em class="rotator" id="rotator">Manual Workflows</em> into Deployable Web Systems.
-          </h1>
-          <p class="hero__sub reveal">
-            I'm <strong>Rhon Jon Romero</strong> — a BS Information Technology graduate from South East
-            Asian Institute of Technology and an <strong>aspiring junior full stack developer</strong>.
-            I build and deploy production systems for real clients: membership platforms,
-            point-of-sale, and corporate sites that people use every day.
-          </p>
-
-          <div class="hero__meta reveal">
-            <a class="btn btn--primary" href="#work">See my work ↓</a>
-            <a class="btn btn--ghost" href="mailto:ejromero294@gmail.com">Get in touch</a>
-            <span class="badge-live"><span class="badge-live__dot"></span> Open to work</span>
-          </div>
-
-          <div class="hero__stats reveal">
-            <div class="stat">
-              <span class="stat__num" data-count="27" id="repoCount">0</span><span class="stat__plus">+</span>
-              <span class="stat__label">Public repositories</span>
-            </div>
-            <div class="stat">
-              <span class="stat__num" data-count="17">0</span><span class="stat__plus">+</span>
-              <span class="stat__label">Systems shipped</span>
-            </div>
+      <!-- cards sit on a circle that slowly spins (positions set in home.js) -->
+      <div class="ring-clip" aria-hidden="true">
+        <div class="ring-wrap">
+          <div class="ring" id="ring">
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/tampakan-m700-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/tampakan-m0-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/damayan-m0-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/marci-m0-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/pg-m0-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/tampakan-m1500-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/damayan-m2400-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/marci-m1500-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/damayan-m700-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/tampakan-m2400-sm.jpg" alt="" /></div></div>
+            <div class="ring__card"><div class="ring__face"><img src="assets/shots/marci-m700-sm.jpg" alt="" /></div></div>
           </div>
         </div>
+      </div>
 
-        <figure class="hero__visual reveal">
-          <div class="hero__sprite" id="heroSprite" role="img"
-            aria-label="Pixel-art figure of Rhon Jon Romero — in graduation attire in light mode, in developer clothes in dark mode"></div>
-        </figure>
+      <div class="hero__foot">
+        <p class="hero__sub">
+          IT graduate &amp; Aspiring full-stack web developer from General Santos City. Turning manual
+          ideas into working and deployable web systems.
+        </p>
+        <div class="hero__actions">
+          <a class="btn-glass" href="#contact">
+            <span>Let's Connect</span>
+            <span class="btn-glass__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          </a>
+          <span class="status"><span class="status__dot"></span>Available for work</span>
+        </div>
       </div>
     </section>
 
-    <!-- ================= SKILLS TICKER ================= -->
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__track" id="tickerTrack">
-        <div class="ticker__group">
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/php" alt="" loading="lazy" onerror="this.remove()" />PHP</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/mysql" alt="" loading="lazy" onerror="this.remove()" />MySQL</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/postgresql" alt="" loading="lazy" onerror="this.remove()" />PostgreSQL</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/javascript" alt="" loading="lazy" onerror="this.remove()" />JavaScript</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/react" alt="" loading="lazy" onerror="this.remove()" />React</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/nodedotjs" alt="" loading="lazy" onerror="this.remove()" />Node.js</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/laravel" alt="" loading="lazy" onerror="this.remove()" />Laravel</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/openjdk" alt="" loading="lazy" onerror="this.remove()" />Java</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#0ea5e9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 7h-3v2h3a3 3 0 1 1 0 6h-3v2h3a5 5 0 0 0 0-10zm-7 8H7a3 3 0 1 1 0-6h3V7H7a5 5 0 0 0 0 10h3v-2zm-2-4h8v2H8v-2z"/></svg>REST API</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#2563eb" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 1 1 6 0v3H9V7zm3 6a2 2 0 0 1 1 3.73V19h-2v-2.27A2 2 0 0 1 12 13z"/></svg>OAuth</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/tailwindcss" alt="" loading="lazy" onerror="this.remove()" />Tailwind CSS</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/bootstrap" alt="" loading="lazy" onerror="this.remove()" />Bootstrap</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/html5" alt="" loading="lazy" onerror="this.remove()" />HTML5</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/css" alt="" loading="lazy" onerror="this.remove()" />CSS3</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#8b5cf6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 4h13a1 1 0 0 1 1 1v3h-2V6H4v8h7v2H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm12 6h6a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm1 2v6h4v-6h-4z"/></svg>Responsive UI/UX</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#22c55e" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2zm3 5h10v2H7V8zm0 4h7v2H7v-2z"/></svg>SMS Integration</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/xampp" alt="" loading="lazy" onerror="this.remove()" />XAMPP</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/cpanel" alt="" loading="lazy" onerror="this.remove()" />cPanel</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#2563eb" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.7 8.3 5 12l3.7 3.7-1.4 1.4L2.2 12l5.1-5.1zm6.6 0L19 12l-3.7 3.7 1.4 1.4L21.8 12l-5.1-5.1z"/></svg>VS Code</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/hostinger" alt="" loading="lazy" onerror="this.remove()" />Hostinger</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/git" alt="" loading="lazy" onerror="this.remove()" />Git</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><img class="ticker__icon" src="https://cdn.simpleicons.org/claude" alt="" loading="lazy" onerror="this.remove()" />Claude Code</span><span class="ticker__sep">·</span>
-          <span class="ticker__item"><svg class="ticker__icon ticker__icon--accent" style="color:#10a37f" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>ChatGPT</span><span class="ticker__sep">·</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ================= WORK ================= -->
-    <section class="section" id="work">
-      <div class="section__head reveal">
-        <span class="section__index mono">01</span>
-        <h2 class="section__title" data-i18n="title_work">Things I've Built</h2>
-        <p class="section__note mono" data-i18n="note_work">systems in production &amp; on GitHub</p>
-      </div>
-
-      <ol class="ledger">
-        <li class="ledger__row ledger__row--thumb reveal">
-          <span class="ledger__num mono">001</span>
-          <img class="ledger__thumb" src="assets/damayan-thumb.jpg" alt="Divine Life Damayan homepage preview" loading="lazy" />
-          <div class="ledger__body">
-            <h3 class="ledger__title">Divine Life Damayan <span class="ledger__live mono">● live</span></h3>
-            <p class="ledger__desc" data-i18n="proj1_desc">Membership & mutual-aid platform with CMS-managed landing pages, over-the-counter payment processing, and multi-language support.</p>
-            <div class="ledger__tags mono"><span>PHP</span><span>MySQL</span><span>CMS</span><span>i18n</span></div>
-            <a class="ledger__case mono" href="projects/divine-life-damayan" data-i18n="read_case">Read case study →</a>
-          </div>
-          <span class="ledger__year mono">2026</span>
-          <a class="ledger__link" href="https://divinelifedamayan.com" target="_blank" rel="noopener" aria-label="Visit live site">↗</a>
-        </li>
-
-        <li class="ledger__row ledger__row--thumb reveal">
-          <span class="ledger__num mono">002</span>
-          <img class="ledger__thumb" src="assets/powergiant-thumb.jpg" alt="Power Giant RMT homepage preview" loading="lazy" />
-          <div class="ledger__body">
-            <h3 class="ledger__title">Power Giant RMT <span class="ledger__live mono">● live</span></h3>
-            <p class="ledger__desc" data-i18n="proj2_desc">Corporate site for a multi-service company — oils, waste management, cleaning, and logistics — with service catalog, testimonials, and quote requests.</p>
-            <div class="ledger__tags mono"><span>PHP</span><span>Corporate</span><span>Quotes</span></div>
-            <a class="ledger__case mono" href="projects/power-giant-rmt" data-i18n="read_case">Read case study →</a>
-          </div>
-          <span class="ledger__year mono">2025</span>
-          <a class="ledger__link" href="https://powergiantrmt.com" target="_blank" rel="noopener" aria-label="Visit live site">↗</a>
-        </li>
-
-        <li class="ledger__row ledger__row--thumb reveal">
-          <span class="ledger__num mono">003</span>
-          <img class="ledger__thumb" src="assets/qrattendance-thumb.jpg" alt="QR Attendance scanner dashboard preview" loading="lazy" />
-          <div class="ledger__body">
-            <h3 class="ledger__title">QR Attendance</h3>
-            <p class="ledger__desc" data-i18n="proj3_desc">Attendance tracking that replaces paper logbooks — students scan a QR code and records land in a live dashboard.</p>
-            <div class="ledger__tags mono"><span>PHP</span><span>QR</span><span>MySQL</span></div>
-          </div>
-          <span class="ledger__year mono">2025</span>
-          <a class="ledger__link" href="https://github.com/Git-branches/qr-attendance-" target="_blank" rel="noopener" aria-label="View project">↗</a>
-        </li>
-
-        <li class="ledger__row ledger__row--thumb reveal">
-          <span class="ledger__num mono">004</span>
-          <img class="ledger__thumb" src="assets/cropsight-thumb.jpg" alt="Cropsight v2 farm dashboard preview" loading="lazy" />
-          <div class="ledger__body">
-            <h3 class="ledger__title">Cropsight v2</h3>
-            <p class="ledger__desc" data-i18n="proj4_desc">Crop-monitoring platform, rebuilt with a chatbot assistant and a refreshed UI/UX for farmers and agri-technicians.</p>
-            <div class="ledger__tags mono"><span>PHP</span><span>Chatbot</span><span>UI/UX</span></div>
-          </div>
-          <span class="ledger__year mono">2025</span>
-          <a class="ledger__link" href="https://github.com/Git-branches/Cropsightv2" target="_blank" rel="noopener" aria-label="View project">↗</a>
-        </li>
-
-        <li class="ledger__row ledger__row--thumb reveal">
-          <span class="ledger__num mono">005</span>
-          <img class="ledger__thumb" src="assets/posbarcode-thumb.jpg" alt="POS checkout terminal preview" loading="lazy" />
-          <div class="ledger__body">
-            <h3 class="ledger__title">POS &amp; Financial Reporting System</h3>
-            <p class="ledger__desc" data-i18n="proj5_desc">Integrated point-of-sale and financial reporting for retail — barcode checkout, inventory, and synced financial reports. Usability-tested (SUS 77.17) and published in IJVRA 2026.</p>
-            <div class="ledger__tags mono"><span>Web Based</span><span>Capstone</span><span>PHP</span><span>Barcode</span><span>Inventory</span></div>
-            <a class="ledger__case mono" href="https://doi.org/10.56975/ijvra.v4i2.700782" target="_blank" rel="noopener">Published research — IJVRA 2026 ↗</a>
-          </div>
-          <span class="ledger__year mono">2025</span>
-          <a class="ledger__link" href="https://github.com/Git-branches/POS-with-Barcode" target="_blank" rel="noopener" aria-label="View project">↗</a>
-        </li>
-
-        <li class="ledger__row ledger__row--thumb reveal">
-          <span class="ledger__num mono">006</span>
-          <img class="ledger__thumb" src="assets/dlicense-thumb.jpg" alt="Drivers license portal preview" loading="lazy" />
-          <div class="ledger__body">
-            <h3 class="ledger__title">Drivers ID & Licensing System</h3>
-            <p class="ledger__desc" data-i18n="proj6_desc">License portal and records information system — application, renewal, and record lookup in one place.</p>
-            <div class="ledger__tags mono"><span>PHP</span><span>Records</span><span>Portal</span></div>
-          </div>
-          <span class="ledger__year mono">2024</span>
-          <a class="ledger__link" href="https://github.com/Git-branches/Driivers-ID-Licensing-and-Record-Information-System" target="_blank" rel="noopener" aria-label="View project">↗</a>
-        </li>
-
-        <li class="ledger__row ledger__row--thumb reveal">
-          <span class="ledger__num mono">007</span>
-          <img class="ledger__thumb" src="assets/classsched-thumb.jpg" alt="Scheduling dashboard preview" loading="lazy" />
-          <div class="ledger__body">
-            <h3 class="ledger__title">Classroom Sched v2</h3>
-            <p class="ledger__desc" data-i18n="proj7_desc">Classroom scheduling system that untangles room conflicts and teacher loads for schools.</p>
-            <div class="ledger__tags mono"><span>PHP</span><span>Scheduling</span><span>MySQL</span></div>
-          </div>
-          <span class="ledger__year mono">2024</span>
-          <a class="ledger__link" href="https://github.com/Git-branches/Classroom-schedv2" target="_blank" rel="noopener" aria-label="View project">↗</a>
-        </li>
-      </ol>
-
-      <p class="section__more reveal">
-        <a class="btn btn--ghost" href="https://github.com/Git-branches?tab=repositories" target="_blank" rel="noopener"><span data-i18n="repos_all">All</span> <span id="repoTotal">27</span>+ <span data-i18n="repos_tail">repositories on GitHub ↗</span></a>
+    <!-- ================= BIO ================= -->
+    <section class="bio" id="about">
+      <h2 class="sr-only">About me</h2>
+      <p class="bio__text" id="bioText">
+        Information Technology graduate with hands-on experience in developing, deploying, and
+        maintaining web-based systems for real clients. Experienced in PHP, MySQL, JavaScript,
+        REST APIs, responsive UI development, and system maintenance. Familiar with Git/GitHub, web
+        hosting, databases, and third-party integrations. Developed and maintained a production
+        membership and referral management system serving <strong>1,200+ registered members</strong>,
+        demonstrating strong problem-solving and technical abilities.
       </p>
+      <div class="bio__stats">
+        <div><strong><span id="repoCount">27</span>+</strong><span>Public repositories</span></div>
+        <div><strong>25+</strong><span>Systems shipped</span></div>
+        <div><strong id="localTime">--:--</strong><span>General Santos City, PH</span></div>
+      </div>
     </section>
 
-    <!-- ================= STACK ================= -->
-    <section class="section" id="stack">
-      <div class="section__head reveal">
-        <span class="section__index mono">02</span>
-        <h2 class="section__title">Tech Stack</h2>
-        <p class="section__note mono" data-i18n="note_stack">tools I reach for daily</p>
+    <!-- ================= WORK (sticky stacking cards) ================= -->
+    <section class="work" id="work">
+      <div class="section-head section-head--dark">
+        <p class="eyebrow">Selected Work</p>
+        <h2 class="display">Things I've built</h2>
+        <p class="lede">Systems in production and on GitHub.</p>
       </div>
 
-      <div class="stack-grid">
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">Frontend</h3>
-          <ul><li>Tailwind CSS</li><li>Bootstrap</li><li>JavaScript</li><li>HTML5 / CSS3</li><li>Responsive UI/UX</li><li>React</li></ul>
+      <div class="stack" id="stackCards">
+        <div class="stack__slot">
+          <article class="pcard">
+            <div class="pcard__info">
+              <div>
+                <p class="pcard__meta">2026 <i>•</i> Membership Platform <span class="pcard__live">Live</span></p>
+                <h3 class="pcard__title">Divine Life Damayan</h3>
+                <p class="pcard__desc">Membership &amp; mutual-aid platform serving 1,200+ members — CMS-managed landing pages, over-the-counter payments, and English / Tagalog / Cebuano support.</p>
+                <ul class="pcard__tags"><li>PHP</li><li>MySQL</li><li>CMS</li><li>i18n</li></ul>
+              </div>
+              <div class="pcard__actions">
+                <a class="pill pill--solid" href="https://divinelifedamayan.com" target="_blank" rel="noopener">Live Site ↗</a>
+                <a class="pill" href="projects/divine-life-damayan">Case Study</a>
+              </div>
+            </div>
+            <div class="pcard__shot"><img src="assets/damayan-cover.jpg" alt="Divine Life Damayan homepage" loading="lazy" /></div>
+          </article>
         </div>
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">Backend</h3>
-          <ul><li>PHP</li><li>Laravel</li><li>Node.js</li><li>Java</li><li>REST API</li><li>OAuth</li></ul>
+        <div class="stack__slot">
+          <article class="pcard">
+            <div class="pcard__info">
+              <div>
+                <p class="pcard__meta">2026 <i>•</i> Tourism Platform <span class="pcard__live">Live</span></p>
+                <h3 class="pcard__title">Tampakan Tourism</h3>
+                <p class="pcard__desc">Official tourism site for the Municipality of Tampakan — destinations, an interactive tourist map, tour-guide booking and verification, events, live weather, and a Gemini-powered visitor assistant, backed by admin and resort-manager dashboards.</p>
+                <ul class="pcard__tags"><li>PHP</li><li>MySQL</li><li>Gemini API</li><li>Maps</li></ul>
+              </div>
+              <div class="pcard__actions">
+                <a class="pill pill--solid" href="https://tampakantourism.site.je/" target="_blank" rel="noopener">Live Site ↗</a>
+                <a class="pill" href="https://github.com/Git-branches/TampakanTourism" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+            <div class="pcard__shot"><img src="assets/tampakan-cover.jpg" alt="Tampakan Tourism homepage" loading="lazy" /></div>
+          </article>
         </div>
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">Databases &amp; Integrations</h3>
-          <ul><li>MySQL</li><li>PostgreSQL</li><li><button class="stack-pop" type="button" data-modal="modalSms">SMS APIs <span class="stack-pop__count mono">3</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li><li><button class="stack-pop" type="button" data-modal="modalAi">AI chatbots <span class="stack-pop__count mono">2</span><span class="stack-pop__arrow" aria-hidden="true">▸</span></button></li></ul>
+        <div class="stack__slot">
+          <article class="pcard">
+            <div class="pcard__info">
+              <div>
+                <p class="pcard__meta">2026 <i>•</i> Real Estate Redesign <span class="pcard__live">Live</span></p>
+                <h3 class="pcard__title">Marci Metzger Realty</h3>
+                <p class="pcard__desc">Homepage redesign for a Pahrump, Nevada realtor — property search with the original seven filters, photo gallery with lightbox, motion system, and a working contact form. Static HTML, CSS, and JavaScript.</p>
+                <ul class="pcard__tags"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive</li></ul>
+              </div>
+              <div class="pcard__actions">
+                <a class="pill pill--solid" href="https://marci-metzger-realestate.vercel.app/" target="_blank" rel="noopener">Live Site ↗</a>
+                <a class="pill" href="https://github.com/Git-branches/Junior-Web-Builder-Assignment" target="_blank" rel="noopener">GitHub</a>
+              </div>
+            </div>
+            <div class="pcard__shot"><img src="assets/marci-cover.jpg" alt="Marci Metzger real estate homepage" loading="lazy" /></div>
+          </article>
         </div>
-        <div class="stack-card reveal">
-          <h3 class="stack-card__label mono">Tools &amp; Deployment</h3>
-          <ul><li>Git &amp; GitHub</li><li>VS Code</li><li>XAMPP</li><li>cPanel</li><li>Hostinger</li></ul>
+        <div class="stack__slot">
+          <article class="pcard">
+            <div class="pcard__info">
+              <div>
+                <p class="pcard__meta">2025 <i>•</i> Corporate Site <span class="pcard__live">Live</span></p>
+                <h3 class="pcard__title">Power Giant RMT</h3>
+                <p class="pcard__desc">Corporate site for a multi-service company — oils, waste management, cleaning, and logistics — with a service catalog, testimonials, and quote requests.</p>
+                <ul class="pcard__tags"><li>PHP</li><li>MySQL</li><li>Quotes</li></ul>
+              </div>
+              <div class="pcard__actions">
+                <a class="pill pill--solid" href="https://powergiantrmt.com" target="_blank" rel="noopener">Live Site ↗</a>
+                <a class="pill" href="projects/power-giant-rmt">Case Study</a>
+              </div>
+            </div>
+            <div class="pcard__shot"><img src="assets/powergiant-cover.jpg" alt="Power Giant RMT homepage" loading="lazy" /></div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <dialog class="stack-modal" id="modalSms">
-        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
-        <h4 class="stack-modal__title mono">SMS APIs</h4>
-        <ul class="stack-modal__list">
-          <li>PhilSMS <span class="stack-modal__note">Philippine SMS gateway</span></li>
-          <li>Semaphore <span class="stack-modal__note">OTP &amp; alerts for PH numbers</span></li>
-          <li>UniSMS <span class="stack-modal__note">unified SMS delivery API</span></li>
-        </ul>
-      </dialog>
+    <!-- ================= MORE PROJECTS (archive deck) ================= -->
+    <section class="archive" id="projects">
+      <div class="section-head section-head--dark">
+        <p class="eyebrow">More Projects</p>
+        <h2 class="display">Systems on GitHub</h2>
+        <p class="lede">Capstone work and school systems — each one replaced a manual process.</p>
+      </div>
 
-      <dialog class="stack-modal" id="modalAi">
-        <button class="stack-modal__close" type="button" aria-label="Close">✕</button>
-        <h4 class="stack-modal__title mono">AI chatbots</h4>
-        <ul class="stack-modal__list">
-          <li>Claude <span class="stack-modal__note">chatbot &amp; dev workflows</span></li>
-          <li>ChatGPT <span class="stack-modal__note">assistants &amp; integrations</span></li>
-        </ul>
-      </dialog>
+      <div class="deck" id="deck">
+        <div class="deck__stage">
+          <article class="acard">
+            <div class="acard__top"><span>2025</span><span class="acard__dot"></span></div>
+            <div class="acard__mid">
+              <p class="acard__cat">Capstone · Published</p>
+              <h3 class="acard__title">POS &amp; Financial Reporting</h3>
+              <p class="acard__desc">Barcode checkout, inventory, and synced financial reports. SUS 77.17, published in IJVRA 2026.</p>
+            </div>
+            <p class="acard__tech">PHP · MySQL · Barcode</p>
+            <div class="acard__links">
+              <a href="https://github.com/Git-branches/POS-with-Barcode" target="_blank" rel="noopener">GitHub ↗</a>
+              <a href="https://doi.org/10.56975/ijvra.v4i2.700782" target="_blank" rel="noopener">Paper ↗</a>
+            </div>
+          </article>
+          <article class="acard">
+            <div class="acard__top"><span>2025</span><span class="acard__dot"></span></div>
+            <div class="acard__mid">
+              <p class="acard__cat">Web App</p>
+              <h3 class="acard__title">QR Attendance</h3>
+              <p class="acard__desc">Students scan a QR code and records land in a live dashboard — no more paper logbooks.</p>
+            </div>
+            <p class="acard__tech">PHP · MySQL · QR</p>
+            <div class="acard__links">
+              <a href="https://github.com/Git-branches/qr-attendance-" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <article class="acard">
+            <div class="acard__top"><span>2025</span><span class="acard__dot"></span></div>
+            <div class="acard__mid">
+              <p class="acard__cat">Agri-Tech</p>
+              <h3 class="acard__title">Cropsight v2</h3>
+              <p class="acard__desc">Crop monitoring for farmers and agri-technicians, rebuilt with a chatbot assistant.</p>
+            </div>
+            <p class="acard__tech">PHP · Chatbot · UI/UX</p>
+            <div class="acard__links">
+              <a href="https://github.com/Git-branches/Cropsightv2" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <article class="acard">
+            <div class="acard__top"><span>2024</span><span class="acard__dot"></span></div>
+            <div class="acard__mid">
+              <p class="acard__cat">Records System</p>
+              <h3 class="acard__title">Drivers ID &amp; Licensing</h3>
+              <p class="acard__desc">Application, renewal, and record lookup for driver licenses in one portal.</p>
+            </div>
+            <p class="acard__tech">PHP · MySQL · Records</p>
+            <div class="acard__links">
+              <a href="https://github.com/Git-branches/Driivers-ID-Licensing-and-Record-Information-System" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <article class="acard">
+            <div class="acard__top"><span>2024</span><span class="acard__dot"></span></div>
+            <div class="acard__mid">
+              <p class="acard__cat">Scheduling</p>
+              <h3 class="acard__title">Classroom Sched v2</h3>
+              <p class="acard__desc">Untangles room conflicts and teacher loads for schools.</p>
+            </div>
+            <p class="acard__tech">PHP · MySQL</p>
+            <div class="acard__links">
+              <a href="https://github.com/Git-branches/Classroom-schedv2" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+          <p class="deck__more">
+            <a class="pill" href="https://github.com/Git-branches?tab=repositories" target="_blank" rel="noopener">All <span id="repoTotal">27</span>+ repositories on GitHub ↗</a>
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- ================= SERVICES ================= -->
-    <section class="section" id="services">
-      <div class="section__head reveal">
-        <span class="section__index mono">03</span>
-        <h2 class="section__title" data-i18n="title_services">What I Do</h2>
-        <p class="section__note mono" data-i18n="note_services">from idea to deployed system</p>
+    <section class="services" id="services">
+      <div class="section-head section-head--dark section-head--left">
+        <p class="eyebrow rv rv-eyebrow">Where I Can Help</p>
+        <h2 class="display rv" data-words>From paper to production</h2>
+        <p class="lede rv rv-fade" style="--d: 0.35s">…and everything in between, to get your system live.</p>
       </div>
 
-      <div class="svc-deck reveal" role="region" aria-roledescription="carousel" aria-label="Services">
-        <article class="svc-card svc-card--left">
-          <span class="svc-card__badge mono">❮ pos · attendance · records ❯</span>
-          <div class="svc-card__head">
-            <span class="svc-card__icon" aria-hidden="true">🧾</span>
-            <h3 class="svc-card__title">Business Systems</h3>
+      <div class="svc-list" id="stack">
+        <article class="svc rv rv-card">
+          <div class="svc__body">
+            <h3 class="svc__title">Business Systems</h3>
+            <p class="svc__desc">POS with barcode scanning, attendance, scheduling, and record management — built around how your business actually runs.</p>
+            <p class="svc__tech">POS · Attendance · Inventory · Records · Reporting</p>
           </div>
-          <p class="svc-card__desc" data-i18n="svc1_desc">
-            POS with barcode scanning, attendance tracking, scheduling, and record
-            management — custom-built around how your business actually operates.
-          </p>
-          <div class="svc-card__tags mono"><span>POS</span><span>Attendance</span><span>Records</span></div>
-        </article>
-        <article class="svc-card svc-card--center">
-          <span class="svc-card__badge mono">❮ database → deploy ❯</span>
-          <div class="svc-card__head">
-            <span class="svc-card__icon" aria-hidden="true">🌐</span>
-            <h3 class="svc-card__title">Full-Stack Web Apps</h3>
+          <div class="svc__icons" aria-hidden="true">
+            <svg class="svc__svg" viewBox="0 0 24 24"><path d="M5 2h14v20l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
           </div>
-          <p class="svc-card__desc" data-i18n="svc2_desc">
-            End-to-end delivery: database design, backend logic, responsive UI, and
-            deployment to the cPanel hosting you already pay for.
-          </p>
-          <div class="svc-card__tags mono"><span>Database</span><span>Backend</span><span>Deploy</span></div>
         </article>
-        <article class="svc-card svc-card--right">
-          <span class="svc-card__badge mono">❮ chatbots &amp; workflows ❯</span>
-          <div class="svc-card__head">
-            <span class="svc-card__icon" aria-hidden="true">✦</span>
-            <h3 class="svc-card__title">AI Integration</h3>
+        <article class="svc rv rv-card">
+          <div class="svc__body">
+            <h3 class="svc__title">Frontend Development</h3>
+            <p class="svc__tech">Tailwind CSS · Bootstrap · JavaScript · HTML5 · CSS3 · Responsive UI/UX</p>
           </div>
-          <p class="svc-card__desc" data-i18n="svc3_desc">
-            Chatbot assistants and AI-assisted workflows folded into existing systems —
-            like the assistant built into Cropsight v2.
-          </p>
-          <div class="svc-card__tags mono"><span>Chatbots</span><span>Workflows</span><span>AI</span></div>
+          <div class="svc__icons" aria-hidden="true">
+            <img src="https://cdn.simpleicons.org/html5" alt="" loading="lazy" />
+            <img src="https://cdn.simpleicons.org/javascript" alt="" loading="lazy" />
+            <img src="https://cdn.simpleicons.org/tailwindcss" alt="" loading="lazy" />
+          </div>
         </article>
-      </div>
-
-      <div class="svc-nav reveal" aria-label="Service cards navigation">
-        <button class="svc-nav__btn" id="svcPrev" type="button" aria-label="Previous card">←</button>
-        <button class="svc-nav__btn" id="svcNext" type="button" aria-label="Next card">→</button>
+        <article class="svc rv rv-card">
+          <div class="svc__body">
+            <h3 class="svc__title">Backend &amp; Databases</h3>
+            <p class="svc__tech">PHP · Java · REST APIs · OAuth · MySQL · PostgreSQL</p>
+          </div>
+          <div class="svc__icons" aria-hidden="true">
+            <img src="https://cdn.simpleicons.org/php" alt="" loading="lazy" />
+            <img src="https://cdn.simpleicons.org/mysql" alt="" loading="lazy" />
+            <img src="https://cdn.simpleicons.org/postgresql" alt="" loading="lazy" />
+          </div>
+        </article>
+        <article class="svc rv rv-card">
+          <div class="svc__body">
+            <h3 class="svc__title">AI &amp; Integrations</h3>
+            <p class="svc__desc">Chatbot assistants and AI-assisted workflows built into existing systems, like the Gemini-powered assistant in Tampakan Tourism and the chatbot in Cropsight v2.</p>
+            <p class="svc__tech">Claude · ChatGPT · Gemini · Semaphore · PhilSMS · UniSMS · Web3Forms</p>
+          </div>
+          <div class="svc__icons" aria-hidden="true">
+            <img src="https://cdn.simpleicons.org/claude" alt="" loading="lazy" />
+            <img src="https://cdn.simpleicons.org/googlegemini" alt="" loading="lazy" />
+          </div>
+        </article>
+        <article class="svc rv rv-card">
+          <div class="svc__body">
+            <h3 class="svc__title">Tools &amp; Deployment</h3>
+            <p class="svc__tech">Git &amp; GitHub · VS Code · XAMPP · cPanel · Hostinger · Vercel · Netlify</p>
+          </div>
+          <div class="svc__icons" aria-hidden="true">
+            <img src="https://cdn.simpleicons.org/git" alt="" loading="lazy" />
+            <img src="https://cdn.simpleicons.org/cpanel" alt="" loading="lazy" />
+            <img src="https://cdn.simpleicons.org/vercel/111111" alt="" loading="lazy" />
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- ================= ABOUT ================= -->
-    <!-- ================= CONTACT ================= -->
-    <section class="section section--contact" id="contact">
-      <div class="section__head reveal">
-        <span class="section__index mono">04</span>
-        <h2 class="section__title" data-i18n="title_contact">Contact</h2>
-        <p class="section__note mono" data-i18n="note_contact">let's build something</p>
+    <!-- ================= EXPERIENCE & EDUCATION ================= -->
+    <section class="edu" id="experience">
+      <div class="section-head">
+        <h2 class="display rv" data-words>Experience <span class="muted">&amp; Education</span></h2>
       </div>
 
-      <a class="contact-mail reveal" href="mailto:ejromero294@gmail.com">
-        ejromero294<span class="accent">@</span>gmail.com
-      </a>
-
-      <form class="contact-form reveal" id="contactForm" novalidate>
-        <div class="contact-form__row">
-          <label class="contact-form__field">
-            <span class="contact-form__label mono" data-i18n="form_name">Your name</span>
-            <input type="text" name="name" required autocomplete="name" placeholder="Juan dela Cruz" />
-          </label>
-          <label class="contact-form__field">
-            <span class="contact-form__label mono" data-i18n="form_email">Your email</span>
-            <input type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
-          </label>
+      <div class="edu__grid">
+        <div>
+          <h3 class="edu__label rv rv-line">Work Experience</h3>
+          <div class="tl">
+            <div class="tl__item rv rv-tl">
+              <p class="tl__date">May 2026 – Aug 2026 <span class="tl__badge">Project-based</span></p>
+              <h4 class="tl__title">Divine Life Damayan Community Inc.</h4>
+              <p class="tl__role">Full Stack Developer</p>
+              <p class="tl__note">Membership &amp; referral system for 1,200+ members, multilingual CMS, live production deploys.</p>
+            </div>
+            <div class="tl__item rv rv-tl">
+              <p class="tl__date">Nov 2025 – Dec 2025 <span class="tl__badge">Project-based</span></p>
+              <h4 class="tl__title">PowerGiant RMT</h4>
+              <p class="tl__role">Backend Developer</p>
+              <p class="tl__note">PHP &amp; MySQL backend, live deployment, client-driven improvements.</p>
+            </div>
+            <div class="tl__item rv rv-tl">
+              <p class="tl__date">Aug 2025 – Nov 2025</p>
+              <h4 class="tl__title">Manulife, Koronadal</h4>
+              <p class="tl__role">IT Staff (OJT)</p>
+              <p class="tl__note">Document processing and day-to-day computer support.</p>
+            </div>
+          </div>
         </div>
-        <label class="contact-form__field">
-          <span class="contact-form__label mono" data-i18n="form_topic">Topic</span>
-          <select name="subject">
-            <option value="" data-i18n="opt_none">— select a topic (optional) —</option>
-            <option value="Job opportunity">Job opportunity</option>
-            <option value="Project / freelance inquiry">Project / freelance inquiry</option>
-            <option value="Collaboration">Collaboration</option>
-            <option value="Just saying hi" data-i18n="opt_hi">Just saying hi</option>
-            <option value="Other" data-i18n="opt_other">Other</option>
-          </select>
-        </label>
-        <label class="contact-form__field">
-          <span class="contact-form__label mono" data-i18n="form_msg">Message</span>
-          <textarea name="message" rows="4" required placeholder="Tell me about your project or role…" data-i18n-ph="form_msg_ph"></textarea>
-        </label>
-        <!-- honeypot: real people never fill this -->
-        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
-        <button class="btn btn--primary" type="submit" id="contactSubmit" data-i18n="send_btn">Send message →</button>
-      </form>
 
-      <div class="contact-links reveal">
-        <a href="https://github.com/Git-branches" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/ej-romero-bba17238b" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a href="https://ph.jobstreet.com/profiles/rhonjong-romero-m8LWX00L8B" target="_blank" rel="noopener">JobStreet ↗</a>
-        <a href="https://profile.indeed.com/" target="_blank" rel="noopener">Indeed ↗</a>
-        <a href="https://www.facebook.com/ejromero995" target="_blank" rel="noopener">Facebook ↗</a>
-        <button id="copyEmail" type="button">Copy email</button>
+        <div>
+          <h3 class="edu__label rv rv-line">Education &amp; Research</h3>
+          <div class="tl">
+            <div class="tl__item rv rv-tl">
+              <p class="tl__date">2022 – 2026</p>
+              <h4 class="tl__title">South East Asian Institute of Technology</h4>
+              <p class="tl__role">BS Information Technology</p>
+              <p class="tl__note">Tupi, South Cotabato, Philippines</p>
+            </div>
+          </div>
+
+          <div class="cert rv rv-rise">
+            <div class="cert__head">
+              <h4 class="cert__title">POS &amp; Financial Reporting Systems in Retail</h4>
+              <span class="cert__tag">IJVRA</span>
+            </div>
+            <p class="cert__desc">Co-authored research on how POS and financial reporting systems drive retail performance and customer satisfaction. Vol. 4, Issue 2, pp. 773–787.</p>
+            <a class="cert__link" href="https://doi.org/10.56975/ijvra.v4i2.700782" target="_blank" rel="noopener">February 2026 · doi:10.56975/ijvra.v4i2.700782 ↗</a>
+          </div>
+
+          <h4 class="edu__sub rv rv-rise">Currently Learning</h4>
+          <ul class="dots">
+            <li class="rv rv-rise"><strong>React &amp; Node.js:</strong> component-driven frontends and JavaScript backends.</li>
+            <li class="rv rv-rise"><strong>Laravel:</strong> moving PHP projects onto a modern framework.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GALLERY / LAB ================= -->
+    <section class="lab" id="lab">
+      <div class="section-head section-head--dark">
+        <p class="eyebrow rv rv-eyebrow">From the Field</p>
+        <h2 class="display display--xl rv" data-words>Screens in production</h2>
+        <p class="lede lede--soft rv rv-fade" style="--d: 0.35s">Live sites, captured on a phone screen</p>
+      </div>
+
+      <div class="marquee rv rv-marquee" aria-label="Project screenshots">
+        <div class="marquee__track" id="marqueeTrack">
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/tampakan-m0.jpg" alt="Tampakan Tourism homepage on mobile" width="640" height="960" loading="lazy" /></div><figcaption>Tampakan</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/marci-m0.jpg" alt="Marci Metzger homepage on mobile" width="640" height="960" loading="lazy" /></div><figcaption>Marci Metzger</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/damayan-m0.jpg" alt="Divine Life Damayan homepage on mobile" width="640" height="960" loading="lazy" /></div><figcaption>Damayan</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/pg-m0.jpg" alt="Power Giant RMT homepage on mobile" width="640" height="960" loading="lazy" /></div><figcaption>Power Giant</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/tampakan-m1500.jpg" alt="Tampakan destination cards" width="640" height="960" loading="lazy" /></div><figcaption>Destinations</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/marci-m1500.jpg" alt="Marci Metzger buyer and seller sections" width="640" height="960" loading="lazy" /></div><figcaption>Buy or Sell</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/damayan-m2400.jpg" alt="Damayan member products" width="640" height="960" loading="lazy" /></div><figcaption>Products</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/tampakan-m2400.jpg" alt="Tampakan things-to-do categories" width="640" height="960" loading="lazy" /></div><figcaption>Activities</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/marci-m700.jpg" alt="Marci Metzger stats section" width="640" height="960" loading="lazy" /></div><figcaption>Stats</figcaption></figure>
+          <figure class="poster"><div class="poster__img"><img src="assets/shots/damayan-m700.jpg" alt="Damayan programs" width="640" height="960" loading="lazy" /></div><figcaption>Programs</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="contact" id="contact">
+      <p class="contact__kicker rv rv-rise">That's a wrap? Maybe not.</p>
+      <h2 class="contact__title rv" data-words style="--d: 0.15s">Great things start<br />with 'Hello'</h2>
+      <p class="contact__text rv rv-rise" style="--d: 0.55s">
+        Open to job offers, freelance projects, and systems that need building.
+        <a class="contact__phone" href="tel:+639560031151">+63 956 003 1151</a>
+      </p>
+
+      <button class="btn-dark rv rv-pop" type="button" id="openForm" style="--d: 0.7s">
+        Let's Talk
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+
+      <p class="contact__or rv rv-fade" style="--d: 0.85s">or connect through..</p>
+      <div class="socials rv rv-socials" style="--d: 0.9s">
+        <a href="https://www.linkedin.com/in/ej-romero-bba17238b" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2zM4 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/></svg>
+        </a>
+        <a href="mailto:ejromero294@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        </a>
+        <a href="https://github.com/Git-branches" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4M9 18c-4.51 2-5-2-7-2"/></svg>
+        </a>
+        <a href="https://ph.jobstreet.com/profiles/rhonjong-romero-m8LWX00L8B" target="_blank" rel="noopener" aria-label="JobStreet">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </a>
+        <a href="https://www.facebook.com/ejromero995" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <button type="button" id="copyEmail" aria-label="Copy email address" title="Copy email">
+          <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span class="mono">© <span id="year"></span> Rhon Jon Romero · General Santos City, PH</span>
-    <span class="mono footer__note" data-i18n="footer_note">Designed &amp; built by hand — no templates</span>
-    <a class="mono" href="#top" data-i18n="footer_top">Back to top ↑</a>
+    <div class="footer__rule"></div>
+    <div class="footer__row">
+      <p class="footer__copy">© <span id="year"></span> Rhon Jon Romero · GenSan, PH</p>
+      <p class="footer__note">Designed and built by Rhon Jon Romero.</p>
+      <a class="footer__top" href="#top">Back to top <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+    </div>
   </footer>
 
-  <script src="js/motion.js"></script>
-  <script src="js/sfx.js"></script>
-  <script src="js/hero-sprite.js"></script>
-  <script src="js/main.js"></script>
+  <!-- contact form dialog -->
+  <dialog class="form-dlg" id="formDialog" aria-labelledby="formTitle">
+    <button class="form-dlg__close" type="button" id="closeForm" aria-label="Close">✕</button>
+    <h3 class="form-dlg__title" id="formTitle">Send a message</h3>
+    <p class="form-dlg__sub">Lands straight in my inbox — I usually reply within a day.</p>
+    <form class="cform" id="contactForm" novalidate>
+      <div class="cform__row">
+        <label><span>Your name</span><input type="text" name="name" required autocomplete="name" placeholder="Juan dela Cruz" /></label>
+        <label><span>Your email</span><input type="email" name="email" required autocomplete="email" placeholder="you@email.com" /></label>
+      </div>
+      <label><span>Topic</span>
+        <select name="subject">
+          <option value="">— select a topic (optional) —</option>
+          <option value="Job opportunity">Job opportunity</option>
+          <option value="Project / freelance inquiry">Project / freelance inquiry</option>
+          <option value="Collaboration">Collaboration</option>
+          <option value="Just saying hi">Just saying hi</option>
+          <option value="Other">Other</option>
+        </select>
+      </label>
+      <label><span>Message</span><textarea name="message" rows="4" required placeholder="Tell me about your project or role…"></textarea></label>
+      <!-- honeypot: real people never fill this -->
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+      <button class="btn-dark" type="submit" id="contactSubmit">Send message →</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/site.js"></script>
+  <script src="js/home.js"></script>
   <script src="js/palette.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>

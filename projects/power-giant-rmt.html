@@ -5,114 +5,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Power Giant RMT — Case Study · Rhon Jon Romero</title>
   <meta name="description" content="Case study: corporate website for Power Giant RMT — oils, waste management, cleaning, and logistics — built with PHP by Rhon Jon Romero." />
+  <meta name="theme-color" content="#0f0f0f" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/home.css" />
   <link rel="icon" href="../assets/icon-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="../assets/icon-192.png" />
   <link rel="manifest" href="../manifest.webmanifest" />
   <script>
-    // apply saved theme before paint
-    const saved = localStorage.getItem("theme");
-    if (saved) document.documentElement.setAttribute("data-theme", saved);
-    else if (matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.setAttribute("data-theme", "dark");
+    document.documentElement.classList.add("js"); // scroll-reveal start states only apply when JS runs
   </script>
 </head>
-<body>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="nav">
-    <a class="nav__logo" href="../">RJR<span class="accent">.</span></a>
-    <div class="nav__actions">
-      <button class="theme-toggle" id="soundToggle" aria-label="Toggle sound effects" title="Sound effects">
-        <span class="theme-toggle__icon" id="soundIcon"><svg class="vol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/><path d="M15 9.5a3.5 3.5 0 0 1 0 5"/><path d="M17.7 7a7 7 0 0 1 0 10"/><path d="M20.3 4.5a10.5 10.5 0 0 1 0 15"/></svg></span>
-      </button>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <span class="theme-toggle__icon">◐</span>
+    <div class="nav__pill">
+      <nav class="nav__side nav__side--left" aria-label="Primary">
+        <a class="roll" href="../#about"><span data-t="About">About</span></a>
+        <a class="roll" href="../#work"><span data-t="Work">Work</span></a>
+        <a class="roll" href="../#lab"><span data-t="Gallery">Gallery</span></a>
+      </nav>
+      <a class="nav__logo" href="../" aria-label="Portfolio home">RJR<span>.</span></a>
+      <nav class="nav__side nav__side--right" aria-label="Secondary">
+        <a class="roll" href="../#services"><span data-t="Services">Services</span></a>
+        <a class="roll" href="../#contact"><span data-t="Contact">Contact</span></a>
+        <a class="nav__cta" href="../resume">
+          <span class="nav__cta-a">Résumé <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          <span class="nav__cta-b" aria-hidden="true">Résumé <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+        </a>
+      </nav>
+      <button class="nav__burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main class="case">
-    <a class="case__back" href="../#work">← Back to all work</a>
+  <div class="menu" id="mobileMenu" hidden>
+    <a href="../#about">About</a>
+    <a href="../#work">Work</a>
+    <a href="../#lab">Gallery</a>
+    <a href="../#services">Services</a>
+    <a href="../#contact">Contact</a>
+    <a href="../resume">Résumé ↗</a>
+  </div>
 
-    <p class="case__kicker">Case Study · 002</p>
-    <h1 class="case__title">Power Giant RMT</h1>
+  <main id="main" class="cs">
+    <header class="cs-hero">
+      <a class="cs-back rv rv-fade" href="../#work">← All work</a>
+      <p class="eyebrow rv rv-eyebrow">Case Study · 002</p>
+      <h1 class="cs-title rv" data-words>Power Giant RMT</h1>
+      <p class="cs-lede rv rv-rise" style="--d: 0.35s">Backend and deployment for a five-service corporate site built around one goal: turning visitors into quote requests.</p>
+      <dl class="cs-meta">
+        <div class="rv rv-rise"><dt>Year</dt><dd>Nov – Dec 2025</dd></div>
+        <div class="rv rv-rise"><dt>Role</dt><dd>Backend developer<br />(project-based)</dd></div>
+        <div class="rv rv-rise"><dt>Stack</dt><dd>PHP · MySQL</dd></div>
+        <div class="rv rv-rise"><dt>Live</dt><dd><a href="https://powergiantrmt.com" target="_blank" rel="noopener">powergiantrmt.com ↗</a></dd></div>
+      </dl>
+    </header>
 
-    <div class="case__meta">
-      <span><strong>Year</strong> Nov – Dec 2025</span>
-      <span><strong>Role</strong> Backend developer (project-based)</span>
-      <span><strong>Stack</strong> PHP · MySQL</span>
-      <span><strong>Live</strong> <a href="https://powergiantrmt.com" target="_blank" rel="noopener">powergiantrmt.com ↗</a></span>
-    </div>
-
-    <figure class="case__shot">
-      <img src="../assets/powergiant-cover.jpg" alt="Power Giant RMT homepage" loading="lazy" />
+    <figure class="cs-shot rv rv-shot">
+      <div class="cs-shot__frame"><img src="../assets/powergiant-cover.jpg" alt="Power Giant RMT homepage" loading="lazy" /></div>
       <figcaption>Homepage — powergiantrmt.com</figcaption>
     </figure>
 
-    <h2>The problem</h2>
-    <p>
-      <strong>Power Giant RMT</strong> is a diversified service company in the Philippines — palm and
-      coconut oil supply, hazardous waste management, professional cleaning, furniture, and nationwide
-      logistics. Five very different service lines needed one credible online home where commercial
-      clients could understand the offering and request a quotation fast.
-    </p>
+    <section class="cs-sec">
+      <h2 class="cs-sec__label rv rv-line"><span class="cs-sec__num">01</span>The problem</h2>
+      <div class="cs-sec__body">
+          <p class="rv rv-rise"><strong>Power Giant RMT</strong> is a diversified service company in the Philippines — palm and coconut oil supply, hazardous waste management, professional cleaning, furniture, and nationwide logistics. Five very different service lines needed one credible online home where commercial clients could understand the offering and request a quotation fast.</p>
+      </div>
+    </section>
 
-    <h2>What I built</h2>
-    <p>
-      I handled the <strong>backend</strong> of the site as a project-based developer, working
-      alongside the team responsible for the frontend design:
-    </p>
-    <ul>
-      <li><strong>Backend functionality in PHP + MySQL</strong> — the data and logic behind the service catalog, projects, and news sections.</li>
-      <li><strong>Quote &amp; contact handling</strong> — the "Get Quote Now" flow that turns visitors into leads for the sales team.</li>
-      <li><strong>Live deployment</strong> — shipped the system to production hosting and kept it running.</li>
-      <li><strong>Client change requests</strong> — implemented requirements and system improvements as the company's needs evolved.</li>
-    </ul>
+    <section class="cs-sec">
+      <h2 class="cs-sec__label rv rv-line"><span class="cs-sec__num">02</span>What I built</h2>
+      <div class="cs-sec__body">
+          <p class="rv rv-rise">I handled the <strong>backend</strong> of the site as a project-based developer, working alongside the team responsible for the frontend design:</p>
+          <ul class="cs-features">
+            <li class="rv rv-rise">
+              <span class="cs-features__n">01</span>
+              <h3>Backend in PHP + MySQL</h3>
+              <p>The data and logic behind the service catalog, projects, and news sections.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">02</span>
+              <h3>Quote &amp; contact handling</h3>
+              <p>The “Get Quote Now” flow that turns visitors into leads for the sales team.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">03</span>
+              <h3>Live deployment</h3>
+              <p>Shipped the system to production hosting and kept it running.</p>
+            </li>
+            <li class="rv rv-rise">
+              <span class="cs-features__n">04</span>
+              <h3>Client change requests</h3>
+              <p>Implemented requirements and system improvements as the company’s needs evolved.</p>
+            </li>
+          </ul>
+      </div>
+    </section>
 
-    <figure class="case__shot">
-      <img src="../assets/powergiant-categories.jpg" alt="Project categories: hazardous waste, furniture, oil fuel infrastructure, cleaning, logistics" loading="lazy" />
+    <figure class="cs-shot rv rv-shot">
+      <div class="cs-shot__frame"><img src="../assets/powergiant-categories.jpg" alt="Project categories: hazardous waste, furniture, oil fuel infrastructure, cleaning, logistics" loading="lazy" /></div>
       <figcaption>Five service lines, one catalog — project categories driven by the database</figcaption>
     </figure>
 
-    <figure class="case__shot">
-      <img src="../assets/powergiant-projects.jpg" alt="Featured projects grid with completed project cards" loading="lazy" />
+    <figure class="cs-shot rv rv-shot">
+      <div class="cs-shot__frame"><img src="../assets/powergiant-projects.jpg" alt="Featured projects grid with completed project cards" loading="lazy" /></div>
       <figcaption>Featured projects — client-managed entries rendered from the backend</figcaption>
     </figure>
 
-    <h2>The result</h2>
-    <p>
-      A corporate site that treats "request a quote" as the product: every service line funnels to
-      contact, compliance credentials are one click away, and the company can update projects and
-      news itself. The backend runs on standard PHP hosting the client already owns — cheap to
-      operate and easy to maintain.
-    </p>
+    <section class="cs-sec">
+      <h2 class="cs-sec__label rv rv-line"><span class="cs-sec__num">03</span>The result</h2>
+      <div class="cs-sec__body">
+          <p class="rv rv-rise">A corporate site that treats “request a quote” as the product: every service line funnels to contact, compliance credentials are one click away, and the company can update projects and news itself. The backend runs on standard PHP hosting the client already owns — cheap to operate and easy to maintain.</p>
+      </div>
+    </section>
 
-    <div class="case__cta">
-      <a class="btn btn--primary" href="https://powergiantrmt.com" target="_blank" rel="noopener">Visit live site ↗</a>
-      <a class="btn btn--ghost" href="divine-life-damayan">Previous case study →</a>
-    </div>
+    <nav class="cs-next" aria-label="More case studies">
+      <a class="cs-next__link rv rv-rise" href="divine-life-damayan">
+        <span class="eyebrow">Previous case study</span>
+        <span class="cs-next__title">Divine Life Damayan <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="pill pill--solid rv rv-rise" href="https://powergiantrmt.com" target="_blank" rel="noopener">Visit live site ↗</a>
+    </nav>
   </main>
 
-  <footer class="footer">
-    <span class="mono">© <span id="year"></span> Rhon Jon Romero · General Santos City, PH</span>
-    <a class="mono" href="../">← Portfolio home</a>
+  <footer class="footer footer--dark">
+    <div class="footer__rule"></div>
+    <div class="footer__row">
+      <p class="footer__copy">© <span id="year"></span> Rhon Jon Romero · GenSan, PH</p>
+      <p class="footer__note">Designed and built by Rhon Jon Romero.</p>
+      <a class="footer__top" href="#top">Back to top <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+    </div>
   </footer>
 
-  <script src="../js/motion.js"></script>
-  <script src="../js/sfx.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/site.js"></script>
   <script src="../js/lightbox.js"></script>
   <script src="../js/palette.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-    document.getElementById("themeToggle").addEventListener("click", () => {
-      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-    });
-  </script>
 </body>
 </html>
