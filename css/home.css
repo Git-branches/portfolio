@@ -389,7 +389,10 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .pcard {
   --scale: 1; --dim: 0;
   position: relative;
-  width: 95vw; max-width: 1400px; height: 100%; max-height: 80vh;
+  /* height is capped by the width as well as the viewport: on a very tall
+     viewport (browser zoomed out, portrait monitor) 80vh alone would turn the
+     card into a tall, narrow slab and crop the screenshot to a sliver */
+  width: 95vw; max-width: 1400px; height: 100%; max-height: min(80vh, 57vw, 820px);
   display: flex; gap: clamp(2rem, 4vw, 4rem);
   padding: clamp(1.5rem, 4vw, 3.5rem);
   border-radius: 32px;
