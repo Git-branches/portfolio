@@ -26,18 +26,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/home.css?v=79" />
   <link rel="icon" href="assets/icon-192.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
   <link rel="manifest" href="manifest.webmanifest" />
   <script>
     document.documentElement.classList.add("js"); // scroll-reveal start states only apply when JS runs
     // hold the name back until the card ring starts spinning (home.js releases it)
-    // the orbit loader shows once per session (and never with reduced motion)
-    try {
-      if (sessionStorage.getItem("loaderSeen") || matchMedia("(prefers-reduced-motion: reduce)").matches)
-        document.documentElement.classList.add("no-loader");
-    } catch { document.documentElement.classList.add("no-loader"); }
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("hero-wait");
   </script>
   <script type="application/ld+json">
@@ -89,28 +84,6 @@
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- ================= LOADER (orbit rings) ================= -->
-  <div class="ldr" id="loader" aria-hidden="true">
-    <div class="ldr-main">
-      <div class="ldr-wrap">
-        <div class="c1">
-          <div class="c2">
-            <div class="c3">
-              <div class="rect1">
-                <div class="miniC"></div>
-                <div class="c4">
-                  <div class="rect2"><div class="rect3"></div></div>
-                </div>
-                <div class="c5"></div>
-                <div class="c6"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ================= NAV ================= -->
   <header class="nav">
@@ -191,18 +164,33 @@
 
     <!-- ================= BIO ================= -->
     <section class="bio" id="about">
-      <h2 class="sr-only">About me</h2>
-      <p class="bio__text" id="bioText">
-        Information Technology graduate with hands-on experience in developing, deploying, and
-        maintaining web-based systems for real clients. Experienced in PHP, MySQL, JavaScript,
-        REST APIs, responsive UI development, and system maintenance. Familiar with Git/GitHub, web
-        hosting, databases, and third-party integrations. Developed and maintained a production
-        membership and referral management system serving <strong>1,200+ registered members</strong>,
-        demonstrating strong problem-solving and technical abilities.
-      </p>
+      <div class="bio__grid">
+        <!-- 2x2 portrait: white dots on a transparent background. A lens follows the
+             pointer and shows the original photo, cut out to the same silhouette so the
+             two line up exactly; click / tap / Enter opens the whole photo.
+             home.js loads it on first use and drives the lens. -->
+        <figure class="bio__portrait rv rv-portrait" id="bioPortrait" tabindex="0"
+                aria-label="Portrait of Rhon Jon Romero. Move the pointer over it, or press Enter, to see the original photo.">
+          <img src="assets/about-portrait.png" width="780" height="780" alt="Dithered portrait of Rhon Jon Romero" />
+          <!-- .bio__reveal is the lens layer; its solid backing hides the dots underneath -->
+          <div class="bio__reveal" aria-hidden="true">
+            <img class="bio__photo" data-src="assets/about-photo.webp" width="780" height="780" alt="" />
+          </div>
+          <figcaption class="bio__place"><span aria-hidden="true"></span>General Santos City, PH</figcaption>
+        </figure>
+        <div class="bio__copy">
+          <h2 class="eyebrow rv rv-eyebrow">About me</h2>
+          <p class="bio__text" id="bioText">
+            IT graduate with project-based experience building, deploying, and maintaining web
+            applications for real clients. Experienced in developing new projects and maintaining
+            existing production systems, with knowledge of third-party integrations, troubleshooting,
+            and delivering reliable updates.
+          </p>
+        </div>
+      </div>
       <div class="bio__stats">
         <div><strong><span id="repoCount">27</span>+</strong><span>Public repositories</span></div>
-        <div><strong>25+</strong><span>Systems shipped</span></div>
+        <div><strong>30+</strong><span>Systems shipped</span></div>
         <div><strong id="localTime">--:--</strong><span>General Santos City, PH</span></div>
       </div>
     </section>
@@ -591,8 +579,9 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/site.js"></script>
-  <script src="js/home.js"></script>
+  <!-- ?v= matches the cache version in sw.js; bump both together -->
+  <script src="js/site.js?v=79"></script>
+  <script src="js/home.js?v=79"></script>
   <script src="js/palette.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
 </body>

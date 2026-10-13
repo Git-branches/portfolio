@@ -2,34 +2,6 @@
 // Rhon Jon Romero — Homepage interactions
 // ============================================================
 
-// ---------- loader: hold until the page has loaded (min 3.5s, max 6s) ----------
-// resolves immediately when the loader is skipped (seen this session / reduced motion)
-const loaderDone = new Promise((resolve) => {
-  const loader = document.getElementById("loader");
-  if (!loader || document.documentElement.classList.contains("no-loader")) {
-    loader?.remove();
-    return resolve();
-  }
-  document.body.style.overflow = "hidden";
-  const shown = performance.now();
-  let finished = false;
-  const finish = () => {
-    if (finished) return;
-    finished = true;
-    const wait = Math.max(0, 3500 - (performance.now() - shown));
-    setTimeout(() => {
-      loader.classList.add("is-done");
-      document.body.style.overflow = "";
-      try { sessionStorage.setItem("loaderSeen", "1"); } catch {}
-      setTimeout(() => loader.remove(), 1300);
-      resolve();
-    }, wait);
-  };
-  if (document.readyState === "complete") finish();
-  else window.addEventListener("load", finish, { once: true });
-  setTimeout(finish, 6000); // never block the page on a slow asset
-});
-
 // ---------- hero: ring of screens that deals out, then spins ----------
 // cards rise from below, gather in a small circle, open out to the full ring,
 // and then the whole ring rotates slowly (CSS animation on .ring)
@@ -66,7 +38,7 @@ const loaderDone = new Promise((resolve) => {
   if (REDUCED_MOTION) {
     cards.forEach((c) => { c.style.transition = "none"; });
     place(radius());
-  } else loaderDone.then(() => {
+  } else {
     // each stage starts only once the previous one has settled, so the
     // cards never look like they are chasing each other
     const setDuration = (ms) => cards.forEach((c) => c.style.setProperty("--t", `${ms}ms`));
@@ -98,7 +70,7 @@ const loaderDone = new Promise((resolve) => {
       ring.classList.add("is-spinning");
       document.documentElement.classList.remove("hero-wait");
     }, start + 5600);
-  });
+  }
 
   let resizeTimer;
   window.addEventListener("resize", () => {
@@ -110,6 +82,92 @@ const loaderDone = new Promise((resolve) => {
   cards.forEach((c) =>
     c.addEventListener("click", () => document.getElementById("work").scrollIntoView({ behavior: "smooth" }))
   );
+})();
+
+// ---------- about: a lens that reveals the original photo ----------
+// mouse: a soft circle follows the pointer and shows the real photo through it;
+// click opens it to the whole portrait (click again to close).
+// touch / keyboard: tap or Enter toggles the full photo.
+(() => {
+  const fig = document.getElementById("bioPortrait");
+  const layer = fig?.querySelector(".bio__reveal");
+  const photo = fig?.querySelector(".bio__photo");
+  if (!fig || !layer || !photo) return;
+
+  const LENS = 0.3;   // lens radius as a share of the portrait's width
+  const FULL = 1.5;   // radius that covers the whole portrait from any point
+  const cur = { x: 0.5, y: 0.4, r: 0 };   // what is drawn (x/y 0–1, r in widths)
+  const to = { x: 0.5, y: 0.4, r: 0 };    // where it is heading
+  let inside = false, open = false, raf = 0;
+
+  // the photo is only fetched once someone actually goes for it
+  const load = () => {
+    if (photo.dataset.src) { photo.src = photo.dataset.src; delete photo.dataset.src; }
+  };
+
+  const paint = () => {
+    const w = fig.clientWidth;
+    layer.style.setProperty("--mx", `${(cur.x * 100).toFixed(2)}%`);
+    layer.style.setProperty("--my", `${(cur.y * 100).toFixed(2)}%`);
+    layer.style.setProperty("--r", `${(cur.r * w).toFixed(1)}px`);
+    // a wider feather as the lens grows keeps the edge soft at full size
+    layer.style.setProperty("--feather", `${Math.max(34, cur.r * w * 0.25).toFixed(0)}px`);
+  };
+  const frame = () => {
+    raf = 0;
+    const k = REDUCED_MOTION ? 1 : 0.16;             // easing per frame
+    cur.x += (to.x - cur.x) * k;
+    cur.y += (to.y - cur.y) * k;
+    cur.r += (to.r - cur.r) * (REDUCED_MOTION ? 1 : 0.12);
+    paint();
+    const settled = Math.abs(to.x - cur.x) < 0.001 && Math.abs(to.y - cur.y) < 0.001 && Math.abs(to.r - cur.r) < 0.002;
+    if (!settled) raf = requestAnimationFrame(frame);
+    else { cur.x = to.x; cur.y = to.y; cur.r = to.r; paint(); }
+  };
+  const run = () => { if (!raf) raf = requestAnimationFrame(frame); };
+  const aim = () => {
+    to.r = open ? FULL : inside ? LENS : 0;
+    fig.classList.toggle("is-revealed", open);
+    if (to.r) load();
+    run();
+  };
+  const point = (e) => {
+    const r = fig.getBoundingClientRect();
+    to.x = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    to.y = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+  };
+
+  fig.addEventListener("pointerenter", (e) => {
+    if (e.pointerType !== "mouse") return;
+    point(e);
+    if (cur.r < 0.01) { cur.x = to.x; cur.y = to.y; }   // lens grows where the pointer came in
+    inside = true;
+    aim();
+  });
+  fig.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return;
+    point(e);
+    run();
+  });
+  fig.addEventListener("pointerleave", (e) => {
+    if (e.pointerType !== "mouse") return;
+    inside = false;
+    aim();
+  });
+  fig.addEventListener("click", (e) => {
+    point(e);
+    if (!inside) { cur.x = to.x; cur.y = to.y; }        // touch: open from the finger
+    open = !open;
+    aim();
+  });
+  fig.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    e.preventDefault();
+    if (!open) { to.x = cur.x = 0.5; to.y = cur.y = 0.4; }
+    open = !open;
+    aim();
+  });
+  fig.addEventListener("blur", () => { if (open && !inside) { open = false; aim(); } });
 })();
 
 // ---------- bio: words light up as the paragraph scrolls through ----------
