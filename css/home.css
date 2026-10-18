@@ -435,16 +435,18 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   padding: 0.3rem 0.75rem; border-radius: 999px; border: 1px solid var(--glass-line);
 }
 .pcard__actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+/* The screenshot is shown whole, at its own aspect ratio (no cover-crop): the
+   frame takes the image's height and sits centred beside the text, so every
+   capture reads exactly as it was taken, on any screen size. */
 .pcard__shot {
-  position: relative; flex: 1; min-width: 0;
+  position: relative; flex: 1; min-width: 0; align-self: center;
   border-radius: 20px; overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background: #0b0b0b;
-  display: flex; align-items: center; justify-content: center;
 }
 .pcard__shot img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  opacity: 0.9; transition: opacity 0.3s ease, transform 0.8s var(--ease);
+  display: block; width: 100%; height: auto;
+  opacity: 0.92; transition: opacity 0.3s ease, transform 0.8s var(--ease);
 }
 .pcard:hover .pcard__shot img { opacity: 1; transform: scale(1.03); }
 
@@ -463,12 +465,13 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .work__more { text-align: center; margin-top: 4rem; }
 
 @media (max-width: 860px) {
-  .pcard { flex-direction: column; max-height: 84vh; gap: 1.5rem; border-radius: 24px; }
+  /* stacked layout: the card hugs its content (no empty band under the screenshot) */
+  .pcard { flex-direction: column; height: auto; max-height: 84vh; gap: 1.5rem; border-radius: 24px; }
   .pcard__info { flex: none; padding: 0; gap: 1.25rem; }
   .pcard__title { margin: 0.75rem 0; }
   .pcard__desc { font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .pcard__tags { display: none; }
-  .pcard__shot { flex: 1 1 auto; min-height: 140px; }
+  .pcard__shot { flex: none; align-self: stretch; border-radius: 14px; }
   .pill { padding: 0.75rem 1.4rem; font-size: 0.95rem; }
 }
 
@@ -665,7 +668,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .poster:hover figcaption { opacity: 1; }
 @media (max-width: 640px) {
   .lab { padding: 6rem 0; }
-  .poster__img { width: 16rem; height: 25rem; }
+  .poster__img { width: 16rem; height: 24rem; } /* 2:3, same as the captures */
   .poster { margin-right: 1.75rem; }
   .marquee { -webkit-mask-image: none; mask-image: none; }
 }
@@ -1037,6 +1040,23 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   .rs .cs-sec:first-of-type { margin-top: 3.5rem; }
   .rs-item__head { flex-direction: column; gap: 0.4rem; }
 }
+
+/* ============================================================
+   DEV/STATION showcase badge — the snippet DEV/STATION provides,
+   moved here from its inline <style>. Only change: the focus outline is
+   white, because their #000 is invisible on this dark site.
+   ============================================================ */
+.devstation-floating-badge {
+  position: fixed; right: 0; top: 50%; transform: translateY(-50%);
+  z-index: 50; display: flex; align-items: center; justify-content: flex-end;
+  min-width: 44px; min-height: 44px; text-decoration: none;
+}
+.devstation-floating-badge img { display: block; width: 36px; height: 130px; }
+.devstation-floating-badge:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+@media (max-width: 600px) {
+  .devstation-floating-badge img { width: 30px; height: auto; }
+}
+@media print { .devstation-floating-badge { display: none; } }
 
 /* ============================================================
    Scroll-entrance system
