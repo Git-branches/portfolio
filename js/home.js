@@ -336,13 +336,26 @@ formDialog.addEventListener("click", (e) => {
 const WEB3FORMS_KEY = "ce9b16f2-c397-459a-9bf5-e620170750ea";
 const PAGE_LOADED_AT = Date.now();
 const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+// messages go in the dialog itself — a toast would be hidden under the open modal
+const setStatus = (msg, ok = false) => {
+  formStatus.hidden = !msg;
+  formStatus.textContent = msg || "";
+  formStatus.classList.toggle("is-ok", ok);
+};
+formDialog.addEventListener("close", () => setStatus(""));
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  setStatus("");
   const data = Object.fromEntries(new FormData(contactForm));
   if (data.botcheck) return; // honeypot tripped — silently drop
-  if (Date.now() - PAGE_LOADED_AT < 4000) return; // bots submit instantly; humans can't
+  if (Date.now() - PAGE_LOADED_AT < 4000) {
+    // bots submit instantly; a person this fast gets told why instead of silence
+    setStatus("Please take a moment to finish your message, then send again.");
+    return;
+  }
   if (!data.name || !data.email || !data.message) {
-    window.showToast("Please fill in name, email, and message.");
+    setStatus("Please fill in your name, email, and message.");
     return;
   }
 
@@ -364,16 +377,19 @@ contactForm.addEventListener("submit", async (e) => {
         message: data.message,
       }),
     });
-    const json = await res.json();
+    const json = await res.json().catch(() => ({}));
     if (json.success) {
       contactForm.reset();
       formDialog.close();
       window.showToast("Message sent — thanks! I'll reply soon ✓");
     } else {
-      window.showToast("Couldn't send. Please email me directly.");
+      // show Web3Forms' own reason (bad key, unverified email, rate limit…)
+      console.error("Web3Forms rejected the message:", res.status, json);
+      setStatus(`Couldn't send (${json.message || "HTTP " + res.status}). Please email me at ejromero294@gmail.com.`);
     }
-  } catch {
-    window.showToast("Network error. Please email me directly.");
+  } catch (err) {
+    console.error("Contact form request failed:", err);
+    setStatus("Network error — couldn't reach the mail service. Please email me at ejromero294@gmail.com.");
   } finally {
     btn.disabled = false;
     btn.textContent = label;
